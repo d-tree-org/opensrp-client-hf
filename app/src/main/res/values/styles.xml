@@ -1,0 +1,113 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AddoTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay.NavigationDrawerStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:listPreferredItemHeightSmall">70sp</item>
+    </style>
+
+    <style name="copy_clipboard_dialog" parent="android:Theme.Holo.Dialog">
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+    </style>
+
+    <style name="AddoTheme.Login" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="android:textSize">@dimen/login_font_size</item>
+        <item name="colorControlActivated">@android:color/white</item>
+    </style>
+
+    <style name="AddoTheme.NoActionBar" parent="AddoTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="CustomFontTextViewStyle.at">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/google_sans_bold</item>
+    </style>
+
+    <style name="FamilyTheme.AppBarOverlay.Light" parent="FamilyTheme.AppBarOverlay">
+        <item name="android:textColorPrimary">@color/customAppThemeBlue</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="AddoTheme.Dialog.FullWidth" parent="android:Theme.Holo.Light.Dialog">
+        <item name="android:windowMinWidthMajor">98%</item>
+        <item name="android:windowMinWidthMinor">98%</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <style name="Material.Drawable.RadioButton.AdvancedSearch" parent="Material.Drawable.RadioButton">
+        <item name="rbd_width">40dp</item>
+        <item name="rbd_height">40dp</item>
+        <item name="rbd_strokeSize">2dp</item>
+        <item name="rbd_radius">15dp</item>
+        <item name="rbd_innerRadius">10dp</item>
+        <item name="rbd_strokeColor">@drawable/advanced_search_rdb_stoke_color_list</item>
+    </style>
+
+    <style name="returnToSelectVil">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#FF840952</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">1.21</item>
+    </style>
+
+    <style name="selectClientVillag">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="askTheClientIfTh">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:lineSpacingMultiplier">1.18</item>
+    </style>
+
+    <style name="scanFingerprint">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">#FF840952</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:lineSpacingMultiplier">1.19</item>
+    </style>
+
+    <style name="arafaMwendapole">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#FF840952</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.22</item>
+    </style>
+
+    <style name="scanFingerprintBtn">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:lineSpacingMultiplier">1.18</item>
+    </style>
+
+    <style name="selectThePersonTo">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#FF840952</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+</resources>
