@@ -72,7 +72,7 @@
             android:theme="@style/AddoTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.smartregister.addo.activity.FamilyProfileActivity" />
+                android:value="org.smartregister.hf.activity.FamilyProfileActivity" />
         </activity>
         <activity
             android:name=".activity.FamilyFocusedMemberProfileActivity"
@@ -81,7 +81,7 @@
             android:theme="@style/AddoTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.smartregister.addo.activity.FamilyProfileActivity" />
+                android:value="org.smartregister.hf.activity.FamilyProfileActivity" />
         </activity>
         <activity
             android:name=".activity.ChildProfileActivity"
