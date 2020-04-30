@@ -98,15 +98,16 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
     @Override
     protected void registerBottomNavigation() {
-        super.registerBottomNavigation();
+        //super.registerBottomNavigation();
 
-        bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_search);
-        bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_clients);
-        bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_scan_qr);
-        bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_register);
-        bottomNavigationView.getMenu().removeItem(R.id.action_fingerprint);
-        FamilyRegisterBottomNavigationListener listener = new FamilyRegisterBottomNavigationListener(this, bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(listener);
+//        bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_search);
+//        bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_library);
+//        bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_clients);
+//        bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_scan_qr);
+//        bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_register);
+//        bottomNavigationView.getMenu().removeItem(R.id.action_fingerprint);
+//        FamilyRegisterBottomNavigationListener listener = new FamilyRegisterBottomNavigationListener(this, bottomNavigationView);
+//        bottomNavigationView.setOnNavigationItemSelectedListener(listener);
     }
 
     @Override
