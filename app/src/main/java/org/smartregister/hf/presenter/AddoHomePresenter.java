@@ -18,12 +18,10 @@ public class AddoHomePresenter implements AddoHomeContract.Presenter {
         this.viewReference = new WeakReference(addoHomeView);
         this.model = model;
         this.interactor = interactor;
-
     }
 
 
     private View getView() {
-
         return this.viewReference != null ? this.viewReference.get() : null;
     }
 
