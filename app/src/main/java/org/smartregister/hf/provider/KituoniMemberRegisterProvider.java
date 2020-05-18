@@ -30,10 +30,10 @@ import java.util.Set;
 
 import timber.log.Timber;
 
-public class AddoMemberRegisterProvider extends FamilyMemberRegisterProvider {
+public class KituoniMemberRegisterProvider extends FamilyMemberRegisterProvider {
     private Context context;
 
-    public AddoMemberRegisterProvider(Context context, CommonRepository commonRepository, Set visibleColumns, View.OnClickListener onClickListener, View.OnClickListener paginationClickListener, String familyHead, String primaryCaregiver) {
+    public KituoniMemberRegisterProvider(Context context, CommonRepository commonRepository, Set visibleColumns, View.OnClickListener onClickListener, View.OnClickListener paginationClickListener, String familyHead, String primaryCaregiver) {
         super(context, commonRepository, visibleColumns, onClickListener, paginationClickListener, familyHead, primaryCaregiver);
         this.context = context;
     }
@@ -102,44 +102,6 @@ public class AddoMemberRegisterProvider extends FamilyMemberRegisterProvider {
         return res.get(0);
     }
 
-/**
-    private ChildVisit retrieveChildVisitList(Rules rules, CommonPersonObjectClient pc, Map<String, String> map) {
-        String dob = Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.DOB, false);
-        String dobString = Utils.getDuration(dob);
-        String lastVisitDate = map.get(ChildDBConstants.KEY.LAST_HOME_VISIT);
-        String visitNotDone = map.get(ChildDBConstants.KEY.VISIT_NOT_DONE);
-        String strDateCreated = map.get(ChildDBConstants.KEY.DATE_CREATED);
-        long lastVisit = 0;
-        long visitNot = 0;
-        long dateCreated = 0;
-        if (!TextUtils.isEmpty(lastVisitDate)) {
-            lastVisit = Long.valueOf(lastVisitDate);
-        }
-        if (!TextUtils.isEmpty(visitNotDone)) {
-            visitNot = Long.valueOf(visitNotDone);
-        }
-        if (!TextUtils.isEmpty(strDateCreated)) {
-            dateCreated = org.smartregister.family.util.Utils.dobStringToDateTime(strDateCreated).getMillis();
-        }
-        return ChildUtils.getChildVisitStatus(context, rules, dobString, lastVisit, visitNot, dateCreated);
-    }
-
-    private void updateDueColumn(RegisterViewHolder viewHolder, ChildVisit childVisit) {
-        viewHolder.statusLayout.setVisibility(View.VISIBLE);
-        if (childVisit != null) {
-            viewHolder.status.setVisibility(View.VISIBLE);
-//            if (childVisit.getVisitStatus().equalsIgnoreCase(ChildProfileInteractor.VisitType.DUE.name())) {
-//                viewHolder.status.setImageResource(Utils.getDueProfileImageResourceIDentifier());
-//            } else if (childVisit.getVisitStatus().equalsIgnoreCase(ChildProfileInteractor.VisitType.OVERDUE.name())) {
-//                viewHolder.status.setImageResource(Utils.getOverDueProfileImageResourceIDentifier());
-//            } else {
-//                viewHolder.status.setVisibility(View.INVISIBLE);
-//            }
-        } else {
-            viewHolder.status.setVisibility(View.INVISIBLE);
-        }
-    }
-**/
     ////////////////////////////////////////////////////////////////
     // Inner classes
     ////////////////////////////////////////////////////////////////
