@@ -13,9 +13,9 @@ import androidx.annotation.NonNull;
 /**
  * Author : Isaya Mollel on 2020-05-13.
  */
-public class TaskServiceJob extends BaseJob {
+public class KituoniTaskServiceJob extends BaseJob {
 
-    public static final String TAG = "TaskServiceJob";
+    public static final String TAG = "KituoniTaskServiceJob";
 
     @NonNull
     @Override
