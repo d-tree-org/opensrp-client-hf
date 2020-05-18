@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -229,6 +230,10 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
                 Toast.makeText(parentActivity, parentActivity.getResources().getText
                         (R.string.action_start_sync), Toast.LENGTH_SHORT).show();
                 mPresenter.sync(parentActivity);
+
+                TextView textView = rootView.findViewById(R.id.referral_count);
+                textView.setText("Referrals: "+ getReferralCount());
+
             }
         };
 
@@ -378,4 +383,22 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         }
 
     }
+
+    public int getReferralCount(){
+        Cursor cursor = null;
+        try {
+            String q = "select count(*) from task where status = 'READY'";
+            cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
+            cursor.moveToFirst();
+            return cursor.getCount();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (cursor != null){
+                cursor.close();
+            }
+        }
+        return 0;
+    }
+
 }
