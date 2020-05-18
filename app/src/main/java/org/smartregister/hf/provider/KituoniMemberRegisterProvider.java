@@ -5,8 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import org.jeasy.rules.api.Rules;
 import org.smartregister.hf.R;
@@ -21,6 +25,7 @@ import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.family.provider.FamilyMemberRegisterProvider;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.view.contract.SmartRegisterClient;
+import org.smartregister.view.customcontrols.CustomFontTextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,9 +33,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import androidx.recyclerview.widget.RecyclerView;
 import timber.log.Timber;
 
+import org.smartregister.hf.util.TaksUtils;
+
 public class KituoniMemberRegisterProvider extends FamilyMemberRegisterProvider {
+
     private Context context;
 
     public KituoniMemberRegisterProvider(Context context, CommonRepository commonRepository, Set visibleColumns, View.OnClickListener onClickListener, View.OnClickListener paginationClickListener, String familyHead, String primaryCaregiver) {
@@ -42,21 +51,29 @@ public class KituoniMemberRegisterProvider extends FamilyMemberRegisterProvider 
     public void getView(Cursor cursor, SmartRegisterClient client, RegisterViewHolder viewHolder) {
         super.getView(cursor, client, viewHolder);
 
+        KituoniRegisterViewHolder vh = (KituoniRegisterViewHolder) viewHolder;
+
         // Update UI cutoffs
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) viewHolder.profile.getLayoutParams();
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) vh.profile.getLayoutParams();
         layoutParams.width = context.getResources().getDimensionPixelSize(R.dimen.member_profile_pic_width);
         layoutParams.height = context.getResources().getDimensionPixelSize(R.dimen.member_profile_pic_width);
-        viewHolder.profile.setLayoutParams(layoutParams);
-        viewHolder.patientNameAge.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimensionPixelSize(R.dimen.member_profile_list_title_size));
+        vh.profile.setLayoutParams(layoutParams);
+        vh.patientNameAge.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimensionPixelSize(R.dimen.member_profile_list_title_size));
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) client;
 
-        viewHolder.statusLayout.setVisibility(View.GONE);
-        viewHolder.status.setVisibility(View.GONE);
+        if (TaksUtils.getReferralStatus(pc.entityId())){
+            vh.clientReferred.setVisibility(View.VISIBLE);
+        }else {
+            vh.clientReferred.setVisibility(View.GONE);
+        }
+
+        vh.statusLayout.setVisibility(View.GONE);
+        vh.status.setVisibility(View.GONE);
 
         String entityType = Utils.getValue(pc.getColumnmaps(), ChildDBConstants.KEY.ENTITY_TYPE, false);
         if (Constants.TABLE_NAME.CHILD.equals(entityType)) {
-            Utils.startAsyncTask(new UpdateAsyncTask(viewHolder, pc), null);
+            Utils.startAsyncTask(new UpdateAsyncTask(vh, pc), null);
         }
 
     }
@@ -138,4 +155,21 @@ public class KituoniMemberRegisterProvider extends FamilyMemberRegisterProvider 
             }**/
         }
     }
+
+    @Override
+    public FamilyMemberRegisterProvider.RegisterViewHolder createViewHolder(ViewGroup parent) {
+        android.view.View view = LayoutInflater.from(context).inflate(R.layout.family_member_register_list_row, parent, false);
+        return new KituoniRegisterViewHolder(view);
+    }
+
+    public class KituoniRegisterViewHolder extends RegisterViewHolder {
+
+        private TextView clientReferred;
+
+        KituoniRegisterViewHolder(View itemView){
+            super(itemView);
+            this.clientReferred = (TextView)itemView.findViewById(R.id.referred);
+        }
+    }
+
 }
