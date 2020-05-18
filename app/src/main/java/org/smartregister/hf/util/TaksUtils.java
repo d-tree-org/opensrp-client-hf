@@ -11,18 +11,17 @@ import java.util.Set;
  */
 public class TaksUtils {
 
-    public static boolean isClientRefered(String clientBaseId){
+    public static boolean getReferralStatus(String clientBaseId){
 
         TaskRepository taskRepository = CoreLibrary.getInstance().context().getTaskRepository();
         Set<Task> referralTasks = taskRepository.getTasksByEntityAndStatus(
                 "5270285b-5a3b-4647-b772-c0b3c52e2b71",
                 clientBaseId,
                 Task.TaskStatus.READY);
-        if (referralTasks.size() > 0){
-            return true;
-        }else {
-            return false;
-        }
+
+        //referralTasks.toArray();
+
+        return !referralTasks.isEmpty();
     }
 
 }
