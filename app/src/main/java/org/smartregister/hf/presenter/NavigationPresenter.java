@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import org.smartregister.hf.contract.NavigationContract;
 import org.smartregister.hf.interactor.NavigationInteractor;
+import org.smartregister.hf.job.KituoniTaskServiceJob;
 import org.smartregister.hf.model.NavigationModel;
 import org.smartregister.hf.model.NavigationOption;
 import org.smartregister.hf.util.Constants;
@@ -78,6 +79,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
     public void sync(Activity activity) {
         ImageUploadServiceJob.scheduleJobImmediately(ImageUploadServiceJob.TAG);
         SyncServiceJob.scheduleJobImmediately(SyncServiceJob.TAG);
+        KituoniTaskServiceJob.scheduleJobImmediately(KituoniTaskServiceJob.TAG);
     }
 
     @Override
