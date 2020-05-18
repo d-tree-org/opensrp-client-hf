@@ -209,7 +209,7 @@ dependencies {
 
     }
 
-    implementation('org.smartregister:opensrp-client-family:1.2.35-DTREE-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-family:1.2.43-DTREE-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
