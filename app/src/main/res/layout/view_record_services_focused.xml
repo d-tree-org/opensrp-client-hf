@@ -7,53 +7,141 @@
     android:orientation="vertical"
     android:paddingTop="10dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/referral_title"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Referral Details"
+        android:textSize="20sp"
+        android:textColor="@color/primary_color"
+        android:fontFamily="@font/google_sans_bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/referral_focus_title"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Reason"
+        android:textColor="@color/cardview_dark_background"
+        android:fontFamily="@font/google_sans_bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/referral_focus"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
+        android:text="ANC Danger Signs"
+        android:textColor="@color/second_grey"
+        android:fontFamily="@font/google_sans_regular"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/referral_danger_signs_title"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Problem"
+        android:textColor="@color/cardview_dark_background"
+        android:fontFamily="@font/google_sans_bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/referral_danger_signs"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="4dp"
+        android:textSize="16sp"
+        android:text="Vaginal bleeding, Severe headache, Blurred vision, Convulsions/Seizures, true"
+        android:textColor="@color/second_grey"
+        android:fontFamily="@font/google_sans_regular"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/referral_date_title"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Date Referred"
+        android:textColor="@color/cardview_dark_background"
+        android:fontFamily="@font/google_sans_bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/referral_date"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
+        android:text="Mar 27th 2020"
+        android:textColor="@color/second_grey"
+        android:fontFamily="@font/google_sans_regular"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/referral_source_title"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Referal Source"
+        android:textColor="@color/cardview_dark_background"
+        android:fontFamily="@font/google_sans_bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/referral_source"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
+        android:text="Community Health Worker"
+        android:textColor="@color/second_grey"
+        android:fontFamily="@font/google_sans_regular"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/referee_title"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Referred By"
+        android:textColor="@color/cardview_dark_background"
+        android:fontFamily="@font/google_sans_bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/referee"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
+        android:text="chwone"
+        android:textColor="@color/second_grey"
+        android:fontFamily="@font/google_sans_regular"/>
+
     <org.smartregister.view.customcontrols.CustomFontTextView
-        android:id="@+id/tv_focused_client_screening"
+        android:id="@+id/tv_mark_as_done"
         style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="17dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="32dp"
         android:layout_marginRight="17dp"
-        android:background="@drawable/addo_btn_selector_client_profile"
+        android:background="@drawable/btn_drawable"
         android:gravity="center"
-        android:text="@string/addo_profile_other_screening"
+        android:layout_gravity="right"
+        android:text="Mark as Done"
         android:textAllCaps="false"
-        android:textColor="@color/addo_primary" />
-
-    <org.smartregister.view.customcontrols.CustomFontTextView
-        android:id="@+id/tv_focused_client_commodities"
-        style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="17dp"
-        android:background="@drawable/addo_btn_selector_client_profile"
-        android:gravity="center"
-        android:text="@string/give_commodities_client_focus_profile"
-        android:textColor="@color/addo_primary" />
-
-    <org.smartregister.view.customcontrols.CustomFontTextView
-        android:id="@+id/tv_focused_client_dispense"
-        style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginBottom="17dp"
-        android:background="@drawable/addo_btn_selector_client_profile"
-        android:gravity="center"
-        android:layout_marginEnd="17dp"
-        android:text="@string/focused_client_profile_dispense"
-        android:textColor="@color/addo_primary" />
+        android:textColor="@color/white" />
 
     <View
         android:id="@+id/view_record"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:background="@color/light_grey" />
-
 
 </LinearLayout>
