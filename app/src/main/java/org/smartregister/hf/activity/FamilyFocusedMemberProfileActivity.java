@@ -1,5 +1,6 @@
 package org.smartregister.hf.activity;
 
+import android.content.DialogInterface;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -7,7 +8,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.viewpager.widget.ViewPager;
 
 import org.smartregister.hf.R;
@@ -33,7 +36,15 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private TextView detailTwoView;
     private TextView detailThreeView;
     private CircleImageView imageView;
-    private CustomFontTextView ctvScreeningMed, ctvCommodities, ctvDispense;
+    private CustomFontTextView markAsDone;
+
+    //Referral Details Views
+    private View referralDetailsSection;
+    private TextView referralReason;
+    private TextView referralIndicators;
+    private TextView referralDate;
+    private TextView referralSource;
+    private TextView referee;
 
     private View familyHeadView;
     private View primaryCaregiverView;
@@ -49,6 +60,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private CommonPersonObjectClient commonPersonObject;
     protected MemberObject memberObject;
     private FamilyMemberFloatingMenu familyFloatingMenu;
+
+    private String referralEntityId;
 
     @Override
     protected void onCreation() {
@@ -72,6 +85,9 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         initializePresenter();
 
         setupViews();
+
+        presenter().getReferralData(baseEntityId);
+
     }
 
     @Override
@@ -92,12 +108,18 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         imageView = findViewById(R.id.imageview_profile);
         imageView.setBorderWidth(2);
 
-        ctvScreeningMed = findViewById(R.id.tv_focused_client_screening);
-        ctvScreeningMed.setOnClickListener(this);
-        ctvCommodities = findViewById(R.id.tv_focused_client_commodities);
-        ctvCommodities.setOnClickListener(this);
-        ctvDispense = findViewById(R.id.tv_focused_client_dispense);
-        ctvDispense.setOnClickListener(this);
+        markAsDone = findViewById(R.id.tv_mark_as_done);
+        markAsDone.setOnClickListener(this);
+
+        referralDetailsSection  = findViewById(R.id.referral_details_section);
+        referralDetailsSection.setVisibility(View.GONE);
+
+        referralReason = findViewById(R.id.referral_focus);
+        referralIndicators = findViewById(R.id.referral_danger_signs);
+        referralDate = findViewById(R.id.referral_date);
+        referralSource = findViewById(R.id.referral_source);
+        referee = findViewById(R.id.referee);
+
     }
 
     @Override
@@ -156,6 +178,27 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     }
 
     @Override
+    public void setReferralDetailsView(boolean hasReferral) {
+        referralDetailsSection.setVisibility( hasReferral ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void goToFamilyProfile() {
+        finish();
+    }
+
+    @Override
+    public void setReferralDetails(String entityId, String focus, String indicators, String date, String source, String referredBy) {
+        referralReason.setText(focus);
+        referralIndicators.setText(indicators);
+        referralDate.setText(date);
+        referralSource.setText(source);
+        referee.setText(referredBy);
+
+        this.referralEntityId = entityId;
+    }
+
+    @Override
     public void toggleFamilyHead(boolean show) {
         if (show) {
             familyHeadView.setVisibility(View.VISIBLE);
@@ -181,26 +224,28 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
     @Override
     public void onClick(View view) {
-
         switch (view.getId()){
-
-            case R.id.tv_focused_client_screening:
-                Toast.makeText(this, "You clicked client screening", Toast.LENGTH_SHORT).show();
+            case R.id.tv_mark_as_done:
+                confirmMarkingAsDone();
                 break;
-
-            case R.id.tv_focused_client_commodities:
-                Toast.makeText(this, "Give your client the commodities they want", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.tv_focused_client_dispense:
-                Toast.makeText(this, "Please dispense the medication now.", Toast.LENGTH_SHORT).show();
-                break;
-
             default:
                 super.onClick(view);
                 break;
-
         }
-
     }
+
+    void confirmMarkingAsDone(){
+        new AlertDialog.Builder(this)
+                .setView(R.layout.dialog_complete_referral_confirmation)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue with delete operation
+                        presenter().markReferralAsDone(baseEntityId);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.alert_light_frame)
+                .show();
+    }
+
 }

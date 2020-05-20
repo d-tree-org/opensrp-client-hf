@@ -30,12 +30,18 @@ public class AddoSyncConfiguration extends SyncConfiguration {
         String userLocationId = Utils.context().allSharedPreferences().fetchUserLocalityId(providerId);
 
         List<String> locationIds = LocationHelper.getInstance().locationsFromHierarchy(true, null);
-        if (!org.smartregister.util.Utils.isEmptyCollection(locationIds)) {
+
+        /**
+         * HF is supposed to sync all the villages within the district so for now we will pass all
+         * the locationIds within the list
+         */
+        if (locationIds.contains(userLocationId)){
+            //Current user's location id is part of the hierarchy list
             int index = locationIds.indexOf(userLocationId);
-            List<String> subLocationIds = locationIds.subList(index, locationIds.size());
-            return StringUtils.join(subLocationIds, ",");
+            locationIds = locationIds.subList(index, locationIds.size());
         }
-        return "";
+
+        return StringUtils.join(locationIds, ",");
     }
 
     @Override

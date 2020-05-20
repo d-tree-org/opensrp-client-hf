@@ -37,6 +37,8 @@ public class AddoJobCreator implements JobCreator {
                 return new ImageUploadServiceJob();
             case P2pServiceJob.TAG:
                 return new P2pServiceJob();
+            case KituoniTaskServiceJob.TAG:
+                return new KituoniTaskServiceJob();
             default:
                 Timber.d( "Looks like you tried to create a job " + tag + " that is not declared in the Chw Job Creator");
                 return null;

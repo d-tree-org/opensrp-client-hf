@@ -215,7 +215,7 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include android:id="@+id/ds_screening" layout="@layout/view_btn_client_profile_action" />
+<!--        <include android:id="@+id/ds_screening" layout="@layout/view_btn_client_profile_action" />-->
 
         <include layout="@layout/content_base_profile" />
     </androidx.appcompat.widget.LinearLayoutCompat>

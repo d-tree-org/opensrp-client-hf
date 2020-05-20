@@ -9,7 +9,7 @@ import org.smartregister.hf.activity.ChildProfileActivity;
 import org.smartregister.hf.activity.FamilyOtherMemberProfileActivity;
 import org.smartregister.hf.activity.FamilyProfileActivity;
 import org.smartregister.hf.model.FamilyProfileMemberModel;
-import org.smartregister.hf.provider.AddoMemberRegisterProvider;
+import org.smartregister.hf.provider.KituoniMemberRegisterProvider;
 import org.smartregister.hf.util.ChildDBConstants;
 import org.smartregister.hf.util.ChildUtils;
 import org.smartregister.hf.util.Utils;
@@ -53,8 +53,8 @@ public class FamilyProfileMemberFragment extends BaseFamilyProfileMemberFragment
 
     @Override
     public void initializeAdapter(Set<View> visibleColumns, String familyHead, String primaryCaregiver) {
-        AddoMemberRegisterProvider addoMemberRegisterProvider = new AddoMemberRegisterProvider(this.getActivity(), this.commonRepository(), visibleColumns, this.registerActionHandler, this.paginationViewHandler, familyHead, primaryCaregiver);
-        this.clientAdapter = new RecyclerViewPaginatedAdapter(null, addoMemberRegisterProvider, this.context().commonrepository(this.tablename));
+        KituoniMemberRegisterProvider kituoniMemberRegisterProvider = new KituoniMemberRegisterProvider(this.getActivity(), this.commonRepository(), visibleColumns, this.registerActionHandler, this.paginationViewHandler, familyHead, primaryCaregiver);
+        this.clientAdapter = new RecyclerViewPaginatedAdapter(null, kituoniMemberRegisterProvider, this.context().commonrepository(this.tablename));
         this.clientAdapter.setCurrentlimit(20);
         this.clientsView.setAdapter(this.clientAdapter);
     }

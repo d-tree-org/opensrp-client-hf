@@ -233,6 +233,19 @@
                                 android:text="Logout as"
                                 android:textSize="16sp" />
 
+                            <TextView
+                                android:id="@+id/referral_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/dark_grey_text"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_below="@id/tvLogout"
+                                android:fontFamily="@font/google_sans_medium"
+                                android:textSize="16sp" />
+
                         </RelativeLayout>
 
                     </LinearLayout>

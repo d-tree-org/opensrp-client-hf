@@ -62,7 +62,6 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     private String PhoneNumber;
     private CommonPersonObjectClient commonPersonObject;
     private FamilyMemberFloatingMenu familyFloatingMenu;
-    private TextView textViewDangersignScreening;
     protected MemberObject memberObject;
     private FormUtils formUtils;
 
@@ -116,8 +115,6 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
     protected void setupViews() {
         super.setupViews();
 
-        textViewDangersignScreening = findViewById(R.id.textview_ds_screening);
-
         TextView toolbarTitle = findViewById(R.id.toolbar_title);
         toolbarTitle.setText(String.format(getString(R.string.return_to_family_name), presenter().getFamilyName()));
 
@@ -136,8 +133,6 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         addContentView(familyFloatingMenu, linearLayoutParams);
 
         familyFloatingMenu.setClickListener(onClickFloatingMenu);
-
-        textViewDangersignScreening.setOnClickListener(this);
 
     }
 
