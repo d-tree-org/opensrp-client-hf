@@ -54,8 +54,10 @@ public class NavigationPresenter implements NavigationContract.Presenter {
             mInteractor.getRegisterCount(tableMap.get(mModel.getNavigationItems().get(x).getMenuTitle()), new NavigationContract.InteractorCallback<Integer>() {
                 @Override
                 public void onResult(Integer result) {
+                    /*
                     mModel.getNavigationItems().get(finalX).setRegisterCount(result);
                     getNavigationView().refreshCount();
+                     */
                 }
 
                 @Override

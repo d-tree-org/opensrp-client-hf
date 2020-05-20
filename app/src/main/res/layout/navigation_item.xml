@@ -39,6 +39,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:text="0" />
+        android:text="0"
+        android:visibility="gone"/>
 
 </RelativeLayout>
