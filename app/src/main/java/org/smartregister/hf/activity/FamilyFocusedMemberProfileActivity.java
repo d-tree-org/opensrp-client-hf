@@ -36,6 +36,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private CustomFontTextView markAsDone;
 
     //Referral Details Views
+    private View referralDetailsSection;
     private TextView referralReason;
     private TextView referralIndicators;
     private TextView referralDate;
@@ -106,6 +107,9 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         markAsDone = findViewById(R.id.tv_mark_as_done);
         markAsDone.setOnClickListener(this);
 
+        referralDetailsSection  = findViewById(R.id.referral_details_section);
+        referralDetailsSection.setVisibility(View.GONE);
+
         referralReason = findViewById(R.id.referral_focus);
         referralIndicators = findViewById(R.id.referral_danger_signs);
         referralDate = findViewById(R.id.referral_date);
@@ -167,6 +171,11 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     @Override
     public void setProfileDetailThree(String detailThree) {
         detailThreeView.setText(detailThree);
+    }
+
+    @Override
+    public void setReferralDetailsView(boolean hasReferral) {
+        referralDetailsSection.setVisibility( hasReferral ? View.VISIBLE : View.GONE);
     }
 
     @Override

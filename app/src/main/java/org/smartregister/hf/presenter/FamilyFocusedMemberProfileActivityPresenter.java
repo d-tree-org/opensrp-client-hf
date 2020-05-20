@@ -84,12 +84,17 @@ public class FamilyFocusedMemberProfileActivityPresenter
 
     @Override
     public void onReferralTaskFetched(Task referral) {
-        getView().setReferralDetails(
-                referral.getFocus(),
-                referral.getDescription(),
-                referral.getAuthoredOn().toString(),
-                referral.getOwner(),
-                referral.getRequester());
+        if (referral != null){
+            getView().setReferralDetailsView(true);
+            getView().setReferralDetails(
+                    referral.getFocus(),
+                    referral.getDescription(),
+                    referral.getAuthoredOn().toString(),
+                    referral.getOwner(),
+                    referral.getRequester());
+        }else {
+            getView().setReferralDetailsView(false);
+        }
     }
 
     @Override

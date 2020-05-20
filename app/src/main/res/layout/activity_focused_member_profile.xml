@@ -215,7 +215,7 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include android:id="@+id/action_items_focused_member"
+        <include android:id="@+id/referral_details_section"
             layout="@layout/view_record_services_focused" />
 
         <include layout="@layout/content_base_profile" />

@@ -28,6 +28,8 @@ public interface FamilyFocusedMemberProfileContract {
         String getString(int id_with_value);
 
         void setReferralDetails(String focus, String indicators, String date, String source, String referredBy);
+
+        void setReferralDetailsView(boolean hasReferral);
     }
 
     interface Presenter extends BaseProfileContract.Presenter {
