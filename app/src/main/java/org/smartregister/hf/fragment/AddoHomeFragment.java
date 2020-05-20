@@ -21,6 +21,7 @@ import org.smartregister.hf.contract.AddoHomeFragmentContract;
 import org.smartregister.hf.custom_views.NavigationMenu;
 import org.smartregister.hf.model.AddoHomeFragmentModel;
 import org.smartregister.hf.presenter.AddoHomeFragmentPresenter;
+import org.smartregister.hf.util.TaksUtils;
 import org.smartregister.hf.view.EmptystateView;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
@@ -41,6 +42,10 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
     private AddoHomeActivity.AddoHomeSharedViewModel model;
     private TextView tvNoVillage;
     private EmptystateView emptystateView;
+
+    private TextView totalReferralCount;
+    private TextView todayReferralCount;
+    private TextView attendedReferralCount;
 
     @Override
     public void setupViews(View view) {
@@ -64,6 +69,10 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
                     titleView.getPaddingBottom());
             titleView.setVisibility(View.GONE);
         }
+
+        totalReferralCount = view.findViewById(R.id.total_referrals_count);
+        todayReferralCount = view.findViewById(R.id.today_referral_count);
+        attendedReferralCount = view.findViewById(R.id.attended_referral_count);
 
         tvNoVillage = view.findViewById(R.id.empty_view);
         emptystateView = view.findViewById(R.id.ev_no_villages);
@@ -122,6 +131,22 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
 
         return view;
 
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getReferralCount();
+    }
+
+    private void getReferralCount(){
+        int totalCount = TaksUtils.getReferralCount();
+        int todayCount = TaksUtils.getTodayReferrals();
+        int attended = TaksUtils.getAttendedReferrals();
+
+        totalReferralCount.setText(totalCount+"");
+        todayReferralCount.setText(todayCount+"");
+        attendedReferralCount.setText(attended+"");
     }
 
     @Override
