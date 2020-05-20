@@ -1,5 +1,6 @@
 package org.smartregister.hf.presenter;
 
+import org.smartregister.domain.Task;
 import org.smartregister.hf.contract.FamilyFocusedMemberProfileContract;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.contract.FamilyOtherMemberContract;
@@ -7,13 +8,17 @@ import org.smartregister.family.contract.FamilyProfileMemberContract;
 import org.smartregister.family.interactor.FamilyOtherMemberProfileInteractor;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.Utils;
+import org.smartregister.hf.interactor.FamilyFocusedMemberProfileInteractor;
 
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 
 import static org.smartregister.util.Utils.getName;
 
-public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocusedMemberProfileContract.Presenter, FamilyOtherMemberContract.InteractorCallBack {
+public class FamilyFocusedMemberProfileActivityPresenter
+        implements FamilyFocusedMemberProfileContract.Presenter,
+        FamilyOtherMemberContract.InteractorCallBack,
+        FamilyFocusedMemberProfileContract.InteractorCallBack{
 
     private WeakReference<FamilyFocusedMemberProfileContract.View> viewReference;
     private String baseEntityId;
@@ -22,7 +27,7 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
     protected String familyHead;
     private String familyName;
     protected String villageTown;
-    private FamilyOtherMemberProfileInteractor interactor;
+    private FamilyFocusedMemberProfileInteractor interactor;
 
     public FamilyFocusedMemberProfileActivityPresenter(FamilyFocusedMemberProfileContract.View view, FamilyProfileMemberContract.Model model,
                                                        String viewConfigurationIdentifier, String baseEntityId, String familyBaseEntityId,
@@ -34,12 +39,17 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
         this.familyName = familyName;
         this.primaryCaregiver = primaryCaregiver;
         this.villageTown = villageTown;
-        this.interactor = new FamilyOtherMemberProfileInteractor();
+        this.interactor = new FamilyFocusedMemberProfileInteractor();
 
     }
 
     public String getFamilyName() {
         return familyName;
+    }
+
+    @Override
+    public void getReferralData(String baseEntityId) {
+        interactor.fetchReferralForClient(baseEntityId, this);
     }
 
     @Override
@@ -70,6 +80,21 @@ public class FamilyFocusedMemberProfileActivityPresenter implements FamilyFocuse
     @Override
     public void refreshProfileView() {
         interactor.refreshProfileView(baseEntityId, this);
+    }
+
+    @Override
+    public void onReferralTaskFetched(Task referral) {
+        getView().setReferralDetails(
+                referral.getFocus(),
+                referral.getDescription(),
+                referral.getAuthoredOn().toString(),
+                referral.getOwner(),
+                referral.getRequester());
+    }
+
+    @Override
+    public void onErrorFetchingReferrals(String error) {
+
     }
 
     @Override

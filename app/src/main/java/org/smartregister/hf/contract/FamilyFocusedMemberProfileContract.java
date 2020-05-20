@@ -1,6 +1,7 @@
 package org.smartregister.hf.contract;
 
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.domain.Task;
 import org.smartregister.view.contract.BaseProfileContract;
 
 public interface FamilyFocusedMemberProfileContract {
@@ -25,6 +26,8 @@ public interface FamilyFocusedMemberProfileContract {
         void togglePrimaryCaregiver(boolean show);
 
         String getString(int id_with_value);
+
+        void setReferralDetails(String focus, String indicators, String date, String source, String referredBy);
     }
 
     interface Presenter extends BaseProfileContract.Presenter {
@@ -35,10 +38,21 @@ public interface FamilyFocusedMemberProfileContract {
 
         String getFamilyName();
 
+        void getReferralData(String baseEntityId);
+
+    }
+
+    interface Interactor {
+        void fetchReferralForClient(String baseEntityId, InteractorCallBack callBack);
     }
 
     interface InteractorCallBack {
 
-        void refreshProfileTopSection(CommonPersonObjectClient client);
+        //void refreshProfileTopSection(CommonPersonObjectClient client);
+
+        void onReferralTaskFetched(Task referral);
+
+        void onErrorFetchingReferrals(String error);
+
     }
 }
