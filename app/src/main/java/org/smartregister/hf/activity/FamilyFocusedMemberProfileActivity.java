@@ -1,5 +1,6 @@
 package org.smartregister.hf.activity;
 
+import android.content.DialogInterface;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -7,7 +8,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.viewpager.widget.ViewPager;
 
 import org.smartregister.hf.R;
@@ -58,6 +61,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     protected MemberObject memberObject;
     private FamilyMemberFloatingMenu familyFloatingMenu;
 
+    private String referralEntityId;
+
     @Override
     protected void onCreation() {
         setContentView(R.layout.activity_focused_member_profile);
@@ -81,8 +86,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
         setupViews();
 
-        FamilyFocusedMemberProfileActivityPresenter p = (FamilyFocusedMemberProfileActivityPresenter) presenter;
-        p.getReferralData(baseEntityId);
+        presenter().getReferralData(baseEntityId);
 
     }
 
@@ -179,12 +183,19 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     }
 
     @Override
-    public void setReferralDetails(String focus, String indicators, String date, String source, String referredBy) {
+    public void goToFamilyProfile() {
+        finish();
+    }
+
+    @Override
+    public void setReferralDetails(String entityId, String focus, String indicators, String date, String source, String referredBy) {
         referralReason.setText(focus);
         referralIndicators.setText(indicators);
         referralDate.setText(date);
         referralSource.setText(source);
         referee.setText(referredBy);
+
+        this.referralEntityId = entityId;
     }
 
     @Override
@@ -215,11 +226,26 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_mark_as_done:
-                Toast.makeText(this, "You are marking as done", Toast.LENGTH_SHORT).show();
+                confirmMarkingAsDone();
                 break;
             default:
                 super.onClick(view);
                 break;
         }
     }
+
+    void confirmMarkingAsDone(){
+        new AlertDialog.Builder(this)
+                .setView(R.layout.dialog_complete_referral_confirmation)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue with delete operation
+                        presenter().markReferralAsDone(baseEntityId);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.alert_light_frame)
+                .show();
+    }
+
 }

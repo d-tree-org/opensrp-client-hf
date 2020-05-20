@@ -27,9 +27,12 @@ public interface FamilyFocusedMemberProfileContract {
 
         String getString(int id_with_value);
 
-        void setReferralDetails(String focus, String indicators, String date, String source, String referredBy);
+        void setReferralDetails(String entityId, String focus, String indicators, String date, String source, String referredBy);
 
         void setReferralDetailsView(boolean hasReferral);
+
+        void goToFamilyProfile();
+
     }
 
     interface Presenter extends BaseProfileContract.Presenter {
@@ -41,6 +44,8 @@ public interface FamilyFocusedMemberProfileContract {
         String getFamilyName();
 
         void getReferralData(String baseEntityId);
+
+        void markReferralAsDone(String entityId);
 
     }
 

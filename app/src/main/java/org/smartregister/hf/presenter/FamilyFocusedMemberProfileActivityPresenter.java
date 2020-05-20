@@ -8,6 +8,7 @@ import org.smartregister.family.contract.FamilyProfileMemberContract;
 import org.smartregister.family.interactor.FamilyOtherMemberProfileInteractor;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.Utils;
+import org.smartregister.hf.dao.FamilyDao;
 import org.smartregister.hf.interactor.FamilyFocusedMemberProfileInteractor;
 
 import java.lang.ref.WeakReference;
@@ -53,6 +54,12 @@ public class FamilyFocusedMemberProfileActivityPresenter
     }
 
     @Override
+    public void markReferralAsDone(String entityId) {
+        FamilyDao.completeTasksForEntity(entityId);
+        getView().goToFamilyProfile();
+    }
+
+    @Override
     public void onDestroy(boolean isChangingConfiguration) {
 
         viewReference = null;
@@ -87,6 +94,7 @@ public class FamilyFocusedMemberProfileActivityPresenter
         if (referral != null){
             getView().setReferralDetailsView(true);
             getView().setReferralDetails(
+                    referral.getIdentifier(),
                     referral.getFocus(),
                     referral.getDescription(),
                     referral.getAuthoredOn().toString(),
