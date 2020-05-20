@@ -20,11 +20,6 @@ public class TaksUtils {
     public static int getReferralCount(){
         Cursor cursor = null;
 
-        DateTime today = new DateTime();
-        DateTime yesterday = today.minusDays(1);
-
-        long yesterdayInMiliseconds = yesterday.getMillis();
-
         try {
             String q = "select * from task where status = 'READY'";
             cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
@@ -46,7 +41,7 @@ public class TaksUtils {
         DateTime startOfDay = today.withTimeAtStartOfDay();
 
         try {
-            String q = "select * from task where status = 'READY' and authored_on > "+startOfDay.getMillis()+" ";
+            String q = "select * from task where status = 'READY' and authored_on > "+startOfDay.getMillis();
             cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
             cursor.moveToFirst();
             return cursor.getCount();
@@ -63,12 +58,10 @@ public class TaksUtils {
     public static int getAttendedReferrals(){
         Cursor cursor = null;
         DateTime today = new DateTime();
-        DateTime yesterday = today.minusDays(1);
-
-        long yesterdayInMiliseconds = yesterday.getMillis();
+        DateTime startOfDay = today.withTimeAtStartOfDay();
 
         try {
-            String q = "select * from task where status = '"+ Task.TaskStatus.COMPLETED +"' and authored_on > "+yesterdayInMiliseconds+" ";
+            String q = "select * from task where status = '"+ Task.TaskStatus.COMPLETED +"' and authored_on > "+startOfDay.getMillis();
             cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
             cursor.moveToFirst();
             return cursor.getCount();
