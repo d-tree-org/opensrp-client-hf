@@ -120,20 +120,28 @@
         android:textColor="@color/second_grey"
         android:fontFamily="@font/google_sans_regular"/>
 
-    <org.smartregister.view.customcontrols.CustomFontTextView
-        android:id="@+id/tv_mark_as_done"
-        style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
+    <RelativeLayout
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
+        android:layout_gravity="right"
         android:layout_marginTop="32dp"
         android:layout_marginRight="17dp"
-        android:background="@drawable/btn_drawable"
-        android:gravity="center"
-        android:layout_gravity="right"
-        android:text="Mark as Done"
-        android:textAllCaps="false"
-        android:textColor="@color/white" />
+        android:padding="4dp">
+
+        <org.smartregister.view.customcontrols.CustomFontTextView
+            android:id="@+id/tv_mark_as_done"
+            style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_drawable"
+            android:gravity="center"
+            android:fontFamily="@font/google_sans_medium"
+            android:textSize="12sp"
+            android:text="Mark as Done"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
 
     <View
         android:id="@+id/view_record"
