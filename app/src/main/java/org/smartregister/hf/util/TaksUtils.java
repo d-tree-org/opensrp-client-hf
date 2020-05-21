@@ -61,7 +61,7 @@ public class TaksUtils {
         DateTime startOfDay = today.withTimeAtStartOfDay();
 
         try {
-            String q = "select * from task where status = '"+ Task.TaskStatus.COMPLETED +"' and authored_on > "+startOfDay.getMillis();
+            String q = "select * from task where status = '"+ Task.TaskStatus.COMPLETED +"' OR status = '"+ Task.TaskStatus.IN_PROGRESS +"' AND authored_on > "+startOfDay.getMillis();
             cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
             cursor.moveToFirst();
             return cursor.getCount();
