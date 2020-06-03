@@ -50,6 +50,7 @@
                         android:gravity="center_vertical"
                         android:text="@string/advanced_search"
                         android:layout_margin="3dp"
+                        android:fontFamily="@font/google_sans_regular"
                         android:layout_toEndOf="@+id/imageButton"
                         android:layout_toRightOf="@+id/imageButton"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -71,9 +72,13 @@
                         android:textAllCaps="true"
                         android:textAppearance="?android:textAppearanceSmall"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/advanced_search_toolbar_text_size" />
+                        android:textSize="@dimen/advanced_search_toolbar_text_size"
+                        android:visibility="gone"/>
+
                 </RelativeLayout>
+
             </LinearLayout>
+
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
