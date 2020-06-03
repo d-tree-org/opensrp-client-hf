@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class AdvancedSearchFragmentPresenter implements Presenter, AdvancedSearchContract.Presenter, AdvancedSearchContract.InteractorCallBack {
+public class AdvancedSearchFragmentPresenter implements Presenter, AdvancedSearchContract.Presenter, AdvancedSearchContract.InteractorCallBack  {
 
     protected WeakReference<FamilyRegisterFragmentContract.View> viewReference;
     protected FamilyRegisterFragmentContract.Model model;
@@ -115,28 +115,13 @@ public class AdvancedSearchFragmentPresenter implements Presenter, AdvancedSearc
         return null;
     }
 
-    public void search(Map<String, String> searchMap, boolean isLocal) {
-        Log.d("Search", "searching in presenter: "  + searchMap.toString());
-        interactor.search(searchMap, this);
+    public void search(String searchText) {
+        Log.d("Search", "searching in presenter: "  + searchText);
+        interactor.search(searchText, this);
     }
 
-    public void onResultsFound(Response<String> response) {
-        Log.d("Results", response.payload());
-
-        //To do: convert payload to Family member
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
-            public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                return new Date(json.getAsJsonPrimitive().getAsLong());
-            }
-        });
-        Gson gson = builder.create();
-
-        List<Entity> members = gson.fromJson(response.payload(), new TypeToken<List<Entity>>() {
-        }.getType());
-
+    public void onResultsFound(List<Entity> members) {
         System.out.println("Member size: " + members.size());
-        System.out.println(members.get(0));
 
         getView().showResults(members);
     }

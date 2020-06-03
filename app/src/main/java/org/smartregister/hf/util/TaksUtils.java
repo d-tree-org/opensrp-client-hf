@@ -12,6 +12,8 @@ import java.util.Set;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.common.api.internal.TaskUtil;
+
 /**
  * Author : Isaya Mollel on 2020-05-18.
  */
@@ -20,13 +22,8 @@ public class TaksUtils {
     public static int getReferralCount(){
         Cursor cursor = null;
 
-        DateTime today = new DateTime();
-        DateTime yesterday = today.minusDays(1);
-
-        long yesterdayInMiliseconds = yesterday.getMillis();
-
         try {
-            String q = "select * from task where status = 'READY'";
+            String q = "select * from task where status = 'READY' AND business_status = 'Referred' ";
             cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
             cursor.moveToFirst();
             return cursor.getCount();
@@ -46,7 +43,7 @@ public class TaksUtils {
         DateTime startOfDay = today.withTimeAtStartOfDay();
 
         try {
-            String q = "select * from task where status = 'READY' and authored_on > "+startOfDay.getMillis()+" ";
+            String q = "select * from task where status = 'READY' AND business_status = 'Referred' AND  authored_on > "+startOfDay.getMillis();
             cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
             cursor.moveToFirst();
             return cursor.getCount();
@@ -63,12 +60,12 @@ public class TaksUtils {
     public static int getAttendedReferrals(){
         Cursor cursor = null;
         DateTime today = new DateTime();
-        DateTime yesterday = today.minusDays(1);
-
-        long yesterdayInMiliseconds = yesterday.getMillis();
+        DateTime startOfDay = today.withTimeAtStartOfDay();
 
         try {
-            String q = "select * from task where status = '"+ Task.TaskStatus.COMPLETED +"' and authored_on > "+yesterdayInMiliseconds+" ";
+            String q = "select * from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"')" +
+                    " AND business_status = 'Referred' " +
+                    " AND authored_on > "+startOfDay.getMillis();
             cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
             cursor.moveToFirst();
             return cursor.getCount();
@@ -105,9 +102,37 @@ public class TaksUtils {
                 clientBaseId,
                 Task.TaskStatus.READY);
 
-        //referralTasks.toArray();
+        boolean clientHasReferral = false;
 
-        return !referralTasks.isEmpty();
+        while (referralTasks.iterator().hasNext()){
+            Task t = referralTasks.iterator().next();
+            if (t.getBusinessStatus().equals("referred")){
+                clientHasReferral = true;
+            }
+        }
+
+        return clientHasReferral;
+    }
+
+    public static boolean clientHasReferral(String baseEntityId){
+        Cursor cursor = null;
+        DateTime today = new DateTime();
+        DateTime startOfDay = today.withTimeAtStartOfDay();
+
+        try {
+            String q = "select * from task where status  = '"+ Task.TaskStatus.READY +"' "+
+                    " AND business_status = 'Referred' AND for = '"+baseEntityId+"' ";
+            cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
+            cursor.moveToFirst();
+            return cursor.getCount() > 0;
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (cursor != null){
+                cursor.close();
+            }
+        }
+        return false;
     }
 
 }

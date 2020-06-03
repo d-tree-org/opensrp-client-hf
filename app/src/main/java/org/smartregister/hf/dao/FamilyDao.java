@@ -1,6 +1,7 @@
 package org.smartregister.hf.dao;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -10,13 +11,17 @@ import org.joda.time.DateTime;
 import org.smartregister.dao.AbstractDao;
 import org.smartregister.domain.Task;
 import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.domain.Entity;
 import org.smartregister.repository.BaseRepository;
 import org.smartregister.util.DateUtil;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import timber.log.Timber;
 
 import static org.smartregister.hf.util.CoreConstants.DB_CONSTANTS.FOR;
 import static org.smartregister.hf.util.CoreConstants.DB_CONSTANTS.STATUS;
@@ -28,11 +33,45 @@ public class FamilyDao extends AbstractDao {
         if (StringUtils.isBlank(entityId))
             return;
         ContentValues contentValues = new ContentValues();
-        contentValues.put(STATUS, Task.TaskStatus.COMPLETED.name());
+        contentValues.put(STATUS, Task.TaskStatus.IN_PROGRESS.name());
         contentValues.put(SYNC_STATUS, BaseRepository.TYPE_Unsynced);
         contentValues.put("last_modified", DateUtil.getMillis(new DateTime()));
         AddoApplication.getInstance().getRepository().getWritableDatabase().update("task", contentValues,
                 String.format("%s = ? AND %s =?", FOR, STATUS), new String[]{entityId, Task.TaskStatus.READY.name()});
+    }
+
+    public static List<Entity> search(String searchText) {
+        Cursor cursor = null;
+        List<Entity> entitySet = new ArrayList<>();
+        try {
+            String query = String.format("SELECT * FROM ec_family_member WHERE first_name LIKE '%%%s%%' " +
+                    "OR middle_name LIKE '%%%s%%' OR last_name LIKE '%%%s%%'", searchText, searchText, searchText);
+            cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query,
+                    new String[]{});
+            while (cursor.moveToNext()) {
+                Entity entity = readCursor(cursor);
+                entitySet.add(entity);
+            }
+        } catch (Exception e) {
+            Timber.e(e);
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return entitySet;
+    }
+
+    private static Entity readCursor(Cursor cursor) {
+        Entity entity = new Entity();
+
+        entity.setBaseEntityId(cursor.getString(cursor.getColumnIndex("base_entity_id")));
+        entity.setFirstName(cursor.getString(cursor.getColumnIndex("first_name")));
+        entity.setMiddleName(cursor.getString(cursor.getColumnIndex("middle_name")));
+        entity.setLastName(cursor.getString(cursor.getColumnIndex("last_name")));
+        entity.setGender(cursor.getString(cursor.getColumnIndex("gender")));
+        entity.setFamilyId(cursor.getString(cursor.getColumnIndex("relational_id")));
+
+        return entity;
     }
 
     public static Map<String, Integer> getFamilyServiceSchedule(String familyBaseEntityID) {

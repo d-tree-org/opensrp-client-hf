@@ -62,7 +62,7 @@ public class KituoniMemberRegisterProvider extends FamilyMemberRegisterProvider 
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) client;
 
-        if (TaksUtils.getReferralStatus(pc.entityId())){
+        if (TaksUtils.clientHasReferral(pc.entityId())){
             vh.clientReferred.setVisibility(View.VISIBLE);
         }else {
             vh.clientReferred.setVisibility(View.GONE);

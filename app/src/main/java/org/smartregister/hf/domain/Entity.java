@@ -6,8 +6,7 @@ import java.util.Map;
 
 public class Entity extends BaseEntity {
     private String baseEntityId;
-    private Map<String, Object> relationships;
-    private Map<String, Object> identifiers;
+    private String familyId;
 
     public String getBaseEntityId() {
         return baseEntityId;
@@ -17,19 +16,11 @@ public class Entity extends BaseEntity {
         this.baseEntityId = baseEntityId;
     }
 
-    public Map<String, Object> getRelationships() {
-        return relationships;
+    public String getFamilyId() {
+        return familyId;
     }
 
-    public void setRelationships(Map<String, Object> relationships) {
-        this.relationships = relationships;
-    }
-
-    public Map<String, Object> getIdentifiers() {
-        return identifiers;
-    }
-
-    public void setIdentifiers(Map<String, Object> identifiers) {
-        this.identifiers = identifiers;
+    public void setFamilyId(String familyId) {
+        this.familyId = familyId;
     }
 }

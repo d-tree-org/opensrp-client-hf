@@ -13,6 +13,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.viewpager.widget.ViewPager;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.smartregister.hf.R;
 import org.smartregister.hf.contract.FamilyFocusedMemberProfileContract;
 import org.smartregister.hf.custom_views.FamilyMemberFloatingMenu;
@@ -26,6 +29,10 @@ import org.smartregister.family.util.Utils;
 import org.smartregister.helper.ImageRenderHelper;
 import org.smartregister.view.activity.BaseProfileActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -191,7 +198,19 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     public void setReferralDetails(String entityId, String focus, String indicators, String date, String source, String referredBy) {
         referralReason.setText(focus);
         referralIndicators.setText(indicators);
-        referralDate.setText(date);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("E MMM d, hh:mm aa", Locale.getDefault());
+        Date dateTime;
+        String formattedDate = "";
+
+        try {
+            dateTime = DateTime.parse(date).toDate();
+            formattedDate = sdf.format(dateTime);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        referralDate.setText(formattedDate);
         referralSource.setText(source);
         referee.setText(referredBy);
 

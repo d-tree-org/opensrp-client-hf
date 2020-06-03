@@ -17,8 +17,8 @@
 
             <ImageView
                 android:id="@+id/locationImageView"
-                android:layout_width="@dimen/me_page_section_square_dimension"
-                android:layout_height="@dimen/me_page_section_square_dimension"
+                android:layout_width="20sp"
+                android:layout_height="20sp"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/me_page_initials_background_margin"
                 android:contentDescription="@string/section_icon"
@@ -26,31 +26,17 @@
                 android:tint="@color/addo_primary"
                 android:src="@drawable/ic_icon_location" />
 
-            <RelativeLayout
-                android:id="@+id/locationPickerView"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
+            <TextView
+                android:id="@+id/village_name"
+                android:fontFamily="@font/google_sans_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="0dp"
-                android:layout_toEndOf="@+id/locationImageView"
-                android:orientation="horizontal">
-
-
-                <org.smartregister.view.LocationPickerView
-                    android:id="@+id/village_name"
-                    style="@style/me_page_location_selector"
-                    android:layout_width="210dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginEnd="80dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:scrollHorizontally="true"
-                    android:text="Village Name" />
-
-            </RelativeLayout>
+                android:layout_toEndOf="@id/locationImageView"
+                android:text="Village Name" />
 
             <ImageView
                 android:id="@+id/locationRightCaret"
@@ -58,7 +44,6 @@
                 android:layout_height="@dimen/me_page_section_square_dimension"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/locationPickerView"
                 android:contentDescription="@string/right_arrow"
                 android:gravity="center"
                 android:src="@drawable/baseline_keyboard_arrow_right"
@@ -69,10 +54,9 @@
         <View
             android:id="@+id/contact_summary_separator"
             android:layout_width="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:layout_height="1dp"
-            android:background="@color/me_page_line_separator" />
+            android:background="@color/lighter_grey" />
 
 </LinearLayout>

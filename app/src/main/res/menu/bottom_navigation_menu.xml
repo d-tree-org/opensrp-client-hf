@@ -13,8 +13,8 @@
     <item
         android:id="@+id/action_clients"
         android:enabled="true"
-        android:icon="@drawable/ic_icon_nav_clients"
-        android:title="@string/clients_menu"
+        android:icon="@null"
+        android:title=""
         app:showAsAction="ifRoom"/>
 
 <!--    <item-->

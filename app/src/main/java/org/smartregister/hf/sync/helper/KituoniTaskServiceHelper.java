@@ -1,6 +1,9 @@
 package org.smartregister.hf.sync.helper;
 
+import android.util.Log;
+
 import org.smartregister.CoreLibrary;
+import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.repository.TaskRepository;
 import org.smartregister.sync.helper.TaskServiceHelper;
 
@@ -29,9 +32,7 @@ public class KituoniTaskServiceHelper extends TaskServiceHelper {
 
     @Override
     protected List<String> getLocationIds() {
-        List<String> res = new ArrayList<>();
-        res.add("bb8e7fd4-f8d8-42d9-a71c-d659f9e2c64d");
-        return res;
+        return LocationHelper.getInstance().locationsFromHierarchy(true, null);
     }
 
     @Override

@@ -4,7 +4,6 @@
     android:id="@+id/addo_home_fragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -30,11 +29,30 @@
         android:layout_height="match_parent"
         android:background="@drawable/listview_background_rounded">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/addo_villages_recycler_view"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Client's Village from the list"
+                android:paddingTop="8dp"
+                android:textSize="14sp"
+                android:paddingBottom="8dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/primary_color"
+                android:fontFamily="@font/google_sans_italic"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/addo_villages_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/client_list_progress"
@@ -52,6 +70,7 @@
             android:padding="10dp"
             android:text="@string/addo_user_no_villages"
             android:visibility="gone" />
+
         <org.smartregister.hf.view.EmptystateView
             android:id="@+id/ev_no_villages"
             android:layout_width="wrap_content"
