@@ -98,16 +98,6 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
     @Override
     protected void registerBottomNavigation() {
-        //super.registerBottomNavigation();
-
-//        bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_search);
-//        bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_library);
-//        bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_clients);
-//        bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_scan_qr);
-//        bottomNavigationView.getMenu().removeItem(org.smartregister.family.R.id.action_register);
-//        bottomNavigationView.getMenu().removeItem(R.id.action_fingerprint);
-//        FamilyRegisterBottomNavigationListener listener = new FamilyRegisterBottomNavigationListener(this, bottomNavigationView);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(listener);
     }
 
     @Override
@@ -115,13 +105,10 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
         if (requestCode == Constants.RQ_CODE.STORAGE_PERMISIONS && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             NavigationMenu navigationMenu = NavigationMenu.getInstance(this, null, null);
             if (navigationMenu != null) {
-                //navigationMenu.startP2PActivity(this);
             }
         }
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////// Inner Class //////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
+
     public static class AddoHomeSharedViewModel extends ViewModel {
         private final MutableLiveData<String> selectedVillage = new MutableLiveData<String>();
 

@@ -418,4 +418,17 @@
     <string name="focused_client_profile_dispense">Dispense/attend Prescription from HF OR Malaria Lab Tests</string>
     <string name="item_2_placeholder">Item 2 Placeholder</string>
     <string name="item_1_placeholder">Item 1 Placeholder</string>
+    <string name="select_village">Select Client\'s Village from the list</string>
+    <string name="total_number_referrals">Total \nReferrals</string>
+    <string name="today_number_referrals">Today\'s \nReferrals</string>
+    <string name="attended_referrals">Attended \nReferrals</string>
+    <string name="village_name">Village Name</string>
+    <string name="patient_name_age">Patient Name, Age</string>
+    <string name="has_referral">Has Referral</string>
+    <string name="search_criteria_include">Search criteria: Include</string>
+    <string name="no_matches_found">0 matching results found</string>
+    <string name="enter_first_name_or_last">Enter first name or last</string>
+    <string name="skip_to_search">Skip to search</string>
+    <string name="return_to_select_village">Return to select village</string>
+    <string name="scan_fingerprint">Scan fingerprint</string>
 </resources>

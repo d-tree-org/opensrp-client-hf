@@ -115,7 +115,7 @@
         android:layout_marginBottom="100dp"
         android:fontFamily="@font/google_sans_regular"
         android:gravity="center"
-        android:text="Skip to search"
+        android:text="@string/skip_to_search"
         android:textColor="@color/addo_primary"
         android:textSize="14sp" />
 
