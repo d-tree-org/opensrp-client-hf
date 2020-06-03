@@ -36,7 +36,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/locationImageView"
-                android:text="Village Name" />
+                android:text="@string/village_name" />
 
             <ImageView
                 android:id="@+id/locationRightCaret"
