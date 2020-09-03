@@ -2,6 +2,7 @@ package org.smartregister.hf.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import org.smartregister.hf.R;
 import org.smartregister.hf.presenter.LoginPresenter;
@@ -44,6 +45,15 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     private void goToMainActivity(boolean b){
         Intent intent = new Intent(this, AddoHomeActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getTitle().toString().equalsIgnoreCase("Settings")) {
+            startActivity(new Intent(this, HfSettingsActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
