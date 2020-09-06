@@ -14,6 +14,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.json.JSONObject;
 import org.smartregister.hf.repository.HfSharedPreference;
 import org.smartregister.hf.util.Constants;
@@ -36,7 +42,6 @@ public class HfPreferenceFragment extends SettingsActivity.MyPreferenceFragment 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.hfpreference);
 
         Preference addoEnvironmentPreference = findPreference("enable_production");
 
@@ -102,6 +107,7 @@ public class HfPreferenceFragment extends SettingsActivity.MyPreferenceFragment 
         HfSharedPreference addoSharedPreferences = new HfSharedPreference(sharedPreferences);
         addoSharedPreferences.updateOpensrpADDOEnvironment("production");
         writeEnvironmentConfigurations("production");
+        clearApplicationData();
         Toast.makeText(getActivity(), "I am switching to production " + addoSharedPreferences.getOpensrpADDOEnvironment(), Toast.LENGTH_SHORT).show();
     }
 
@@ -110,6 +116,7 @@ public class HfPreferenceFragment extends SettingsActivity.MyPreferenceFragment 
         HfSharedPreference addoSharedPreferences = new HfSharedPreference(sharedPreferences);
         addoSharedPreferences.updateOpensrpADDOEnvironment("test");
         writeEnvironmentConfigurations("test");
+        clearApplicationData();
         Toast.makeText(getActivity(), "I am switching to test", Toast.LENGTH_SHORT).show();
     }
 
@@ -136,8 +143,36 @@ public class HfPreferenceFragment extends SettingsActivity.MyPreferenceFragment 
         alert.show();
     }
 
-    private void clearDeviceData() {
+    private void clearApplicationData() {
+        File appDir = new File(Environment.getDataDirectory() + File.separator + "data/org.smartregister.hf");
+        if(appDir.exists()){
+            String[] children = appDir.list();
+            for(String s : children){
+                if(!s.equals("lib")){
+                    deleteDir(new File(appDir, s));
+                    Log.i("TAG", "File /data/data/APP_PACKAGE/" + s +" DELETED");
+                }
+            }
+        } else {
+            // TODO
+        }
 
+        getActivity().finish();
+        System.exit(0);
+    }
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+
+        return dir.delete();
     }
 
     private void writeEnvironmentConfigurations(String env) {
@@ -145,11 +180,7 @@ public class HfPreferenceFragment extends SettingsActivity.MyPreferenceFragment 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("env", env);
 
-            Writer output = null;
             File file = new File(Environment.getExternalStorageDirectory()+ File.separator + "Kituoni", "env_switch.json");
-//            if (!file.exists()){
-//                file.mkdirs();
-//            }
 
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
