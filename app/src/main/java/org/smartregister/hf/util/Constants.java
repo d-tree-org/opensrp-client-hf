@@ -375,6 +375,10 @@ public class Constants {
 
     public static final class ENVIRONMENT_CONFIG {
         public static final String OPENSRP_HF_ENVIRONMENT = "opensrp_hf_environment";
+        public static final String PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH = "enable_production";
+
+        public static final String TEST_ENVIROMENT = "test";
+        public static final String PRODUCTION_ENVIROMENT = "production";
     }
 
 }
