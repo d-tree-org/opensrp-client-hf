@@ -27,15 +27,10 @@ import org.smartregister.simprint.OnDialogButtonClick;
 import org.smartregister.view.activity.SettingsActivity;
 
 import org.smartregister.hf.R;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.HashMap;
-import java.util.Map;
 
 public class HfPreferenceFragment extends SettingsActivity.MyPreferenceFragment {
 
@@ -43,78 +38,107 @@ public class HfPreferenceFragment extends SettingsActivity.MyPreferenceFragment 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Preference addoEnvironmentPreference = findPreference("enable_production");
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference switchReference = database.getReference("config/switch");
 
-        if (addoEnvironmentPreference != null) {
+        // Read from the database
+        switchReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                boolean value = dataSnapshot.getValue(Boolean.class);
+                if (value){
 
-            final SwitchPreference addoSwitchPreference = (SwitchPreference) addoEnvironmentPreference;
+                    addPreferencesFromResource(R.xml.hfpreference);
 
-            final boolean[] userAgreed = {false};
+                    Preference addoEnvironmentPreference = findPreference("enable_production");
 
-            addoSwitchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    String environment = preference.getSharedPreferences().getString(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, "test");
+                    if (addoEnvironmentPreference != null) {
 
-                    if(newValue instanceof Boolean && ((Boolean) newValue != preference.getSharedPreferences().getBoolean("enable_production", false))) {
-                        if ("test".equalsIgnoreCase(environment)) {
-                            confirmSwitchingEnvironment(getActivity(), new OnDialogButtonClick() {
-                                @Override
-                                public void onOkButtonClick() {
-                                    switchToProduction();
-                                    preference.getSharedPreferences().edit().putBoolean("enable_production", true).commit();
-                                    addoSwitchPreference.setChecked(true);
-                                    userAgreed[0] = true;
+                        final SwitchPreference addoSwitchPreference = (SwitchPreference) addoEnvironmentPreference;
+
+                        final boolean[] userAgreed = {false};
+
+                        addoSwitchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                            @Override
+                            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                                String environment = preference.getSharedPreferences().getString(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, "test");
+
+                                if(newValue instanceof Boolean && ((Boolean) newValue != preference.getSharedPreferences().getBoolean("enable_production", false))) {
+                                    if ("test".equalsIgnoreCase(environment)) {
+                                        confirmSwitchingEnvironment(getActivity(), new OnDialogButtonClick() {
+                                            @Override
+                                            public void onOkButtonClick() {
+                                                switchToProduction();
+                                                preference.getSharedPreferences().edit().putBoolean("enable_production", true).commit();
+                                                addoSwitchPreference.setChecked(true);
+                                                userAgreed[0] = true;
+                                            }
+
+                                            @Override
+                                            public void onCancelButtonClick() {
+                                                addoSwitchPreference.setChecked(false);
+                                                userAgreed[0] = false;
+                                            }
+                                        }, "Production");
+
+                                    } else {
+                                        confirmSwitchingEnvironment(getActivity(), new OnDialogButtonClick() {
+                                            @Override
+                                            public void onOkButtonClick() {
+                                                switchToTest();
+                                                preference.getSharedPreferences().edit().putBoolean("enable_production", false).commit();
+                                                addoSwitchPreference.setChecked(false);
+                                                userAgreed[0] = true;
+                                            }
+
+                                            @Override
+                                            public void onCancelButtonClick() {
+                                                addoSwitchPreference.setChecked(true);
+                                                userAgreed[0] = false;
+                                            }
+                                        }, "Test");
+
+                                    }
+
                                 }
 
-                                @Override
-                                public void onCancelButtonClick() {
-                                    addoSwitchPreference.setChecked(false);
-                                    userAgreed[0] = false;
-                                }
-                            }, "Production");
+                                return userAgreed[0];
 
-                        } else {
-                            confirmSwitchingEnvironment(getActivity(), new OnDialogButtonClick() {
-                                @Override
-                                public void onOkButtonClick() {
-                                    switchToTest();
-                                    preference.getSharedPreferences().edit().putBoolean("enable_production", false).commit();
-                                    addoSwitchPreference.setChecked(false);
-                                    userAgreed[0] = true;
-                                }
-
-                                @Override
-                                public void onCancelButtonClick() {
-                                    addoSwitchPreference.setChecked(true);
-                                    userAgreed[0] = false;
-                                }
-                            }, "Test");
-
-                        }
-
+                            }
+                        });
                     }
-
-                    return userAgreed[0];
+                }else{
 
                 }
-            });
-        }
+
+                Log.d("FB", "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("FB", "Failed to read value.", error.toException());
+            }
+        });
+
     }
 
     private void switchToProduction() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        HfSharedPreference addoSharedPreferences = new HfSharedPreference(sharedPreferences);
-        addoSharedPreferences.updateOpensrpADDOEnvironment("production");
+        HfSharedPreference hfSharedPreferences = new HfSharedPreference(sharedPreferences);
+        hfSharedPreferences.updateOpensrpEnviroment("production");
         writeEnvironmentConfigurations("production");
         clearApplicationData();
-        Toast.makeText(getActivity(), "I am switching to production " + addoSharedPreferences.getOpensrpADDOEnvironment(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "I am switching to production " + hfSharedPreferences.getOpensrpEnviroment(), Toast.LENGTH_SHORT).show();
     }
 
     private void switchToTest() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        HfSharedPreference addoSharedPreferences = new HfSharedPreference(sharedPreferences);
-        addoSharedPreferences.updateOpensrpADDOEnvironment("test");
+        HfSharedPreference hfSharedPreferences = new HfSharedPreference(sharedPreferences);
+        hfSharedPreferences.updateOpensrpEnviroment("test");
         writeEnvironmentConfigurations("test");
         clearApplicationData();
         Toast.makeText(getActivity(), "I am switching to test", Toast.LENGTH_SHORT).show();
