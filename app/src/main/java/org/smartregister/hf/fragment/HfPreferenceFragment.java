@@ -64,10 +64,10 @@ public class HfPreferenceFragment extends SettingsActivity.MyPreferenceFragment 
                         addoSwitchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                             @Override
                             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                                String environment = preference.getSharedPreferences().getString(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, "test");
+                                String environment = preference.getSharedPreferences().getString(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT);
 
                                 if(newValue instanceof Boolean && ((Boolean) newValue != preference.getSharedPreferences().getBoolean("enable_production", false))) {
-                                    if ("test".equalsIgnoreCase(environment)) {
+                                    if (Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT.equalsIgnoreCase(environment)) {
                                         confirmSwitchingEnvironment(getActivity(), new OnDialogButtonClick() {
                                             @Override
                                             public void onOkButtonClick() {
@@ -82,7 +82,7 @@ public class HfPreferenceFragment extends SettingsActivity.MyPreferenceFragment 
                                                 addoSwitchPreference.setChecked(false);
                                                 userAgreed[0] = false;
                                             }
-                                        }, "Production");
+                                        }, Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT);
 
                                     } else {
                                         confirmSwitchingEnvironment(getActivity(), new OnDialogButtonClick() {
@@ -99,7 +99,7 @@ public class HfPreferenceFragment extends SettingsActivity.MyPreferenceFragment 
                                                 addoSwitchPreference.setChecked(true);
                                                 userAgreed[0] = false;
                                             }
-                                        }, "Test");
+                                        }, Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT);
 
                                     }
 
@@ -129,19 +129,17 @@ public class HfPreferenceFragment extends SettingsActivity.MyPreferenceFragment 
     private void switchToProduction() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         HfSharedPreference hfSharedPreferences = new HfSharedPreference(sharedPreferences);
-        hfSharedPreferences.updateOpensrpEnviroment("production");
-        writeEnvironmentConfigurations("production");
+        hfSharedPreferences.updateOpensrpEnviroment(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT);
+        writeEnvironmentConfigurations(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT);
         clearApplicationData();
-        Toast.makeText(getActivity(), "I am switching to production " + hfSharedPreferences.getOpensrpEnviroment(), Toast.LENGTH_SHORT).show();
     }
 
     private void switchToTest() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         HfSharedPreference hfSharedPreferences = new HfSharedPreference(sharedPreferences);
-        hfSharedPreferences.updateOpensrpEnviroment("test");
-        writeEnvironmentConfigurations("test");
+        hfSharedPreferences.updateOpensrpEnviroment(Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT);
+        writeEnvironmentConfigurations(Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT);
         clearApplicationData();
-        Toast.makeText(getActivity(), "I am switching to test", Toast.LENGTH_SHORT).show();
     }
 
     private void confirmSwitchingEnvironment(Context context, final OnDialogButtonClick onDialogButtonClick, String environment) {

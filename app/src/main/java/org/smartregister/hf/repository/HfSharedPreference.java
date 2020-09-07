@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 
 import com.vijay.jsonwizard.utils.AllSharedPreferences;
 
+import org.smartregister.hf.util.Constants;
+
 public class HfSharedPreference extends AllSharedPreferences {
 
     public static final String OPENSRP_HF_ENVIRONMENT = "opensrp_hf_environment";
@@ -19,7 +21,7 @@ public class HfSharedPreference extends AllSharedPreferences {
     }
 
     public String getOpensrpEnviroment() {
-        return preferences.getString(OPENSRP_HF_ENVIRONMENT, "test");
+        return preferences.getString(OPENSRP_HF_ENVIRONMENT, Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT);
     }
 
 }
