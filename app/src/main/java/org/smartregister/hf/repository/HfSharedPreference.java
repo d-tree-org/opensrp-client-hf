@@ -14,11 +14,11 @@ public class HfSharedPreference extends AllSharedPreferences {
         this.preferences = preferences;
     }
 
-    public void updateOpensrpADDOEnvironment(String environmentValue) {
-        preferences.edit().putString(OPENSRP_HF_ENVIRONMENT, environmentValue).commit();
+    public void updateOpensrpEnviroment(String environmentValue) {
+        preferences.edit().putString(OPENSRP_HF_ENVIRONMENT, environmentValue).apply();
     }
 
-    public String getOpensrpADDOEnvironment() {
+    public String getOpensrpEnviroment() {
         return preferences.getString(OPENSRP_HF_ENVIRONMENT, "test");
     }
 
