@@ -26,7 +26,7 @@
             android:maxLines="8"
             android:minLines="1"
             android:singleLine="false"
-            android:text="Search criteria: Include"
+            android:text="@string/search_criteria_include"
             android:textColor="@color/client_list_grey"
             android:textSize="20sp" />
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:inputType="textMultiLine"
-            android:text="0 matching results found"
+            android:text="@string/no_matches_found"
             android:textColor="@color/client_list_grey"
             android:textSize="20sp" />
 

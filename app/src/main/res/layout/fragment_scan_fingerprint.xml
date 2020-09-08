@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:textColor="@color/white"
-                    android:text="Return to select village" />
+                    android:text="@string/return_to_select_village" />
 
             </LinearLayout>
 
@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="24sp"
-                    android:text="Scan fingerprint" />
+                    android:text="@string/scan_fingerprint" />
 
                 <LinearLayout
                     android:id="@+id/village_name_section"
@@ -103,8 +103,7 @@
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Arafa Mwendapole" />
+                        android:layout_height="wrap_content"/>
 
                 </LinearLayout>
 
@@ -139,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_drawable"
                 android:gravity="center"
-                android:text="SCAN FINGERPRINT" />
+                android:text="@string/scan_fingerprint" />
 
         </RelativeLayout>
 

@@ -26,7 +26,7 @@
                 android:id="@+id/search_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter first name or last"
+                android:hint="@string/enter_first_name_or_last"
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:fontFamily="@font/google_sans_regular"

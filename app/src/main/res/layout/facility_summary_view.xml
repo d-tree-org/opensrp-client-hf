@@ -30,7 +30,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total \nReferrals"
+                    android:text="@string/total_number_referrals"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:fontFamily="@font/google_sans_bold"
@@ -74,7 +74,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Today's \nReferrals"
+                    android:text="@string/today_number_referrals"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:fontFamily="@font/google_sans_bold"
@@ -118,7 +118,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Attended \nReferrals"
+                    android:text="@string/attended_referrals"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:fontFamily="@font/google_sans_bold"

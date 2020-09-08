@@ -1,6 +1,8 @@
 package org.smartregister.hf.application;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 
@@ -32,6 +34,7 @@ import org.smartregister.family.FamilyLibrary;
 import org.smartregister.family.activity.FamilyWizardFormActivity;
 import org.smartregister.family.domain.FamilyMetadata;
 import org.smartregister.family.util.DBConstants;
+import org.smartregister.hf.util.FileUtils;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.repository.AllSharedPreferences;
@@ -115,10 +118,6 @@ public class AddoApplication extends DrishtiApplication {
             language = configuration.getLocales().get(0).getLanguage();
         } else {
             language = configuration.locale.getLanguage();
-        }
-
-        if (language.equals(Locale.FRENCH.getLanguage())) {
-            saveLanguage(Locale.FRENCH.getLanguage());
         }
 
     }
