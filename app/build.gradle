@@ -31,8 +31,8 @@ android {
         applicationId "org.smartregister.hf"
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
-        versionCode 2
-        versionName "0.1.0"
+        versionCode 3
+        versionName "0.2.0"
         multiDexEnabled true
 
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
