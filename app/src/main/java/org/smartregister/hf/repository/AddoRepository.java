@@ -6,7 +6,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.AllConstants;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.chw.anc.repository.VisitRepository;
 import org.smartregister.configurableviews.repository.ConfigurableViewsRepository;
 import org.smartregister.repository.EventClientRepository;
@@ -26,7 +26,7 @@ public class AddoRepository extends Repository {
     private Context context;
 
     public AddoRepository(Context context, org.smartregister.Context openSRPContext) {
-        super(context, AllConstants.DATABASE_NAME, 10, openSRPContext.session(), AddoApplication.createCommonFtsObject(), openSRPContext.sharedRepositoriesArray());
+        super(context, AllConstants.DATABASE_NAME, 10, openSRPContext.session(), HfApplication.createCommonFtsObject(), openSRPContext.sharedRepositoriesArray());
         this.context = context;
     }
 
@@ -61,7 +61,7 @@ public class AddoRepository extends Repository {
 
     @Override
     public SQLiteDatabase getReadableDatabase() {
-        String pass = AddoApplication.getInstance().getPassword();
+        String pass = HfApplication.getInstance().getPassword();
         if (StringUtils.isNotBlank(pass)) {
             return getReadableDatabase(pass);
         } else {
@@ -71,7 +71,7 @@ public class AddoRepository extends Repository {
 
     @Override
     public SQLiteDatabase getWritableDatabase() {
-        String pass = AddoApplication.getInstance().getPassword();
+        String pass = HfApplication.getInstance().getPassword();
         if (StringUtils.isNotBlank(pass)) {
             return getWritableDatabase(pass);
         } else {

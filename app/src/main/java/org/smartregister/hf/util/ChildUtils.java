@@ -27,7 +27,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.ISODateTimeFormat;
 import org.json.JSONObject;
 import org.smartregister.hf.R;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.clientandeventmodel.Obs;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
@@ -192,10 +192,10 @@ public class ChildUtils {
 
     public static void processClientProcessInBackground(){
         try {
-            long lastSyncTimeStamp = AddoApplication.getInstance().getContext().allSharedPreferences().fetchLastUpdatedAtDate(0);
+            long lastSyncTimeStamp = HfApplication.getInstance().getContext().allSharedPreferences().fetchLastUpdatedAtDate(0);
             Date lastSyncDate = new Date(lastSyncTimeStamp);
-            AddoApplication.getClientProcessor(AddoApplication.getInstance().getContext().applicationContext()).processClient(FamilyLibrary.getInstance().getEcSyncHelper().getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
-            AddoApplication.getInstance().getContext().allSharedPreferences().saveLastUpdatedAtDate(lastSyncDate.getTime());
+            HfApplication.getClientProcessor(HfApplication.getInstance().getContext().applicationContext()).processClient(FamilyLibrary.getInstance().getEcSyncHelper().getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
+            HfApplication.getInstance().getContext().allSharedPreferences().saveLastUpdatedAtDate(lastSyncDate.getTime());
         } catch (Exception e) {
             Timber.e(e);
         }
@@ -249,14 +249,14 @@ public class ChildUtils {
             event.addObs((new Obs()).withFormSubmissionField(Constants.FORM_CONSTANTS.FORM_SUBMISSION_FIELD.HOME_VISIT_ILLNESS).withValue(illnessJson == null ? "" : illnessJson.toString())
                     .withFieldCode(Constants.FORM_CONSTANTS.FORM_SUBMISSION_FIELD.HOME_VISIT_ILLNESS).withFieldType("formsubmissionField").withFieldDataType("text").withParentCode("").withHumanReadableValues(new ArrayList<>()));
 
-            tagSyncMetadata(AddoApplication.getInstance().getContext().allSharedPreferences(), event);
+            tagSyncMetadata(HfApplication.getInstance().getContext().allSharedPreferences(), event);
 
             JSONObject eventJson = new JSONObject(JsonFormUtils.gson.toJson(event));
             syncHelper.addEvent(entityId, eventJson);
-            long lastSyncTimeStamp = AddoApplication.getInstance().getContext().allSharedPreferences().fetchLastUpdatedAtDate(0);
+            long lastSyncTimeStamp = HfApplication.getInstance().getContext().allSharedPreferences().fetchLastUpdatedAtDate(0);
             Date lastSyncDate = new Date(lastSyncTimeStamp);
-            AddoApplication.getClientProcessor(AddoApplication.getInstance().getContext().applicationContext()).processClient(syncHelper.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
-            AddoApplication.getInstance().getContext().allSharedPreferences().saveLastUpdatedAtDate(lastSyncDate.getTime());
+            HfApplication.getClientProcessor(HfApplication.getInstance().getContext().applicationContext()).processClient(syncHelper.getEvents(lastSyncDate, BaseRepository.TYPE_Unsynced));
+            HfApplication.getInstance().getContext().allSharedPreferences().saveLastUpdatedAtDate(lastSyncDate.getTime());
 
         } catch (Exception e) {
             Timber.e(e);
@@ -418,12 +418,12 @@ public class ChildUtils {
 
             String str = context.getResources().getString(R.string.due) + "" + dd_MMM_yyyy.format(date);
             spannableString = new SpannableString(str);
-            spannableString.setSpan(new ForegroundColorSpan(AddoApplication.getInstance().getContext().getColorResource(R.color.grey)), 0, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableString.setSpan(new ForegroundColorSpan(HfApplication.getInstance().getContext().getColorResource(R.color.grey)), 0, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             return spannableString;
         } else {
             String str = context.getResources().getString(R.string.overdue) + "" + dd_MMM_yyyy.format(date);
             spannableString = new SpannableString(str);
-            spannableString.setSpan(new ForegroundColorSpan(AddoApplication.getInstance().getContext().getColorResource(R.color.alert_urgent_red)), 0, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableString.setSpan(new ForegroundColorSpan(HfApplication.getInstance().getContext().getColorResource(R.color.alert_urgent_red)), 0, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             return spannableString;
         }
     }
@@ -518,7 +518,7 @@ public class ChildUtils {
             baseEvent.addObs((new Obs()).withFormSubmissionField(Constants.FORM_CONSTANTS.FORM_SUBMISSION_FIELD.HOME_VISIT_ID).withValue(homeVisitId)
                     .withFieldCode(Constants.FORM_CONSTANTS.FORM_SUBMISSION_FIELD.HOME_VISIT_ID).withFieldType("formsubmissionField").withFieldDataType("text").withParentCode("").withHumanReadableValues(new ArrayList<>()));
 
-            tagSyncMetadata(AddoApplication.getInstance().getContext().allSharedPreferences(), baseEvent);
+            tagSyncMetadata(HfApplication.getInstance().getContext().allSharedPreferences(), baseEvent);
             JSONObject eventJson = new JSONObject(JsonFormUtils.gson.toJson(baseEvent));
             syncHelper.addEvent(entityId, eventJson);
 
@@ -568,7 +568,7 @@ public class ChildUtils {
             baseEvent.addObs(new Obs("concept", "text", Constants.FORM_CONSTANTS.VACCINE_CARD.CODE, "",
                     JsonFormUtils.toList(JsonFormUtils.getChoice(context).get(choiceValue)), JsonFormUtils.toList(choiceValue), null,
                     ChildDBConstants.KEY.VACCINE_CARD).withHumanReadableValues(huValue));
-            tagSyncMetadata(AddoApplication.getInstance().getContext().allSharedPreferences(), baseEvent);
+            tagSyncMetadata(HfApplication.getInstance().getContext().allSharedPreferences(), baseEvent);
             JSONObject eventJson = new JSONObject(JsonFormUtils.gson.toJson(baseEvent));
             syncHelper.addEvent(entityId, eventJson);
         } catch (Exception e) {

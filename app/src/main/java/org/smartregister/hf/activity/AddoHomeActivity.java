@@ -10,13 +10,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import org.smartregister.hf.BuildConfig;
-import org.smartregister.hf.R;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.custom_views.NavigationMenu;
 import org.smartregister.hf.fragment.AddoHomeFragment;
 import org.smartregister.hf.fragment.AdvancedSearchFragment;
 import org.smartregister.hf.fragment.ScanFingerPrintFragment;
-import org.smartregister.hf.listeners.FamilyRegisterBottomNavigationListener;
 import org.smartregister.hf.util.Constants;
 import org.smartregister.family.activity.BaseFamilyRegisterActivity;
 import org.smartregister.family.model.BaseFamilyRegisterModel;
@@ -45,7 +43,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         NavigationMenu.getInstance(this, null, null);
-        AddoApplication.getInstance().notifyAppContextChange();
+        HfApplication.getInstance().notifyAppContextChange();
 
         action = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.ACTION);
         if (action != null && action.equals(Constants.ACTION.START_REGISTRATION)) {

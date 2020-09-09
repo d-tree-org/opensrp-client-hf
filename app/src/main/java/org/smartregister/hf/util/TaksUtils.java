@@ -5,14 +5,12 @@ import android.database.Cursor;
 import org.joda.time.DateTime;
 import org.smartregister.CoreLibrary;
 import org.smartregister.domain.Task;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.repository.TaskRepository;
 
 import java.util.Set;
 
 import androidx.annotation.NonNull;
-
-import com.google.android.gms.common.api.internal.TaskUtil;
 
 /**
  * Author : Isaya Mollel on 2020-05-18.
@@ -24,7 +22,7 @@ public class TaksUtils {
 
         try {
             String q = "select * from task where status = 'READY' AND business_status = 'Referred' ";
-            cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
+            cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
             cursor.moveToFirst();
             return cursor.getCount();
         }catch (Exception e){
@@ -44,7 +42,7 @@ public class TaksUtils {
 
         try {
             String q = "select * from task where status = 'READY' AND business_status = 'Referred' AND  authored_on > "+startOfDay.getMillis();
-            cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
+            cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
             cursor.moveToFirst();
             return cursor.getCount();
         }catch (Exception e){
@@ -66,7 +64,7 @@ public class TaksUtils {
             String q = "select * from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"')" +
                     " AND business_status = 'Referred' " +
                     " AND authored_on > "+startOfDay.getMillis();
-            cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
+            cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
             cursor.moveToFirst();
             return cursor.getCount();
         }catch (Exception e){
@@ -122,7 +120,7 @@ public class TaksUtils {
         try {
             String q = "select * from task where status  = '"+ Task.TaskStatus.READY +"' "+
                     " AND business_status = 'Referred' AND for = '"+baseEntityId+"' ";
-            cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
+            cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
             cursor.moveToFirst();
             return cursor.getCount() > 0;
         }catch (Exception e){

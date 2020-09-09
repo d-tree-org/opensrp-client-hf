@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.clientandeventmodel.Client;
 import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.clientandeventmodel.Obs;
@@ -32,10 +32,10 @@ import static org.smartregister.util.AssetHandler.jsonStringToJava;
 public class ATJsonFormUtils {
     private static final String TITLE = "title";
     private HashMap<String, String> JSON_DB_MAP;
-    private AddoApplication addoApplication;
+    private HfApplication hfApplication;
 
-    public ATJsonFormUtils(AddoApplication addoApplication) {
-        this.addoApplication = addoApplication;
+    public ATJsonFormUtils(HfApplication hfApplication) {
+        this.hfApplication = hfApplication;
         JSON_DB_MAP = new HashMap<>();
         JSON_DB_MAP.put(CoreConstants.JsonAssets.SEX, DBConstants.KEY.GENDER);
         JSON_DB_MAP.put(CoreConstants.JsonAssets.NATIONAL_ID, CoreConstants.JsonAssets.NATIONAL_ID);
@@ -107,7 +107,7 @@ public class ATJsonFormUtils {
 
 
         String query_client = "select json from client where baseEntityId = ? order by updatedAt desc";
-        try (Cursor cursor = addoApplication.getRepository().getReadableDatabase().rawQuery(query_client, new String[]{baseEntityID})) {
+        try (Cursor cursor = hfApplication.getRepository().getReadableDatabase().rawQuery(query_client, new String[]{baseEntityID})) {
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
@@ -122,7 +122,7 @@ public class ATJsonFormUtils {
         String query_event = String.format("select json from event where baseEntityId = '%s' and eventType in ('%s','%s') order by updatedAt desc limit 1;",
                 baseEntityID, CoreConstants.EventType.UPDATE_FAMILY_MEMBER_REGISTRATION, CoreConstants.EventType.FAMILY_MEMBER_REGISTRATION);
 
-        try (Cursor cursor1 = addoApplication.getRepository().getReadableDatabase().rawQuery(query_event, new String[]{})) {
+        try (Cursor cursor1 = hfApplication.getRepository().getReadableDatabase().rawQuery(query_event, new String[]{})) {
             cursor1.moveToFirst();
 
             while (!cursor1.isAfterLast()) {

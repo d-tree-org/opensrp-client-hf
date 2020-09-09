@@ -19,7 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.hf.R;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.domain.FamilyMember;
 import org.smartregister.chw.anc.domain.MemberObject;
 import org.smartregister.clientandeventmodel.Address;
@@ -779,12 +779,12 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
         return "";
     }
 
-    public static Pair<List<Client>, List<Event>> processFamilyUpdateRelations(AddoApplication addoApplication, Context context, FamilyMember familyMember, String lastLocationId) throws Exception {
+    public static Pair<List<Client>, List<Event>> processFamilyUpdateRelations(HfApplication hfApplication, Context context, FamilyMember familyMember, String lastLocationId) throws Exception {
         List<Client> clients = new ArrayList<>();
         List<Event> events = new ArrayList<>();
 
 
-        ECSyncHelper syncHelper = addoApplication.getEcSyncHelper();
+        ECSyncHelper syncHelper = hfApplication.getEcSyncHelper();
         JSONObject clientObject = syncHelper.getClient(familyMember.getFamilyID());
         Client familyClient = syncHelper.convert(clientObject, Client.class);
         if (familyClient == null) {
@@ -940,7 +940,7 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
         String query_event = String.format("select json from event where baseEntityId = '%s' and eventType in ('%s','%s') order by updatedAt desc limit 1;",
                 baseEntityID, CoreConstants.EventType.UPDATE_ANC_REGISTRATION, CoreConstants.EventType.ANC_REGISTRATION);
 
-        try (Cursor cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_event, new String[]{})) {
+        try (Cursor cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_event, new String[]{})) {
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
@@ -965,6 +965,6 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
     }
 
     public static JSONObject getAutoPopulatedJsonEditMemberFormString(String title, String formName, Context context, CommonPersonObjectClient client, String eventType, String familyName, boolean isPrimaryCaregiver) {
-        return new ATJsonFormUtils(AddoApplication.getInstance()).getAutoJsonEditMemberFormString(title, formName, context, client, eventType, familyName, isPrimaryCaregiver);
+        return new ATJsonFormUtils(HfApplication.getInstance()).getAutoJsonEditMemberFormString(title, formName, context, client, eventType, familyName, isPrimaryCaregiver);
     }
 }

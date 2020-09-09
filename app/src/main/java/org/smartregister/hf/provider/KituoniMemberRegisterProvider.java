@@ -8,13 +8,12 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.jeasy.rules.api.Rules;
 import org.smartregister.hf.R;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.util.ChildDBConstants;
 import org.smartregister.hf.util.Constants;
 import org.smartregister.hf.util.Utils;
@@ -25,7 +24,6 @@ import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.family.provider.FamilyMemberRegisterProvider;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.view.contract.SmartRegisterClient;
-import org.smartregister.view.customcontrols.CustomFontTextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import androidx.recyclerview.widget.RecyclerView;
 import timber.log.Timber;
 
 import org.smartregister.hf.util.TaksUtils;
@@ -135,7 +132,7 @@ public class KituoniMemberRegisterProvider extends FamilyMemberRegisterProvider 
         private UpdateAsyncTask(RegisterViewHolder viewHolder, CommonPersonObjectClient pc) {
             this.viewHolder = viewHolder;
             this.pc = pc;
-            this.rules = AddoApplication.getInstance().getRulesEngineHelper().rules(Constants.RULE_FILE.HOME_VISIT);
+            this.rules = HfApplication.getInstance().getRulesEngineHelper().rules(Constants.RULE_FILE.HOME_VISIT);
         }
 
         @Override

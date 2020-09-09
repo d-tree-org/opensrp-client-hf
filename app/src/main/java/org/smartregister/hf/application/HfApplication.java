@@ -1,8 +1,6 @@
 package org.smartregister.hf.application;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 
@@ -34,7 +32,6 @@ import org.smartregister.family.FamilyLibrary;
 import org.smartregister.family.activity.FamilyWizardFormActivity;
 import org.smartregister.family.domain.FamilyMetadata;
 import org.smartregister.family.util.DBConstants;
-import org.smartregister.hf.util.FileUtils;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.repository.AllSharedPreferences;
@@ -55,7 +52,7 @@ import timber.log.Timber;
 /**
  * Author : Isaya Mollel on 2019-10-18.
  */
-public class AddoApplication extends DrishtiApplication {
+public class HfApplication extends DrishtiApplication {
 
     private JsonSpecHelper jsonSpecHelper;
     private ECSyncHelper ecSyncHelper;
@@ -63,8 +60,8 @@ public class AddoApplication extends DrishtiApplication {
     private static ClientProcessorForJava clientProcessor;
     private RulesEngineHelper rulesEngineHelper;
 
-    public static synchronized AddoApplication getInstance() {
-        return (AddoApplication) mInstance;
+    public static synchronized HfApplication getInstance() {
+        return (HfApplication) mInstance;
     }
 
     public static JsonSpecHelper getJsonSpecHelper() {
@@ -88,7 +85,7 @@ public class AddoApplication extends DrishtiApplication {
         P2POptions p2POptions = new P2POptions(true);
         p2POptions.setAuthorizationService(new AddoAuthorizationService());
 
-        CoreLibrary.init(context, new AddoSyncConfiguration(), BuildConfig.BUILD_TIMESTAMP, p2POptions);
+        CoreLibrary.init(context, new HfSyncConfiguration(), BuildConfig.BUILD_TIMESTAMP, p2POptions);
         CoreLibrary.getInstance().setEcClientFieldsFile(Constants.EC_CLIENT_FIELDS);
 
 
@@ -143,7 +140,7 @@ public class AddoApplication extends DrishtiApplication {
     }
 
     public void saveLanguage(String language) {
-        AllSharedPreferences allSharedPreferences = AddoApplication.getInstance().getContext().allSharedPreferences();
+        AllSharedPreferences allSharedPreferences = HfApplication.getInstance().getContext().allSharedPreferences();
         allSharedPreferences.saveLanguagePreference(language);
     }
 
@@ -244,7 +241,7 @@ public class AddoApplication extends DrishtiApplication {
     }
 
     public AllCommonsRepository getAllCommonsRepository(String table) {
-        return AddoApplication.getInstance().getContext().allCommonsRepositoryobjects(table);
+        return HfApplication.getInstance().getContext().allCommonsRepositoryobjects(table);
     }
 
 }

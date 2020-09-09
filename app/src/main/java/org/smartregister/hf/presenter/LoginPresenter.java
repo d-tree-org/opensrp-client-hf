@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.smartregister.hf.R;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.interactor.LoginInteractor;
 import org.smartregister.configurableviews.model.LoginConfiguration;
 import org.smartregister.configurableviews.model.ViewConfiguration;
@@ -41,7 +41,7 @@ public class LoginPresenter extends BaseLoginPresenter implements BaseLoginContr
                 return;
             }
 
-            ViewConfiguration loginView = AddoApplication.getJsonSpecHelper().getConfigurableView(jsonString);
+            ViewConfiguration loginView = HfApplication.getJsonSpecHelper().getConfigurableView(jsonString);
             LoginConfiguration metadata = (LoginConfiguration) loginView.getMetadata();
             LoginConfiguration.Background background = metadata.getBackground();
 
