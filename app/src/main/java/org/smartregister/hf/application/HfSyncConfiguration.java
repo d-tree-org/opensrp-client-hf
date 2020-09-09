@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Author : Isaya Mollel on 2019-10-18.
  */
-public class AddoSyncConfiguration extends SyncConfiguration {
+public class HfSyncConfiguration extends SyncConfiguration {
 
     @Override
     public int getSyncMaxRetries() {
@@ -72,6 +72,11 @@ public class AddoSyncConfiguration extends SyncConfiguration {
         */
         //return SyncFilter.LOCATION;
         return SyncFilter.LOCATION;
+    }
+
+    @Override
+    public boolean isSyncUsingPost() {
+        return true;
     }
 
     @Override
