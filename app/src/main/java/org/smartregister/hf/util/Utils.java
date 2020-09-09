@@ -31,7 +31,7 @@ import org.joda.time.Period;
 import org.smartregister.CoreLibrary;
 import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.R;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.contract.FamilyCallDialogContract;
 import org.smartregister.hf.fragment.CopyToClipboardDialog;
 import org.smartregister.util.PermissionUtils;
@@ -237,7 +237,7 @@ public class Utils extends org.smartregister.family.util.Utils {
      * @return
      */
     public static String getLocalForm(String form_name) {
-        Locale current = AddoApplication.getCurrentLocale();
+        Locale current = HfApplication.getCurrentLocale();
 
         String formIdentity = MessageFormat.format("{0}_{1}", form_name, current.getLanguage());
         // validate variant exists
@@ -247,7 +247,7 @@ public class Utils extends org.smartregister.family.util.Utils {
             }
 
             if (assets.size() == 0) {
-                String[] local_assets = AddoApplication.getInstance().getApplicationContext().getAssets().list("json.form");
+                String[] local_assets = HfApplication.getInstance().getApplicationContext().getAssets().list("json.form");
                 if (local_assets != null && local_assets.length > 0) {
                     for (String s : local_assets) {
                         assets.add(s.substring(0, s.length() - 5));

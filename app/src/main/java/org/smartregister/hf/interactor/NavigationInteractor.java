@@ -2,7 +2,7 @@ package org.smartregister.hf.interactor;
 
 import android.database.Cursor;
 
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.contract.NavigationContract;
 import org.smartregister.hf.util.ChildDBConstants;
 import org.smartregister.hf.util.Constants;
@@ -35,7 +35,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
     }
 
     private CommonRepository commonRepository(String tableName) {
-        return AddoApplication.getInstance().getContext().commonrepository(tableName);
+        return HfApplication.getInstance().getContext().commonrepository(tableName);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
     }
 
     private Long getLastCheckTimeStamp() {
-        return AddoApplication.getInstance().getEcSyncHelper().getLastCheckTimeStamp();
+        return HfApplication.getInstance().getEcSyncHelper().getLastCheckTimeStamp();
     }
 
     private int getCount(String tableName) {

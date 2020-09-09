@@ -21,7 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.hf.R;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.domain.FamilyMember;
 import org.smartregister.hf.repository.AddoRepository;
 import org.smartregister.clientandeventmodel.Address;
@@ -338,10 +338,10 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
             }
             if (lookUpEntityId.equals("family") && StringUtils.isNotBlank(lookUpBaseEntityId)) {
                 Client ss = new Client(lookUpBaseEntityId);
-                Context context = AddoApplication.getInstance().getContext().applicationContext();
+                Context context = HfApplication.getInstance().getContext().applicationContext();
                 addRelationship(context, ss, baseClient);
-                SQLiteDatabase db = AddoApplication.getInstance().getRepository().getReadableDatabase();
-                AddoRepository pathRepository = new AddoRepository(context, AddoApplication.getInstance().getContext());
+                SQLiteDatabase db = HfApplication.getInstance().getRepository().getReadableDatabase();
+                AddoRepository pathRepository = new AddoRepository(context, HfApplication.getInstance().getContext());
                 EventClientRepository eventClientRepository = new EventClientRepository();
                 JSONObject clientjson = eventClientRepository.getClient(db, lookUpBaseEntityId);
                 baseClient.setAddresses(getAddressFromClientJson(clientjson));
@@ -366,7 +366,7 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
 
             if (StringUtils.isNotBlank(surnam_familyName_SameString) && Boolean.valueOf(surnam_familyName_SameString)) {
                 String familyId = jsonForm.getJSONObject("metadata").getJSONObject("look_up").getString("value");
-                CommonPersonObject familyObject = AddoApplication.getInstance().getContext().commonrepository("ec_family").findByCaseID(familyId);
+                CommonPersonObject familyObject = HfApplication.getInstance().getContext().commonrepository("ec_family").findByCaseID(familyId);
                 String lastname = familyObject.getColumnmaps().get(DBConstants.KEY.LAST_NAME);
                 JSONObject surname_object = getFieldJSONObject(fields, "surname");
                 surname_object.put(VALUE, lastname);
@@ -657,7 +657,7 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
 
 
         String query_client = "select json from client where baseEntityId = ? order by updatedAt desc";
-        Cursor cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_client, new String[]{baseEntityID});
+        Cursor cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_client, new String[]{baseEntityID});
         try {
             cursor.moveToFirst();
 
@@ -675,7 +675,7 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
         String query_event = String.format("select json from event where baseEntityId = '%s' and eventType in ('%s','%s') order by updatedAt desc limit 1;",
                 baseEntityID, org.smartregister.hf.util.Constants.EventType.UPDATE_FAMILY_MEMBER_REGISTRATION, org.smartregister.hf.util.Constants.EventType.FAMILY_MEMBER_REGISTRATION);
 
-        Cursor cursor1 = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_event, new String[]{});
+        Cursor cursor1 = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_event, new String[]{});
         try {
             cursor1.moveToFirst();
 
@@ -1006,7 +1006,7 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
         List<Event> events = new ArrayList<>();
 
 
-        ECSyncHelper syncHelper = AddoApplication.getInstance().getEcSyncHelper();
+        ECSyncHelper syncHelper = HfApplication.getInstance().getEcSyncHelper();
         Client familyClient = syncHelper.convert(syncHelper.getClient(familyMember.getFamilyID()), Client.class);
         Map<String, List<String>> relationships = familyClient.getRelationships();
 
@@ -1151,7 +1151,7 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
         String query_event = String.format("select json from event where baseEntityId = '%s' and eventType in ('%s','%s') order by updatedAt desc limit 1;",
                 baseEntityID, org.smartregister.hf.util.Constants.EventType.UPDATE_ANC_REGISTRATION, org.smartregister.hf.util.Constants.EventType.ANC_REGISTRATION);
 
-        Cursor cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_event, new String[]{});
+        Cursor cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_event, new String[]{});
         try {
             cursor.moveToFirst();
 
@@ -1380,7 +1380,7 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
         Client mClient = null;
 
         String query_client = "select json from client where json LIKE '%"+guid+"%' ";
-        Cursor cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_client, null);
+        Cursor cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_client, null);
 
         try {
             cursor.moveToFirst();
@@ -1406,7 +1406,7 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
         Client mClient = null;
 
         String query_client = "select json from client where json LIKE '%"+guid+"%' ";
-        Cursor cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_client, null);
+        Cursor cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_client, null);
 
         try {
             cursor.moveToFirst();

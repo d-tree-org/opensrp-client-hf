@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.smartregister.dao.AbstractDao;
 import org.smartregister.domain.Task;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.domain.Entity;
 import org.smartregister.repository.BaseRepository;
 import org.smartregister.util.DateUtil;
@@ -36,7 +36,7 @@ public class FamilyDao extends AbstractDao {
         contentValues.put(STATUS, Task.TaskStatus.IN_PROGRESS.name());
         contentValues.put(SYNC_STATUS, BaseRepository.TYPE_Unsynced);
         contentValues.put("last_modified", DateUtil.getMillis(new DateTime()));
-        AddoApplication.getInstance().getRepository().getWritableDatabase().update("task", contentValues,
+        HfApplication.getInstance().getRepository().getWritableDatabase().update("task", contentValues,
                 String.format("%s = ? AND %s =?", FOR, STATUS), new String[]{entityId, Task.TaskStatus.READY.name()});
     }
 
@@ -46,7 +46,7 @@ public class FamilyDao extends AbstractDao {
         try {
             String query = String.format("SELECT * FROM ec_family_member WHERE first_name LIKE '%%%s%%' " +
                     "OR middle_name LIKE '%%%s%%' OR last_name LIKE '%%%s%%'", searchText, searchText, searchText);
-            cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query,
+            cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query,
                     new String[]{});
             while (cursor.moveToNext()) {
                 Entity entity = readCursor(cursor);

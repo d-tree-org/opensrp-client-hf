@@ -3,7 +3,7 @@ package org.smartregister.hf.dao;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.dao.AbstractDao;
 import org.smartregister.sync.helper.ECSyncHelper;
@@ -18,7 +18,7 @@ public class EventDao extends AbstractDao {
     public static List<Event> getEvents(String baseEntityID, String eventType, int limit) {
         String sql = "select json from event where baseEntityId = '" + baseEntityID + "' COLLATE NOCASE and eventType = '" + eventType + "' COLLATE NOCASE order by updatedAt desc limit " + limit;
 
-        final ECSyncHelper syncHelper = AddoApplication.getInstance().getEcSyncHelper();
+        final ECSyncHelper syncHelper = HfApplication.getInstance().getEcSyncHelper();
         DataMap<Event> dataMap = c -> {
             try {
                 return syncHelper.convert(new JSONObject(getCursorValue(c, "json")), Event.class);
@@ -43,7 +43,7 @@ public class EventDao extends AbstractDao {
 
         String sql = "select json from event where baseEntityId = '" + baseEntityID + "' COLLATE NOCASE and eventType in (" + types.toString() + ") COLLATE NOCASE order by updatedAt desc limit 1";
 
-        final ECSyncHelper syncHelper = AddoApplication.getInstance().getEcSyncHelper();
+        final ECSyncHelper syncHelper = HfApplication.getInstance().getEcSyncHelper();
         DataMap<Event> dataMap = c -> {
             try {
                 return syncHelper.convert(new JSONObject(getCursorValue(c, "json")), Event.class);

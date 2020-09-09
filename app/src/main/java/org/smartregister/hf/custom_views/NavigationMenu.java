@@ -27,7 +27,7 @@ import com.github.ybq.android.spinkit.style.FadingCircle;
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.hf.R;
 import org.smartregister.hf.adapter.NavigationAdapter;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.contract.NavigationContract;
 import org.smartregister.hf.model.NavigationOption;
 import org.smartregister.hf.presenter.NavigationPresenter;
@@ -289,7 +289,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
                         Intent intent = parentActivity.getIntent();
                         parentActivity.finish();
                         parentActivity.startActivity(intent);
-                        AddoApplication.getInstance().notifyAppContextChange();
+                        HfApplication.getInstance().notifyAppContextChange();
                     }
                 });
                 AlertDialog dialog = builder.create();
@@ -336,7 +336,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     public void logout(Activity activity) {
 
         Toast.makeText(activity.getApplicationContext(), activity.getResources().getText(R.string.action_log_out), Toast.LENGTH_SHORT).show();
-        AddoApplication.getInstance().logoutCurrentUser();
+        HfApplication.getInstance().logoutCurrentUser();
 
     }
 
@@ -388,7 +388,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         Cursor cursor = null;
         try {
             String q = "select count(*) from task where status = 'READY'";
-            cursor = AddoApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
+            cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
             cursor.moveToFirst();
             return cursor.getCount();
         }catch (Exception e){

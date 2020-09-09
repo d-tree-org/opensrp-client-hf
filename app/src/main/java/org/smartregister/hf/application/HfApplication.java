@@ -52,7 +52,7 @@ import timber.log.Timber;
 /**
  * Author : Isaya Mollel on 2019-10-18.
  */
-public class AddoApplication extends DrishtiApplication {
+public class HfApplication extends DrishtiApplication {
 
     private JsonSpecHelper jsonSpecHelper;
     private ECSyncHelper ecSyncHelper;
@@ -60,8 +60,8 @@ public class AddoApplication extends DrishtiApplication {
     private static ClientProcessorForJava clientProcessor;
     private RulesEngineHelper rulesEngineHelper;
 
-    public static synchronized AddoApplication getInstance() {
-        return (AddoApplication) mInstance;
+    public static synchronized HfApplication getInstance() {
+        return (HfApplication) mInstance;
     }
 
     public static JsonSpecHelper getJsonSpecHelper() {
@@ -140,7 +140,7 @@ public class AddoApplication extends DrishtiApplication {
     }
 
     public void saveLanguage(String language) {
-        AllSharedPreferences allSharedPreferences = AddoApplication.getInstance().getContext().allSharedPreferences();
+        AllSharedPreferences allSharedPreferences = HfApplication.getInstance().getContext().allSharedPreferences();
         allSharedPreferences.saveLanguagePreference(language);
     }
 
@@ -241,7 +241,7 @@ public class AddoApplication extends DrishtiApplication {
     }
 
     public AllCommonsRepository getAllCommonsRepository(String table) {
-        return AddoApplication.getInstance().getContext().allCommonsRepositoryobjects(table);
+        return HfApplication.getInstance().getContext().allCommonsRepositoryobjects(table);
     }
 
 }

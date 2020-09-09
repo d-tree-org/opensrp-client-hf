@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.smartregister.hf.R;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Logout(View v){
-        AddoApplication.getInstance().logoutCurrentUser();
+        HfApplication.getInstance().logoutCurrentUser();
     }
 
 }

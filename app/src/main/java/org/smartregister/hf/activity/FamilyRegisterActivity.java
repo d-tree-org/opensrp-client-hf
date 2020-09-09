@@ -11,7 +11,7 @@ import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.R;
-import org.smartregister.hf.application.AddoApplication;
+import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.custom_views.NavigationMenu;
 import org.smartregister.hf.fragment.FamilyRegisterFragment;
 import org.smartregister.hf.listeners.AddoBottomNavigationListener;
@@ -78,7 +78,7 @@ public class FamilyRegisterActivity extends BaseFamilyRegisterActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         NavigationMenu.getInstance(this, null, null);
-        AddoApplication.getInstance().notifyAppContextChange(); // initialize the language (bug in translation)
+        HfApplication.getInstance().notifyAppContextChange(); // initialize the language (bug in translation)
 
         action = getIntent().getStringExtra(Constants.ACTIVITY_PAYLOAD.ACTION);
         if (action != null && action.equals(Constants.ACTION.START_REGISTRATION)) {
