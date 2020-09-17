@@ -258,46 +258,6 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
         }
     }
 
-    private void openFamilyDueTab() {
-        Intent intent = new Intent(this, FamilyProfileActivity.class);
-
-        intent.putExtra(Constants.INTENT_KEY.FAMILY_BASE_ENTITY_ID, ((ChildProfilePresenter) presenter()).getFamilyId());
-        intent.putExtra(Constants.INTENT_KEY.FAMILY_HEAD, ((ChildProfilePresenter) presenter()).getFamilyHeadID());
-        intent.putExtra(Constants.INTENT_KEY.PRIMARY_CAREGIVER, ((ChildProfilePresenter) presenter()).getPrimaryCareGiverID());
-        intent.putExtra(Constants.INTENT_KEY.FAMILY_NAME, ((ChildProfilePresenter) presenter()).getFamilyName());
-
-        intent.putExtra(org.smartregister.hf.util.Constants.INTENT_KEY.SERVICE_DUE, true);
-        startActivity(intent);
-    }
-
-    private void openUpcomingServicePage() {
-        //UpcomingServicesActivity.startUpcomingServicesActivity(this, ((ChildProfilePresenter) presenter()).getChildClient());
-    }
-
-    private void openMedicalHistoryScreen() {
-        /*
-        Map<String, Date> vaccine = ((ChildProfilePresenter) presenter()).getVaccineList();
-        ChildMedicalHistoryActivity.startMedicalHistoryActivity(this, ((ChildProfilePresenter) presenter()).getChildClient(), patientName, lastVisitDay,
-                ((ChildProfilePresenter) presenter()).getDateOfBirth(), new LinkedHashMap<>(vaccine));
-        */
-
-    }
-
-/**
-    private void openVisitHomeScreen(boolean isEditMode) {
-        ChildHomeVisitFragment childHomeVisitFragment = ChildHomeVisitFragment.newInstance();
-        childHomeVisitFragment.setEditMode(isEditMode);
-        childHomeVisitFragment.setContext(this);
-        childHomeVisitFragment.setChildClient(((ChildProfilePresenter) presenter()).getChildClient());
-//                childHomeVisitFragment.setFamilyBaseEntityId(getFamilyBaseEntityId());
-        childHomeVisitFragment.show(getFragmentManager(), ChildHomeVisitFragment.DIALOG_TAG);
-    }
-
-    @Override
-    public void showUndoVisitNotDoneView() {
-        presenter().fetchVisitStatus(childBaseEntityId);
-    }
- **/
     public void openVisitMonthView() {
         layoutNotRecordView.setVisibility(View.VISIBLE);
         layoutRecordButtonDone.setVisibility(View.GONE);
@@ -469,38 +429,6 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
 
     }
 
-    /**
-     * update immunization data and commonpersonobject for child as data may be updated
-     * from childhomevisitfragment screen and need at medical history/upcoming service data.
-     * need postdelay to update the client map
-     */
- /**   private void updateImmunizationData() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                layoutMostDueOverdue.setVisibility(View.GONE);
-                viewMostDueRow.setVisibility(View.GONE);
-                presenter().fetchVisitStatus(childBaseEntityId);
-                presenter().fetchUpcomingServiceAndFamilyDue(childBaseEntityId);
-                presenter().updateChildCommonPerson(childBaseEntityId);
-            }
-        }, 100);
-    }
-**/
-    /**
-     * By this method it'll process the event client at home visit in background. After finish
-     * it'll update the child client because for edit it's need the vaccine card,illness,birthcert.
-     */
- /**   public void processBackgroundEvent(){
-
-        layoutMostDueOverdue.setVisibility(View.GONE);
-        viewMostDueRow.setVisibility(View.GONE);
-        presenter().fetchVisitStatus(childBaseEntityId);
-        presenter().fetchUpcomingServiceAndFamilyDue(childBaseEntityId);
-        presenter().updateChildCommonPerson(childBaseEntityId);
-        presenter().processBackGroundEvent();
-    }
-**/
     @Override
     public void updateAfterBackgroundProcessed() {
 
@@ -625,7 +553,7 @@ public class ChildProfileActivity extends BaseProfileActivity implements ChildPr
             menu.findItem(R.id.action_malaria_registration).setVisible(false);
         }
         menu.findItem(R.id.action_anc_registration).setVisible(false);
-        return true;
+        return false;
     }
 
     @Override
