@@ -147,9 +147,9 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         }
 
         //Menu items for the family members profile
-        getMenuInflater().inflate(R.menu.addo_family_profile_menu, menu);
+        //getMenuInflater().inflate(R.menu.addo_family_profile_menu, menu);
 
-        return true;
+        return false;
     }
 
 
