@@ -36,8 +36,8 @@
                 android:textColorHint="@color/light_grey"
                 android:textSize="18sp"
                 app:met_floatingLabel="highlight"
-                app:met_floatingLabelText="Enter first name or last"
-                app:met_floatingLabelTextSize="@dimen/advanced_search_text_size"
+                app:met_floatingLabelText="@string/enter_first_name_or_last"
+                app:met_floatingLabelTextSize="18sp"
                 app:met_primaryColor="@color/addo_primary"
                 app:met_singleLineEllipsis="true" />
 
@@ -49,7 +49,7 @@
         android:id="@+id/adv_search_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/light_grey_background"
+        android:background="@color/white"
         android:elevation="2dp"
         android:gravity="center"
         android:orientation="vertical">
@@ -70,14 +70,15 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/advanced_search_bg"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
+            android:background="@drawable/btn_drawable"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:text="@string/search"
             android:textAllCaps="false"
             android:textAppearance="?android:textAppearanceSmall"
             android:textColor="@color/white"
-            android:textSize="28sp" />
+            android:fontFamily="@font/google_sans_bold"
+            android:textSize="24sp" />
     </LinearLayout>
 
 
