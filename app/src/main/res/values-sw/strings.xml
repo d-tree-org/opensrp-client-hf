@@ -14,9 +14,19 @@
     <string name="return_to_select_village">Return to select village</string>
     <string name="scan_fingerprint">Scan fingerprint</string>
 
+    <string name="return_to_family_profile">Rudi kwenye taarifa binafsi za kaya</string>
+
+    <string name="return_to_family_name">Rudi kwa familia ya %1$s</string>
+
     <string name="switch_environment_message">Unakaribia kubadilisha mazingira ya mfumo kwenda %s. Kitendo hiki kitaondoa taarifa zote zilizohifadhiwa katika simu hii, kabla ya kuendelea mbele tafadhali hakikisha umeoanisha/sinki taarifa zako. Je ungependa kuendelea kubadilisha mazingira ya mfumo?</string>
     <string name="switch_environment_title">Tahadhari! Unabadilisha Mazingira Ya Mfumo</string>
     <string name="environment_name_test">mfumo jaribio</string>
     <string name="environment_name_production">production</string>
+    <string name="referral_reason">Sababu za Rufaa</string>
+    <string name="danger_signs">Dalili Hatarishi</string>
+    <string name="referral_date">Tarehe ya Rufaa</string>
+    <string name="referal_source">Chanzo cha Rufaa</string>
+    <string name="close_referral">Imefanyika</string>
+    <string name="referral_details">Taarifa za Rufaa</string>
 
 </resources>

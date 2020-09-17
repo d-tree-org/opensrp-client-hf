@@ -432,10 +432,17 @@
     <string name="return_to_select_village">Return to select village</string>
     <string name="scan_fingerprint">Scan fingerprint</string>
 
+    <string name="return_to_family_profile">Return to family profile</string>
 
     <string name="switch_environment_title">Alert! Switching Environment</string>
     <string name="switch_environment_message">You are about to switch to %s environment. This procedure will wipe out all of your device data, you need to make sure everything is synced before you proceed. Do you want to switch the environment?</string>
     <string name="environment_name_test">test</string>
     <string name="environment_name_production">production</string>
+    <string name="referral_reason">Reasons for Referral</string>
+    <string name="danger_signs">Danger Signs</string>
+    <string name="referral_date">Date of Referral</string>
+    <string name="referal_source">Referal Source</string>
+    <string name="close_referral">Mark as Done</string>
+    <string name="referral_details">Referral Details</string>
 
 </resources>
