@@ -386,7 +386,7 @@
     <string name="family_members">Family Members</string>
     <string name="family_no_medication_history">Family has no medication history</string>
     <string name="addo_app_home">ADDO HOME</string>
-    <string name="return_to_addo_home">Return to home</string>
+    <string name="return_to_home">Return to home</string>
     <string name="fingerprint_scan_results">Fingerprint Scan Results</string>
     <string name="fingerprint_identification_title">Find Clients</string>
     <string name="none_of_above">None of the above</string>
@@ -444,5 +444,6 @@
     <string name="referal_source">Referal Source</string>
     <string name="close_referral">Mark as Done</string>
     <string name="referral_details">Referral Details</string>
+    <string name="select_the_person_message">Select the person to receive services</string>
 
 </resources>
