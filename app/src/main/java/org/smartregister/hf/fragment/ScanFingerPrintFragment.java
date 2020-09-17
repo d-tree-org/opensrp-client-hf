@@ -80,6 +80,9 @@ public class ScanFingerPrintFragment extends BaseRegisterFragment implements Sca
         TextView scanFp = view.findViewById(R.id.scan_fp_txt);
         scanFp.setOnClickListener(registerActionHandler);
 
+        TextView manualSearchButton = view.findViewById(R.id.manual_search_txt);
+        manualSearchButton.setOnClickListener(registerActionHandler);
+
     }
 
 
@@ -128,8 +131,9 @@ public class ScanFingerPrintFragment extends BaseRegisterFragment implements Sca
         if (view.getId() == R.id.btn_back_to_villages || view.getId() == R.id.return_to_village_txt) {
             ((BaseRegisterActivity) getActivity()).switchToFragment(0);
         } else if (view.getId() == R.id.scan_fp_txt) {
-            Toast.makeText(getActivity(), "We start scanning now", Toast.LENGTH_SHORT).show();
             startScannig();
+        }else if(view.getId() == R.id.manual_search_txt){
+            startSearch();
         }
     }
 
@@ -141,6 +145,15 @@ public class ScanFingerPrintFragment extends BaseRegisterFragment implements Sca
             SimPrintsIdentifyActivity.startSimprintsIdentifyActivity(getActivity(),
                     SIMPRINT_MODULE_ID, Constants.SIMPRINTS_IDENTIFICATION.IDENTIFY_RESULT_CODE);
         }
+    }
+
+    private void startSearch(){
+        BaseRegisterActivity activity = (BaseRegisterActivity) this.getActivity();
+
+        if (activity == null)
+            return;
+
+        activity.switchToFragment(1);
     }
 
     @Override
