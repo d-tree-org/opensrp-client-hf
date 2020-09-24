@@ -31,6 +31,7 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class AdvancedSearchFragment extends BaseRegisterFragment implements AdvancedSearchContract.View {
 
@@ -45,11 +46,14 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
     private TextView searchCriteria;
     private TextView matchingResults;
     private MaterialEditText searchName;
+    private MaterialEditText firstName;
+    private MaterialEditText lastName;
     private boolean isLocal = false;
     private boolean listMode = false;
 
-    public AdvancedSearchFragment() {
+    public AdvancedSearchFragment(boolean isLocal) {
         // Required empty public constructor
+        this.isLocal = isLocal;
     }
 
     @Override
@@ -59,6 +63,17 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         //return inflater.inflate(R.layout.fragment_advanced_search, container, false);
 
         View view = inflater.inflate(R.layout.fragment_advanced_search, container, false);
+
+        if(!isLocal) {
+            view.findViewById(R.id.search_name_ll).setVisibility(View.GONE);
+            view.findViewById(R.id.first_name_ll).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.last_name_ll).setVisibility(View.VISIBLE);
+        } else {
+            view.findViewById(R.id.search_name_ll).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.first_name_ll).setVisibility(View.GONE);
+            view.findViewById(R.id.last_name_ll).setVisibility(View.GONE);
+        }
+
         rootView = view;//handle to the root
 
         setupViews(view);
@@ -98,6 +113,15 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
     public void setupViews(View view) {
         super.setupViews(view);
 
+        if (titleLabelView != null) {
+            if(isLocal) {
+                titleLabelView.setText(getString(R.string.search));
+            } else {
+                titleLabelView.setText(getString(R.string.global_search));
+            }
+        }
+
+
         listViewLayout = view.findViewById(R.id.advanced_search_list);
         listViewLayout.setVisibility(View.GONE);
 
@@ -123,6 +147,14 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         searchName = view.findViewById(R.id.search_name);
         searchName.addTextChangedListener(advancedSearchTextwatcher);
 
+        firstName = view.findViewById(R.id.first_name);
+        firstName.addTextChangedListener(advancedSearchTextwatcher);
+
+        lastName = view.findViewById(R.id.last_name);
+        lastName.addTextChangedListener(advancedSearchTextwatcher);
+
+        advancedFormSearchableFields.put(Constants.DB.FIRST_NAME, firstName);
+        advancedFormSearchableFields.put(Constants.DB.LAST_NAME, lastName);
         advancedFormSearchableFields.put(Constants.DB.FIRST_NAME, searchName);
     }
 
@@ -235,8 +267,31 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
 
     private void search() {
         showProgressView();
+        Map<String, String> editMap = getSearchMap(isLocal);
+        ((AdvancedSearchContract.Presenter) presenter).search(editMap, isLocal);
+    }
 
-        ((AdvancedSearchContract.Presenter) presenter).search(searchName.getText().toString());
+    protected Map<String, String> getSearchMap(boolean isLocal) {
+
+        Map<String, String> searchParams = new HashMap<>();
+
+        String fn = "";
+        if(isLocal) {
+            fn = Objects.requireNonNull(searchName.getText()).toString().trim();
+        } else {
+            fn = firstName.getText().toString().trim();
+        }
+        String ln = lastName.getText().toString().trim();
+
+        if (!TextUtils.isEmpty(fn)) {
+            searchParams.put(Constants.DB.FIRST_NAME, fn);
+        }
+
+        if (!TextUtils.isEmpty(ln)) {
+            searchParams.put(Constants.DB.LAST_NAME, ln);
+        }
+
+        return searchParams;
     }
 
     @Override
@@ -244,8 +299,8 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
         //Todo implement this
     }
 
-    public void showResults(List<Entity> members) {
-        FamilyMemberAdapter adapter = new FamilyMemberAdapter(getView().getContext(), members);
+    public void showResults(List<Entity> members, boolean isLocal) {
+        FamilyMemberAdapter adapter = new FamilyMemberAdapter(getView().getContext(), members, isLocal);
         ListView listView = rootView.findViewById(R.id.family_member_list);
         listView.setAdapter(adapter);
         updateMatchingResults(members.size());
@@ -288,7 +343,11 @@ public class AdvancedSearchFragment extends BaseRegisterFragment implements Adva
             advancedSearchToolbarSearchButton.setVisibility(View.VISIBLE);
 
             if (titleLabelView != null) {
-                titleLabelView.setText(getString(R.string.search));
+                if(isLocal) {
+                    titleLabelView.setText(getString(R.string.search));
+                } else {
+                    titleLabelView.setText(getString(R.string.global_search));
+                }
             }
 
 

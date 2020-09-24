@@ -50,4 +50,7 @@
     <string name="nav_last">"Tangu: </string>
     <string name="select_the_person_message">Chagua mtu wa kupata huduma</string>
 
+    <string name="search_results_return">Rudi kwenye matokeo</string>
+    <string name="global_search">Tafuta kote</string>
+
 </resources>
