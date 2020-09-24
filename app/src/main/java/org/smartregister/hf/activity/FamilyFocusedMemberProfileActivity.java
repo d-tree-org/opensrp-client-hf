@@ -3,19 +3,16 @@ package org.smartregister.hf.activity;
 import android.content.DialogInterface;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.viewpager.widget.ViewPager;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.smartregister.hf.R;
 import org.smartregister.hf.contract.FamilyFocusedMemberProfileContract;
 import org.smartregister.hf.custom_views.FamilyMemberFloatingMenu;
@@ -74,7 +71,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     protected void onCreation() {
         setContentView(R.layout.activity_focused_member_profile);
 
-        Toolbar toolbar = findViewById(R.id.addo_focused_family_member_toolbar);
+        Toolbar toolbar = findViewById(R.id.focused_family_member_toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = this.getSupportActionBar();
@@ -95,6 +92,12 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
         presenter().getReferralData(baseEntityId);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        return false;
     }
 
     @Override

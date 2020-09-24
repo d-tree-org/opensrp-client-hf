@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/addo_focused_family_member_toolbar"
+            android:id="@+id/focused_family_member_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/anc_member_profile_bg"

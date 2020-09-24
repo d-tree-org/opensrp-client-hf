@@ -1,22 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="select_village">Select Client\'s Village from the list</string>
-    <string name="total_number_referrals">Total \nReferrals</string>
-    <string name="today_number_referrals">Today\'s \nReferrals</string>
-    <string name="attended_referrals">Attended \nReferrals</string>
-    <string name="village_name">Village Name</string>
-    <string name="patient_name_age">Patient Name, Age</string>
-    <string name="has_referral">Has Referral</string>
+
+    <string name="search">Tafuta</string>
+    <string name="advanced_search">Tafuta zaidi</string>
+
+    <string name="matching_results">Idadi ya matokeo ni %1$s.</string>
+
+    <string name="search_results">Matokeo</string>
+
+    <string name="nav_registers">Rejista</string>
+
+    <string name="menu_hf_home">Mwanzo</string>
+
+    <string name="return_to_home">Rudi Mwanzo</string>
+
+    <string name="select_village">Chagua kijiji cha mteja kutoka kwenye listi</string>
+    <string name="total_number_referrals">Rufaa \nZote</string>
+    <string name="today_number_referrals">Rufaa za \nLeo</string>
+    <string name="attended_referrals">Zilizofanyiwa \nKazi</string>
+    <string name="village_name">Jina la Kijiji</string>
+    <string name="patient_name_age">Jina, Umri</string>
+    <string name="has_referral">Ana Rufaa</string>
     <string name="search_criteria_include">Search criteria: Include</string>
-    <string name="no_matches_found">0 matching results found</string>
-    <string name="enter_first_name_or_last">Enter first name or last</string>
-    <string name="skip_to_search">Skip to search</string>
-    <string name="return_to_select_village">Return to select village</string>
-    <string name="scan_fingerprint">Scan fingerprint</string>
+    <string name="no_matches_found">matokeo yaliyopatikana ni 0</string>
+    <string name="enter_first_name_or_last">Jina la kwanza au la mwisho</string>
+    <string name="skip_to_search">Ruka mpaka kutafuta</string>
+    <string name="return_to_select_village">Rudi kuchagua kijiji</string>
+    <string name="scan_fingerprint">Skani alama za vidole</string>
+
+    <string name="return_to_family_profile">Rudi kwenye taarifa binafsi za kaya</string>
+
+    <string name="return_to_family_name">Rudi kwa familia ya %1$s</string>
 
     <string name="switch_environment_message">Unakaribia kubadilisha mazingira ya mfumo kwenda %s. Kitendo hiki kitaondoa taarifa zote zilizohifadhiwa katika simu hii, kabla ya kuendelea mbele tafadhali hakikisha umeoanisha/sinki taarifa zako. Je ungependa kuendelea kubadilisha mazingira ya mfumo?</string>
     <string name="switch_environment_title">Tahadhari! Unabadilisha Mazingira Ya Mfumo</string>
     <string name="environment_name_test">mfumo jaribio</string>
     <string name="environment_name_production">production</string>
+    <string name="referral_reason">Sababu za Rufaa</string>
+    <string name="danger_signs">Dalili Hatarishi</string>
+    <string name="referral_date">Tarehe ya Rufaa</string>
+    <string name="referal_source">Chanzo cha Rufaa</string>
+    <string name="close_referral">Imefanyika</string>
+    <string name="referral_details">Taarifa za Rufaa</string>
+
+    <string name="nav_logout_as">Ondoka kama</string>
+
+    <string name="nav_sync">Oanisha</string>
+
+    <string name="nav_last">"Tangu: </string>
+    <string name="select_the_person_message">Chagua mtu wa kupata huduma</string>
 
 </resources>

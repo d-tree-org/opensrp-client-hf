@@ -164,7 +164,7 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
 
         getMenuInflater().inflate(R.menu.other_member_menu, menu);
 
-        return true;
+        return false;
     }
 
     @Override

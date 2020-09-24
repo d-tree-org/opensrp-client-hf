@@ -35,7 +35,7 @@
                 android:fontFamily="@font/google_sans_regular"
                 android:paddingStart="0dp"
                 android:paddingLeft="0dp"
-                android:text="@string/return_to_addo_home"
+                android:text="@string/return_to_home"
                 android:textColor="@color/white"
                 android:textSize="@dimen/register_member_title_size" />
 
@@ -172,7 +172,7 @@
                 android:layout_height="22dp"
                 android:width="245dp"
                 android:height="18dp"
-                android:text="Select the person to receive services" />
+                android:text="@string/select_the_person_message" />
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
