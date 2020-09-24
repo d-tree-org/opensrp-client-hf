@@ -2,6 +2,7 @@ package org.smartregister.hf.activity;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -96,6 +97,9 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
     @Override
     protected void registerBottomNavigation() {
+        if (this.bottomNavigationView != null){
+            this.bottomNavigationView.setVisibility(View.GONE);
+        }
     }
 
     @Override
