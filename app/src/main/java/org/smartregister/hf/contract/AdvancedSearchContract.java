@@ -9,18 +9,18 @@ import java.util.Map;
 
 public interface AdvancedSearchContract  {
     interface Presenter {
-        void search(String searchText);
+        void search(Map<String, String> searchMap,  boolean isLocal);
     }
 
     interface View extends BaseRegisterFragmentContract.View {
-        void showResults(List<Entity> members);
+        void showResults(List<Entity> members, boolean isLocal);
     }
 
     interface Interactor {
-        void search(String searchText, InteractorCallBack callBack);
+        void search(Map<String, String> editMap, boolean isLocal, InteractorCallBack callBack);
     }
 
     interface InteractorCallBack {
-        void onResultsFound(List<Entity> members);
+        void onResultsFound(List<Entity> members, boolean isLocal);
     }
 }
