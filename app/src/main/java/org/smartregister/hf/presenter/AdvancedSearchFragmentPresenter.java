@@ -115,14 +115,14 @@ public class AdvancedSearchFragmentPresenter implements Presenter, AdvancedSearc
         return null;
     }
 
-    public void search(String searchText) {
-        Log.d("Search", "searching in presenter: "  + searchText);
-        interactor.search(searchText, this);
+    public void search(Map<String, String> searchMap, boolean isLocal) {
+        Log.d("Search", "searching in presenter: "  + searchMap.toString());
+        interactor.search(searchMap, isLocal, this);
     }
 
-    public void onResultsFound(List<Entity> members) {
+    public void onResultsFound(List<Entity> members, boolean isLocal) {
         System.out.println("Member size: " + members.size());
 
-        getView().showResults(members);
+        getView().showResults(members, isLocal);
     }
 }

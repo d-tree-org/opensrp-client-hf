@@ -15,6 +15,9 @@
     <string name="menu_child_clients">Child Clients</string>
     <string name="menu_hiv_clients">HIV Clients</string>
 
+    <string name="search_results_return">Return to Search Results</string>
+    <string name="global_search">Global Search</string>
+
     <string name="title_family_detail">Family Detail</string>
     <string name="child_register_title">Child Clients</string>
     <string name="return_to_all_children">Return to all children</string>
