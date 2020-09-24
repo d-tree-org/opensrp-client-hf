@@ -162,7 +162,7 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
         if (env.equals(Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT)){
             //We are on test env
             Button loginButton = findViewById(R.id.login_login_btn);
-            loginButton.setBackgroundColor(getResources().getColor(R.color.pnc_circle_yellow));
+            loginButton.setBackgroundColor(getResources().getColor(R.color.test_environment_color));
         }else{
             //we are in production
             Button loginButton = findViewById(R.id.login_login_btn);
