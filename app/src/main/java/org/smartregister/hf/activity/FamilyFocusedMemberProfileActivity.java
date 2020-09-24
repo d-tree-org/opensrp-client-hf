@@ -3,6 +3,7 @@ package org.smartregister.hf.activity;
 import android.content.DialogInterface;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
@@ -91,6 +92,12 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
         presenter().getReferralData(baseEntityId);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        return false;
     }
 
     @Override
