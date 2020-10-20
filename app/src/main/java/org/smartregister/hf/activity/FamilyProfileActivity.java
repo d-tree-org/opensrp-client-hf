@@ -52,8 +52,6 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 import de.hdodenhof.circleimageview.CircleImageView;
 import timber.log.Timber;
 
-//import android.support.v4.app.Fragment;
-//import android.support.v4.view.ViewPager;
 
 public class FamilyProfileActivity extends BaseFamilyProfileActivity implements FamilyProfileExtendedContract.View {
 
@@ -146,10 +144,9 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
             addMember.setVisible(false);
         }
 
-        //Menu items for the family members profile
-        //getMenuInflater().inflate(R.menu.addo_family_profile_menu, menu);
+        menu.removeItem(R.id.add_member);
 
-        return false;
+        return true;
     }
 
 
@@ -320,32 +317,12 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         }
     }
 
-    public void updateDueCount(final int dueCount) {
-
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
-            public void run() {
-                adapter.updateCount(Pair.create(1, dueCount));
-            }
-        });
-    }
-
     private void refreshList(Fragment fragment) {
         if (fragment != null && fragment instanceof BaseRegisterFragment) {
             if (fragment instanceof FamilyProfileMemberFragment) {
                 FamilyProfileMemberFragment familyProfileMemberFragment = ((FamilyProfileMemberFragment) fragment);
                 if (familyProfileMemberFragment.presenter() != null) {
                     familyProfileMemberFragment.refreshListView();
-                }
-            } /**else if (fragment instanceof FamilyProfileDueFragment) {
-                FamilyProfileDueFragment familyProfileDueFragment = ((FamilyProfileDueFragment) fragment);
-                if (familyProfileDueFragment.presenter() != null) {
-                    familyProfileDueFragment.refreshListView();
-                }
-            } **/else if (fragment instanceof FamilyProfileActivityFragment) {
-                FamilyProfileActivityFragment familyProfileActivityFragment = ((FamilyProfileActivityFragment) fragment);
-                if (familyProfileActivityFragment.presenter() != null) {
-                    familyProfileActivityFragment.refreshListView();
                 }
             }
         }
