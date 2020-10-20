@@ -69,26 +69,25 @@
         <activity
             android:name=".activity.FamilyOtherMemberProfileActivity"
             android:label="@string/title_family_detail"
-            android:parentActivityName=".activity.FamilyRegisterActivity"
             android:theme="@style/AddoTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.smartregister.hf.activity.FamilyProfileActivity" />
+                android:value="org.smartregister.hf.activity.FamilyRegisterActivity" />
         </activity>
         <activity
             android:name=".activity.FamilyFocusedMemberProfileActivity"
             android:label="@string/title_family_detail"
-            android:parentActivityName=".activity.FamilyRegisterActivity"
             android:theme="@style/AddoTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.smartregister.hf.activity.FamilyProfileActivity" />
+                android:value="org.smartregister.hf.activity.FamilyRegisterActivity" />
         </activity>
 
         <activity
             android:name=".activity.ChildProfileActivity"
             android:label="@string/child_details"
-            android:theme="@style/AddoTheme.NoActionBar" />
+            android:theme="@style/AddoTheme.NoActionBar"
+            android:parentActivityName=".activity.FamilyRegisterActivity"/>
 
         <activity android:name=".activity.HfSettingsActivity"
             android:launchMode="singleTask"
