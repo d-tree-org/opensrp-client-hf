@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -77,6 +78,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         ActionBar actionBar = this.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
             final Drawable backArrow = getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp);
             backArrow.setColorFilter(getResources().getColor(R.color.addo_primary), PorterDuff.Mode.SRC_ATOP);
             actionBar.setHomeAsUpIndicator(backArrow);
@@ -97,7 +99,18 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        return false;
+        menu.removeItem(R.id.switchLanguageMenuItem);
+        menu.removeItem(R.id.updateMenuItem);
+        menu.removeItem(MENU_ITEM_LOGOUT);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
