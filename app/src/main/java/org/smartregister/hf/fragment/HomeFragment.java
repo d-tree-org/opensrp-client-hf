@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.smartregister.hf.R;
-import org.smartregister.hf.activity.AddoHomeActivity;
+import org.smartregister.hf.activity.HomeActivity;
 import org.smartregister.hf.adapter.AddoLocationRecyclerViewProviderAdapter;
 import org.smartregister.hf.contract.AddoHomeFragmentContract;
 import org.smartregister.hf.custom_views.NavigationMenu;
@@ -33,13 +33,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFragmentContract.View {
+public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragmentContract.View {
 
     private RecyclerView addoLocationView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<String> villageLocations = new ArrayList<>();
-    private AddoHomeActivity.AddoHomeSharedViewModel model;
+    private HomeActivity.AddoHomeSharedViewModel model;
     private TextView tvNoVillage;
     private EmptystateView emptystateView;
 
@@ -123,9 +123,9 @@ public class AddoHomeFragment extends BaseRegisterFragment implements AddoHomeFr
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                return (T) new AddoHomeActivity.AddoHomeSharedViewModel();
+                return (T) new HomeActivity.AddoHomeSharedViewModel();
             }
-        }).get(AddoHomeActivity.AddoHomeSharedViewModel.class);
+        }).get(HomeActivity.AddoHomeSharedViewModel.class);
         this.rootView = view;
         this.setupViews(view);
 

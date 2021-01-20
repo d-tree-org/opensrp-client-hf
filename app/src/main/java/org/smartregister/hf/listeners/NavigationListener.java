@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import org.smartregister.hf.R;
-import org.smartregister.hf.activity.AddoHomeActivity;
+import org.smartregister.hf.activity.HomeActivity;
 import org.smartregister.hf.adapter.NavigationAdapter;
 import org.smartregister.hf.util.Constants;
 
@@ -31,7 +31,7 @@ public class NavigationListener implements View.OnClickListener {
                 // the funcitonality we need to define a new navigation menu for ADDO application
                 switch (tag) {
                     case Constants.DrawerMenu.ALL_FAMILIES:
-                        startRegisterActivity(AddoHomeActivity.class);
+                        startRegisterActivity(HomeActivity.class);
                         break;
                     case Constants.DrawerMenu.ANC:
                         Toast.makeText(activity.getApplicationContext(), Constants.DrawerMenu.ANC, Toast.LENGTH_SHORT).show();

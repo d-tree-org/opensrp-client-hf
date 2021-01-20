@@ -51,14 +51,14 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity android:name=".activity.BaseActivity" />
         <activity
-            android:name=".activity.AddoHomeActivity"
+            android:name=".activity.HomeActivity"
             android:label="Addo"
             android:screenOrientation="portrait"
             android:theme="@style/AddoTheme.NoActionBar" />
         <activity
             android:name=".activity.FamilyProfileActivity"
             android:label="@string/title_family_detail"
-            android:parentActivityName=".activity.AddoHomeActivity"
+            android:parentActivityName=".activity.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AddoTheme.NoActionBar"></activity>
         <activity

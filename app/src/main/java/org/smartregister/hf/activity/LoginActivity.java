@@ -72,7 +72,7 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     }
 
     private void goToMainActivity(boolean b){
-        Intent intent = new Intent(this, AddoHomeActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
