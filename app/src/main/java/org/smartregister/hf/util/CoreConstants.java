@@ -160,6 +160,9 @@ public class CoreConstants {
         public static AssetManager assetManager;
         public static Locale locale;
 
+        //Kituoni Specific Form
+        public static final String COMPLETE_REFERRAL = "complete_referral_form";
+
         /**
          * NOTE: This method must be called first before using any of the forms. Preferable onCreate()
          * method of Application
@@ -171,6 +174,8 @@ public class CoreConstants {
             JSON_FORM.assetManager = assetManager;
             JSON_FORM.locale = locale;
         }
+
+        public static String getKituoniCompleteReferral(){return COMPLETE_REFERRAL;}
 
         public static String getAddoRecordServiceOther() { return ADDO_RECORD_SERVICE_OTHER; }
 
