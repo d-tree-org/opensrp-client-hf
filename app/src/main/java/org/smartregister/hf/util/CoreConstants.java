@@ -66,41 +66,11 @@ public class CoreConstants {
     }
 
     public static final class EventType {
-        public static final String BIRTH_CERTIFICATION = "Birth Certification";
-        public static final String OBS_ILLNESS = "Observations Illness";
-        public static final String COUNSELING = "Counseling";
-        public static final String FAMILY_REGISTRATION = "Family Registration";
         public static final String FAMILY_MEMBER_REGISTRATION = "Family Member Registration";
-        public static final String ECD = "Early childhood development";
-        public static final String CHILD_REGISTRATION = "Child Registration";
-        public static final String UPDATE_CHILD_REGISTRATION = "Update Child Registration";
-        public static final String CHILD_HOME_VISIT = "Child Home Visit";
-        public static final String CHILD_VISIT_NOT_DONE = "Visit not done";
-        public static final String UNDO_CHILD_VISIT_NOT_DONE = "Undo child visit not done";
-        public static final String CHILD_REFERRAL = "Sick Child Referral";
-        public static final String ANC_REFERRAL = "ANC Referral";
-        public static final String PNC_REFERRAL = "PNC Referral";
-        public static final String CHILD_VACCINE_CARD_RECEIVED = "Child vaccine card received";
-        public static final String VACCINE_CARD_RECEIVED = "Vaccine Card Received";
-        public static final String MINIMUM_DIETARY_DIVERSITY = "Minimum dietary diversity";
-        public static final String MUAC = "Mid-upper arm circumference (MUAC)";
-        public static final String LLITN = "Sleeping under a LLITN";
-        public static final String VITAMIN_A = "Vitamin A";
-        public static final String DEWORMING = "De-worming";
-        public static final String TT = "TT Vaccination";
-        public static final String IPTP_SP = "IPTp-SP Service";
-        public static final String MNP = "MNP";
-        public static final String DANGER_SIGNS_BABY = "Danger signs - Baby";
-        public static final String PNC_HEALTH_FACILITY_VISIT = "PNC health facility visit";
-        public static final String EXCLUSIVE_BREASTFEEDING = "Exclusive breast feeding";
-        public static final String KANGAROO_CARE = "Kangaroo Care";
-        public static final String UMBILICAL_CORD_CARE = "Umbilical cord care";
-        public static final String IMMUNIZATION_VISIT = "Immunization Visit";
-        public static final String OBSERVATIONS_AND_ILLNESS = "Observations Illness";
-        public static final String UPDATE_FAMILY_RELATIONS = "Update Family Relations";
         public static final String UPDATE_FAMILY_MEMBER_RELATIONS = "Update Family Member Relations";
 
-        public static final String UPDATE_FAMILY_REGISTRATION = "Update Family Registration";
+        public static final String UPDATE_FAMILY_RELATIONS = "Update Family Relations";
+
         public static final String UPDATE_FAMILY_MEMBER_REGISTRATION = "Update Family Member Registration";
 
         public static final String REMOVE_MEMBER = "Remove Family Member";
@@ -108,20 +78,15 @@ public class CoreConstants {
         public static final String REMOVE_FAMILY = "Remove Family";
 
         public static final String ANC_REGISTRATION = "ANC Registration";
-        public static final String ANC_HOME_VISIT = "ANC Home Visit";
-        public static final String PNC_HOME_VISIT = "PNC Home Visit";
-        public static final String ANC_HOME_VISIT_NOT_DONE = "ANC Home Visit Not Done";
-        public static final String ANC_HOME_VISIT_NOT_DONE_UNDO = "ANC Home Visit Not Done Undo";
         public static final String MALARIA_FOLLOW_UP_VISIT = "Malaria Follow-up Visit";
-        public static final String MALARIA_CONFIRMATION = "Malaria Confirmation";
         public static final String UPDATE_ANC_REGISTRATION = "Update ANC Registration";
-        public static final String CLOSE_REFERRAL = "Close Referral";
-        public static final String PREGNANCY_OUTCOME = "Pregnancy Outcome";
-        public static final String PNC_REGISTRATION = "PNC Registration";
-        public static final String PNC_HOME_VISIT_NOT_DONE = "PNC Home Visit Not Done";
-        public static final String PNC_HOME_VISIT_NOT_DONE_UNDO = "PNC Home Visit Not Done Undo";
-        public static final String WASH_CHECK = "WASH check";
-        public static final String NUTRITION_STATUS_BABY = "Nutrition Status - Baby";
+
+        public static final String FACILITY_VISIT = "Facility Visit";
+
+        public static final String ANC_HF_VISIT = "ANC Health Facility Visit";
+        public static final String PNC_HF_VISIT = "PNC Health Facility Visit";
+        public static final String ADOLESCENT_HF_VISIT = "Adolescent Health Facility Visit";
+        public static final String CHILD_HF_VISIT = "Child Health Facility Visit";
 
     }
 
