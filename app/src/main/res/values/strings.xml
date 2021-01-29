@@ -449,4 +449,9 @@
     <string name="referral_details">Referral Details</string>
     <string name="select_the_person_message">Select the person to receive services</string>
 
+    <string name="complete_referral"> Complete Referral </string>
+    <string name="complete_referral_confirmation"> Are you sure you want to mark this referral as completed? </string>
+
+    <string name="okay"> OK </string>
+
 </resources>
