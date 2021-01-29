@@ -12,7 +12,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Complete Referral"
+        android:text="@string/close_referral"
         android:textColor="@color/primary_color"
         android:fontFamily="@font/google_sans_bold"/>
 
