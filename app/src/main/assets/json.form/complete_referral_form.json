@@ -2,7 +2,7 @@
   "validate_on_submit": true,
   "show_errors_on_submit": false,
   "count": "1",
-  "encounter_type": "Malaria Confirmation",
+  "encounter_type": "Referral Completion",
   "entity_id": "",
   "relational_id": "",
   "metadata": {
@@ -60,12 +60,12 @@
         "key": "completed_referral",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "fever_malaria_chw",
+        "openmrs_entity_id": "completed_referral",
         "type": "spinner",
-        "hint": "Did the person complete the referral?",
+        "hint": "The client completed the referral?",
         "values": [
-          "Done",
-          "Not Done"
+          "Yes",
+          "No"
         ],
         "v_required": {
           "value": "true",
