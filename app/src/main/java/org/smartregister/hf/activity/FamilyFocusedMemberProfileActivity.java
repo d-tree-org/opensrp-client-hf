@@ -1,11 +1,13 @@
 package org.smartregister.hf.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -13,7 +15,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import com.vijay.jsonwizard.activities.JsonFormActivity;
+import com.vijay.jsonwizard.constants.JsonFormConstants;
+import com.vijay.jsonwizard.domain.Form;
+
 import org.joda.time.DateTime;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.smartregister.hf.R;
 import org.smartregister.hf.contract.FamilyFocusedMemberProfileContract;
 import org.smartregister.hf.custom_views.FamilyMemberFloatingMenu;
@@ -24,15 +33,22 @@ import org.smartregister.family.adapter.ViewPagerAdapter;
 import org.smartregister.family.model.BaseFamilyProfileMemberModel;
 import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.Utils;
+import org.smartregister.family.activity.FamilyWizardFormActivity;
 import org.smartregister.helper.ImageRenderHelper;
+import org.smartregister.hf.util.CoreConstants;
+import org.smartregister.hf.util.JsonFormUtils;
+import org.smartregister.util.FormUtils;
 import org.smartregister.view.activity.BaseProfileActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import timber.log.Timber;
 
 public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity implements FamilyFocusedMemberProfileContract.View {
 
@@ -54,6 +70,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private View familyHeadView;
     private View primaryCaregiverView;
 
+    private ProgressBar progressBar;
+
     protected ViewPagerAdapter adapter;
     private String familyBaseEntityId;
     private String baseEntityId;
@@ -66,7 +84,11 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     protected MemberObject memberObject;
     private FamilyMemberFloatingMenu familyFloatingMenu;
 
+    private JSONObject referralDetails;
+
     private String referralEntityId;
+
+    private FormUtils formUtils;
 
     @Override
     protected void onCreation() {
@@ -142,6 +164,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         referralDetailsSection  = findViewById(R.id.referral_details_section);
         referralDetailsSection.setVisibility(View.GONE);
 
+        progressBar = findViewById(R.id.progress_bar);
+
         referralReason = findViewById(R.id.referral_focus);
         referralIndicators = findViewById(R.id.referral_danger_signs);
         referralDate = findViewById(R.id.referral_date);
@@ -211,12 +235,35 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     }
 
     @Override
+    public void displayProgressBar(boolean b) {
+        if (b){
+            imageView.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+        }else{
+            imageView.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     public void goToFamilyProfile() {
         finish();
     }
 
     @Override
     public void setReferralDetails(String entityId, String focus, String indicators, String date, String source, String referredBy) {
+
+        try {
+            referralDetails.put("base_entity_id", entityId);
+            referralDetails.put("focus", focus);
+            referralDetails.put("referral_indicator", indicators);
+            referralDetails.put("referral_date", date);
+            referralDetails.put("referral_source", source);
+            referralDetails.put("provider", referredBy);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         referralReason.setText(focus);
         referralIndicators.setText(indicators);
 
@@ -266,7 +313,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_mark_as_done:
-                confirmMarkingAsDone();
+                startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getKituoniCompleteReferral()), getResources().getString(R.string.close_referral));
+                //confirmMarkingAsDone();
                 break;
             default:
                 super.onClick(view);
@@ -274,18 +322,120 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         }
     }
 
-    void confirmMarkingAsDone(){
+    public void startFormActivity(JSONObject jsonForm, String formTitle) {
+        Form form = new Form();
+        form.setName(formTitle);
+        form.setActionBarBackground(R.color.family_actionbar);
+        form.setNavigationBackground(R.color.family_navigation);
+        form.setHomeAsUpIndicator(R.mipmap.ic_cross_white);
+        form.setSaveLabel("FINISH");
+        form.setHideSaveLabel(true);
+        form.setWizard(true);
+
+        /**
+         * Removed the callout to the jsonform activity for capturing referral closure information at the facility
+         * To be implemented when the use-case at the facility point of contact is defined
+         */
+        /// Intent intent = new Intent(this, ReferralWizardFormActivity.class);
+        /// intent.putExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
+        /// intent.putExtra(Constants.WizardFormActivity.EnableOnCloseDialog, false);
+        /// intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
+        /// intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
+        /// startActivityForResult(intent, org.smartregister.family.util.JsonFormUtils.REQUEST_CODE_GET_JSON);
+
+        confirmMarkingAsDone(jsonForm);
+
+    }
+
+    private FormUtils getFormUtils() {
+        if (formUtils == null) {
+            try {
+                formUtils = FormUtils.getInstance(Utils.context().applicationContext());
+            } catch (Exception e) {
+                Timber.e(e);
+            }
+        }
+        return formUtils;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) return;
+        if (requestCode == JsonFormUtils.REQUEST_CODE_GET_JSON){
+            try{
+                String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
+                JSONObject form = new JSONObject(jsonString);
+
+                //Create a new event/visit for this encounter
+
+                JSONArray a = form.getJSONObject("step1").getJSONArray("fields");
+                String formFieldValue = "";
+                for (int i=0; i<a.length(); i++){
+                    JSONObject object = a.getJSONObject(i);
+                    if (object.getString("key").equalsIgnoreCase("completed_referral")){
+                        String value = object.getString("value");
+                        //TODO: Any Reaction to the answer will be here
+                    }
+                }
+
+                form.put("referral_information", referralDetails);
+
+                Map<String, String> formForSubmission = new HashMap<>();
+                formForSubmission.put(form.optString(org.smartregister.chw.anc.util.Constants.ENCOUNTER_TYPE), jsonString);
+                submitForm(formForSubmission);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    void confirmMarkingAsDone(JSONObject jsonForm){
         new AlertDialog.Builder(this)
                 .setView(R.layout.dialog_complete_referral_confirmation)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
-                        presenter().markReferralAsDone(baseEntityId);
+                        createFacilityVisitEvent(jsonForm);
                     }
                 })
                 .setNegativeButton(android.R.string.no, null)
                 .setIcon(android.R.drawable.alert_light_frame)
                 .show();
+    }
+
+    private void createFacilityVisitEvent(JSONObject form){
+        try {
+            JSONArray a = form.getJSONObject("step1").getJSONArray("fields");
+            String formFieldValue = "";
+            for (int i=0; i<a.length(); i++){
+                JSONObject object = a.getJSONObject(i);
+                if (object.getString("key").equalsIgnoreCase("completed_referral")){
+                    /// String value = object.getString("value");
+                    /// Any Reaction to the answer will be here
+                }
+            }
+
+            form.put("referral_information", referralDetails);
+
+            Map<String, String> formForSubmission = new HashMap<>();
+            formForSubmission.put(CoreConstants.EventType.FACILITY_VISIT, form.toString());
+            submitForm(formForSubmission);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void submitForm(Map<String, String> formForSubmission) {
+        presenter().submitVisit(formForSubmission);
+    }
+
+    @Override
+    public void completeReferralTask() {
+        //Mark the referral Task as done
+        presenter().markReferralAsDone(baseEntityId);
     }
 
 }
