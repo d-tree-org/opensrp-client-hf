@@ -144,6 +144,13 @@
               "ec_adolescent",
               "ec_family_member"
             ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "Facility Visit",
+            "creates_case": [
+              "ec_family_member"
+            ]
           }
         ]
       }
