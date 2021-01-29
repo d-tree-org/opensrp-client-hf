@@ -109,6 +109,9 @@
 
         <activity android:name=".activity.MainActivity" />
 
+        <activity android:name=".activity.ReferralWizardFormActivity"
+            android:theme="@style/AddoTheme.NoActionBar"/>
+
         <service android:name="org.smartregister.sync.intent.PullUniqueIdsIntentService" />
         <service android:name="org.smartregister.sync.intent.SyncIntentService" />
         <service android:name=".sync.SyncTaskIntentService" />
