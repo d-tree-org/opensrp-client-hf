@@ -1,6 +1,10 @@
 package org.smartregister.hf.presenter;
 
+import android.app.Activity;
+import android.widget.Toast;
+
 import org.smartregister.domain.Task;
+import org.smartregister.hf.R;
 import org.smartregister.hf.contract.FamilyFocusedMemberProfileContract;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.contract.FamilyOtherMemberContract;
@@ -13,6 +17,7 @@ import org.smartregister.hf.interactor.FamilyFocusedMemberProfileInteractor;
 
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
+import java.util.Map;
 
 import static org.smartregister.util.Utils.getName;
 
@@ -148,5 +153,19 @@ public class FamilyFocusedMemberProfileActivityPresenter
 
         getView().setProfileImage(client.getCaseId(), entityType);
 
+    }
+
+    @Override
+    public void submitVisit(Map<String, String> formForSubmission) {
+        if (viewReference.get() != null) {
+            viewReference.get().displayProgressBar(true);
+            interactor.submitVisit(false, baseEntityId, formForSubmission, this);
+        }
+    }
+
+    @Override
+    public void onSubmitted(boolean successful) {
+        viewReference.get().displayProgressBar(false);
+        viewReference.get().completeReferralTask();
     }
 }

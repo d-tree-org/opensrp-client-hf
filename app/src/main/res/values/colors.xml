@@ -88,4 +88,6 @@
 
     <color name="test_environment_color">#FC7410</color>
 
+    <color name="red_overlay">#66FF0000</color>
+
 </resources>

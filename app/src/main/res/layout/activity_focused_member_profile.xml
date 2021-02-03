@@ -81,14 +81,28 @@
                         app:layout_collapseMode="parallax"
                         app:layout_collapseParallaxMultiplier="1.5">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/imageview_profile"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center_horizontal"
-                            android:tint="@color/white"
-                            app:civ_border_color="#FFFFFFFF"
-                            app:civ_border_width="0dp" />
+                        <RelativeLayout
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_gravity="center_horizontal">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/imageview_profile"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:tint="@color/white"
+                                app:civ_border_color="#FFFFFFFF"
+                                app:civ_border_width="0dp" />
+
+                            <ProgressBar
+                                android:id="@+id/progress_bar"
+                                style="@style/Base.Widget.AppCompat.ProgressBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:visibility="gone" />
+
+                        </RelativeLayout>
 
                         <TextView
                             android:id="@+id/textview_name_focused"

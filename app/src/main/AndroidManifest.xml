@@ -51,14 +51,14 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity android:name=".activity.BaseActivity" />
         <activity
-            android:name=".activity.AddoHomeActivity"
+            android:name=".activity.HomeActivity"
             android:label="Addo"
             android:screenOrientation="portrait"
             android:theme="@style/AddoTheme.NoActionBar" />
         <activity
             android:name=".activity.FamilyProfileActivity"
             android:label="@string/title_family_detail"
-            android:parentActivityName=".activity.AddoHomeActivity"
+            android:parentActivityName=".activity.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AddoTheme.NoActionBar"></activity>
         <activity
@@ -69,26 +69,25 @@
         <activity
             android:name=".activity.FamilyOtherMemberProfileActivity"
             android:label="@string/title_family_detail"
-            android:parentActivityName=".activity.FamilyRegisterActivity"
             android:theme="@style/AddoTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.smartregister.hf.activity.FamilyProfileActivity" />
+                android:value="org.smartregister.hf.activity.FamilyRegisterActivity" />
         </activity>
         <activity
             android:name=".activity.FamilyFocusedMemberProfileActivity"
             android:label="@string/title_family_detail"
-            android:parentActivityName=".activity.FamilyRegisterActivity"
             android:theme="@style/AddoTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.smartregister.hf.activity.FamilyProfileActivity" />
+                android:value="org.smartregister.hf.activity.FamilyRegisterActivity" />
         </activity>
 
         <activity
             android:name=".activity.ChildProfileActivity"
             android:label="@string/child_details"
-            android:theme="@style/AddoTheme.NoActionBar" />
+            android:theme="@style/AddoTheme.NoActionBar"
+            android:parentActivityName=".activity.FamilyRegisterActivity"/>
 
         <activity android:name=".activity.HfSettingsActivity"
             android:launchMode="singleTask"
@@ -109,6 +108,9 @@
         </provider>
 
         <activity android:name=".activity.MainActivity" />
+
+        <activity android:name=".activity.ReferralWizardFormActivity"
+            android:theme="@style/AddoTheme.NoActionBar"/>
 
         <service android:name="org.smartregister.sync.intent.PullUniqueIdsIntentService" />
         <service android:name="org.smartregister.sync.intent.SyncIntentService" />

@@ -53,4 +53,10 @@
     <string name="search_results_return">Rudi kwenye matokeo</string>
     <string name="global_search">Tafuta kote</string>
 
+    <string name="complete_referral"> Kamilisha Rufaa </string>
+    <string name="complete_referral_confirmation"> Je, una uhakika unataka kukamilisha rufaa hii? </string>
+
+    <string name="cancel">HAPANA</string>
+    <string name="okay"> NDIO </string>
+
 </resources>

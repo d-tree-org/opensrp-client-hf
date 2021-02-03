@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.smartregister.hf.R;
-import org.smartregister.hf.activity.AddoHomeActivity;
+import org.smartregister.hf.activity.HomeActivity;
 import org.smartregister.listener.BottomNavigationListener;
 
 public class FamilyRegisterBottomNavigationListener extends BottomNavigationListener {
@@ -24,7 +24,7 @@ public class FamilyRegisterBottomNavigationListener extends BottomNavigationList
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        AddoHomeActivity activity = (AddoHomeActivity) context;
+        HomeActivity activity = (HomeActivity) context;
 
         if (item.getItemId() == R.id.action_fingerprint) {
             activity.startSimprintsId();
