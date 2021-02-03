@@ -5,7 +5,7 @@ import android.util.Log;
 import org.smartregister.CoreLibrary;
 import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.contract.AddoHomeFragmentContract;
-import org.smartregister.hf.fragment.AddoHomeFragment;
+import org.smartregister.hf.fragment.HomeFragment;
 import org.smartregister.configurableviews.ConfigurableViewsLibrary;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
 import org.smartregister.configurableviews.model.View;
@@ -133,7 +133,7 @@ public class AddoHomeFragmentModel implements AddoHomeFragmentContract.Model {
             }
 
         } catch (Exception e) {
-            Log.e(AddoHomeFragment.class.getCanonicalName(), Log.getStackTraceString(e));
+            Log.e(HomeFragment.class.getCanonicalName(), Log.getStackTraceString(e));
         }
 
         return locationList;

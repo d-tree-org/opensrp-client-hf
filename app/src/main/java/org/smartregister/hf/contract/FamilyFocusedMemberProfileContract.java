@@ -4,6 +4,8 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.Task;
 import org.smartregister.view.contract.BaseProfileContract;
 
+import java.util.Map;
+
 public interface FamilyFocusedMemberProfileContract {
 
     interface View extends BaseProfileContract.View {
@@ -33,6 +35,10 @@ public interface FamilyFocusedMemberProfileContract {
 
         void goToFamilyProfile();
 
+        void displayProgressBar(boolean b);
+
+        void completeReferralTask();
+
     }
 
     interface Presenter extends BaseProfileContract.Presenter {
@@ -47,19 +53,28 @@ public interface FamilyFocusedMemberProfileContract {
 
         void markReferralAsDone(String entityId);
 
+        void submitVisit(Map<String, String> formForSubmission);
+
     }
 
     interface Interactor {
         void fetchReferralForClient(String baseEntityId, InteractorCallBack callBack);
+
+        void refreshProfileView(String baseEntityId, InteractorCallBack callback);
+
+        void submitVisit(boolean editMode, String memberID, Map<String, String> formForSubmission, InteractorCallBack callBack);
+
     }
 
     interface InteractorCallBack {
 
-        //void refreshProfileTopSection(CommonPersonObjectClient client);
+        void refreshProfileTopSection(CommonPersonObjectClient client);
 
         void onReferralTaskFetched(Task referral);
 
         void onErrorFetchingReferrals(String error);
+
+        void onSubmitted(boolean successful);
 
     }
 }

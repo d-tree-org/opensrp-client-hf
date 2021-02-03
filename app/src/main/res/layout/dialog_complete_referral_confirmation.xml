@@ -12,7 +12,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Complete Referral"
+        android:text="@string/complete_referral"
         android:textColor="@color/primary_color"
         android:fontFamily="@font/google_sans_bold"/>
 
@@ -23,7 +23,7 @@
         app:layout_constraintLeft_toLeftOf="@id/confirm_title"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
-        android:text="Are you sure you want to mark this referral as complete?"
+        android:text="@string/complete_referral_confirmation"
         android:fontFamily="@font/google_sans_regular"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

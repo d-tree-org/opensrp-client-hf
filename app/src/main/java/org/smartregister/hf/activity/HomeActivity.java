@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModel;
 import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.custom_views.NavigationMenu;
-import org.smartregister.hf.fragment.AddoHomeFragment;
+import org.smartregister.hf.fragment.HomeFragment;
 import org.smartregister.hf.fragment.AdvancedSearchFragment;
 import org.smartregister.hf.fragment.ScanFingerPrintFragment;
 import org.smartregister.hf.util.Constants;
@@ -25,7 +25,7 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.lang.ref.WeakReference;
 
-public class AddoHomeActivity extends BaseFamilyRegisterActivity {
+public class HomeActivity extends BaseFamilyRegisterActivity {
 
     private String action = null;
     private static final int IDENTIFY_RESULT_CODE = 4061;
@@ -36,7 +36,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
     public void startSimprintsId(){
 
         // This is where the session starts, need to find a way to define this session for the confirmation
-        SimPrintsIdentifyActivity.startSimprintsIdentifyActivity(AddoHomeActivity.this,
+        SimPrintsIdentifyActivity.startSimprintsIdentifyActivity(HomeActivity.this,
                 BuildConfig.SIMPRINT_MODULE_ID, IDENTIFY_RESULT_CODE);
     }
 
@@ -60,7 +60,7 @@ public class AddoHomeActivity extends BaseFamilyRegisterActivity {
 
     @Override
     protected BaseRegisterFragment getRegisterFragment() {
-        return new AddoHomeFragment();
+        return new HomeFragment();
     }
 
     /*@Override

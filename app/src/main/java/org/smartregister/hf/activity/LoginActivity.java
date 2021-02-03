@@ -2,7 +2,6 @@ package org.smartregister.hf.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,8 +9,6 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -21,7 +18,6 @@ import org.smartregister.AllConstants;
 import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.R;
 import org.smartregister.hf.presenter.LoginPresenter;
-import org.smartregister.hf.repository.HfSharedPreference;
 import org.smartregister.hf.util.Constants;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.util.Utils;
@@ -72,7 +68,7 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     }
 
     private void goToMainActivity(boolean b){
-        Intent intent = new Intent(this, AddoHomeActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
