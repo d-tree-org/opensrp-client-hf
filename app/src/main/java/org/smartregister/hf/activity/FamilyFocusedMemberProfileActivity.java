@@ -253,6 +253,8 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     @Override
     public void setReferralDetails(String entityId, String focus, String indicators, String date, String source, String referredBy) {
 
+        referralDetails = new JSONObject();
+
         try {
             referralDetails.put("base_entity_id", entityId);
             referralDetails.put("focus", focus);
