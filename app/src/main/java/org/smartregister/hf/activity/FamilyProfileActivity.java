@@ -102,7 +102,7 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         profileView.setBorderWidth(2);
 
         // add floating menu
-        familyFloatingMenu = new FamilyFloatingMenu(this);
+        /*familyFloatingMenu = new FamilyFloatingMenu(this);
         LinearLayout.LayoutParams linearLayoutParams =
                 new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -111,7 +111,7 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
         addContentView(familyFloatingMenu, linearLayoutParams);
         familyFloatingMenu.setClickListener(
                 FloatingMenuListener.getInstance(this, presenter().familyBaseEntityId())
-        );
+        );*/
     }
 
     @Override
