@@ -366,11 +366,16 @@ public class FamilyProfileActivity extends BaseFamilyProfileActivity implements 
             CommonPersonObjectClient commonPersonObjectClient = (CommonPersonObjectClient) view.getTag();
             String entityType = Utils.getValue(commonPersonObjectClient.getColumnmaps(), ChildDBConstants.KEY.ENTITY_TYPE, false);
             if (CoreConstants.TABLE_NAME.FAMILY_MEMBER.equals(entityType)) {
-                if (!(isAncMember(commonPersonObjectClient.entityId()) || isPncMember(commonPersonObjectClient.entityId()))) {
+
+                /// Removed separate screens for focused group members and the rest of the members
+                /*if (!(isAncMember(commonPersonObjectClient.entityId()) || isPncMember(commonPersonObjectClient.entityId()))) {
                     goToOtherMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
                 } else {
                     goToFocusMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
-                }
+                }*/
+
+                goToFocusMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
+
             } else {
                 goToFocusMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
             }
