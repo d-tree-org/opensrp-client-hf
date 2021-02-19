@@ -58,9 +58,11 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     private TextView detailThreeView;
     private CircleImageView imageView;
     private CustomFontTextView markAsDone;
+    private CustomFontTextView attendedFacility;
 
     //Referral Details Views
     private View referralDetailsSection;
+    private View captureFacilityVisitSection;
     private TextView referralReason;
     private TextView referralIndicators;
     private TextView referralDate;
@@ -164,6 +166,12 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         referralDetailsSection  = findViewById(R.id.referral_details_section);
         referralDetailsSection.setVisibility(View.GONE);
 
+        captureFacilityVisitSection = findViewById(R.id.normal_visit_section);
+        captureFacilityVisitSection.setVisibility(View.VISIBLE);
+
+        attendedFacility  = findViewById(R.id.tv_attended_facility);
+        attendedFacility.setOnClickListener(this);
+
         progressBar = findViewById(R.id.progress_bar);
 
         referralReason = findViewById(R.id.referral_focus);
@@ -232,6 +240,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     @Override
     public void setReferralDetailsView(boolean hasReferral) {
         referralDetailsSection.setVisibility( hasReferral ? View.VISIBLE : View.GONE);
+        captureFacilityVisitSection.setVisibility(hasReferral ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -316,9 +325,40 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 startFormActivity(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getKituoniCompleteReferral()), getResources().getString(R.string.close_referral));
                 //confirmMarkingAsDone();
                 break;
+            case R.id.tv_attended_facility:
+                confirmFacilityVisit();
+                break;
             default:
                 super.onClick(view);
                 break;
+        }
+    }
+
+    private void confirmFacilityVisit(){
+
+        try{
+
+            DateTime date = DateTime.now();
+            String dateString = Utils.convertDateFormat(date);
+
+            JSONObject form = new JSONObject();
+            form.put("base_entity_id", baseEntityId);
+            form.put("visit_date", dateString);
+
+            new AlertDialog.Builder(this)
+                    .setView(R.layout.dialog_complete_referral_confirmation)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Continue with delete operation
+                            submitFacilityVisit(form);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.alert_light_frame)
+                    .show();
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -331,17 +371,6 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         form.setSaveLabel("FINISH");
         form.setHideSaveLabel(true);
         form.setWizard(true);
-
-        /**
-         * Removed the callout to the jsonform activity for capturing referral closure information at the facility
-         * To be implemented when the use-case at the facility point of contact is defined
-         */
-        /// Intent intent = new Intent(this, ReferralWizardFormActivity.class);
-        /// intent.putExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
-        /// intent.putExtra(Constants.WizardFormActivity.EnableOnCloseDialog, false);
-        /// intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
-        /// intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
-        /// startActivityForResult(intent, org.smartregister.family.util.JsonFormUtils.REQUEST_CODE_GET_JSON);
 
         confirmMarkingAsDone(jsonForm);
 
@@ -397,7 +426,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
-                        createFacilityVisitEvent(jsonForm);
+                        createFacilityReferralClosureEvent(jsonForm);
                     }
                 })
                 .setNegativeButton(android.R.string.no, null)
@@ -405,7 +434,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 .show();
     }
 
-    private void createFacilityVisitEvent(JSONObject form){
+    private void createFacilityReferralClosureEvent(JSONObject form){
         try {
             JSONArray a = form.getJSONObject("step1").getJSONArray("fields");
             String formFieldValue = "";
@@ -417,15 +446,21 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 }
             }
 
+            //Add referral information to the form
             form.put("referral_information", referralDetails);
 
-            Map<String, String> formForSubmission = new HashMap<>();
-            formForSubmission.put(CoreConstants.EventType.FACILITY_VISIT, form.toString());
-            submitForm(formForSubmission);
+            // Submit visit
+            submitFacilityVisit(form);
 
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void submitFacilityVisit(JSONObject form){
+        Map<String, String> formForSubmission = new HashMap<>();
+        formForSubmission.put(CoreConstants.EventType.FACILITY_VISIT, form.toString());
+        submitForm(formForSubmission);
     }
 
     public void submitForm(Map<String, String> formForSubmission) {
