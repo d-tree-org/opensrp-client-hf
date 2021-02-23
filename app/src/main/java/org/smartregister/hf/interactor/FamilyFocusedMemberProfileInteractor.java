@@ -169,7 +169,7 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
             JSONObject observationValue = new JSONObject();
 
             try {
-                JSONObject object = new JSONObject(jsonString.get(jsonString.get(CoreConstants.EventType.FACILITY_VISIT)));
+                JSONObject object = new JSONObject(jsonString.get(CoreConstants.EventType.FACILITY_VISIT));
                 JSONObject referralInformation;
                 if (object.has("referral_information")){
                     referralInformation = (JSONObject) object.get("referral_information");
@@ -186,7 +186,7 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
             Obs observation = new Obs().withFieldType("formsubmissionField")
                     .withFormSubmissionField(org.smartregister.hf.util.Constants.FORM_CONSTANTS.FORM_SUBMISSION_FIELD.FACILITY_VISIT_INFORMATION)
                     .withFieldCode(org.smartregister.hf.util.Constants.FORM_CONSTANTS.FORM_SUBMISSION_FIELD.FACILITY_VISIT_INFORMATION)
-                    .withValue(observationValue)
+                    .withValue(new JSONObject(observationValue.toString()))
                     .withFieldDataType("text").withParentCode("")
                     .withHumanReadableValues(new ArrayList<>());
 
