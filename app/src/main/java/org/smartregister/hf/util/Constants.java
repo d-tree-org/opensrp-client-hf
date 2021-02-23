@@ -252,6 +252,8 @@ public class Constants {
             public static final String HOME_VISIT_BIRTH_CERT= "birth_certificate";
             public static final String HOME_VISIT_ILLNESS= "illness_information";
 
+            public static final String FACILITY_VISIT_INFORMATION = "facility_visit_information";
+
         }
     }
 

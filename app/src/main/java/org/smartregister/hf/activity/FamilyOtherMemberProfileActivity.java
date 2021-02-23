@@ -130,7 +130,7 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         findViewById(R.id.viewpager).setVisibility(View.GONE);
 
         // add floating menu
-        familyFloatingMenu = new FamilyMemberFloatingMenu(this);
+        /*familyFloatingMenu = new FamilyMemberFloatingMenu(this);
         LinearLayout.LayoutParams linearLayoutParams =
                 new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -138,7 +138,7 @@ public class FamilyOtherMemberProfileActivity extends BaseFamilyOtherMemberProfi
         familyFloatingMenu.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
         addContentView(familyFloatingMenu, linearLayoutParams);
 
-        familyFloatingMenu.setClickListener(onClickFloatingMenu);
+        familyFloatingMenu.setClickListener(onClickFloatingMenu);*/
 
     }
 

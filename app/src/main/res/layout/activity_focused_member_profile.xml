@@ -234,7 +234,11 @@
                     app:tabTextAppearance="@style/CustomFontTextViewStyle.tabIndicator.sub.white" />
 
             <include android:id="@+id/referral_details_section"
+                android:visibility="gone"
                 layout="@layout/view_record_services_focused" />
+
+            <include android:id="@+id/normal_visit_section"
+                layout="@layout/normal_facility_visit_section" />
 
             <include layout="@layout/content_base_profile" />
 

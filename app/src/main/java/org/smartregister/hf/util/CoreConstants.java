@@ -128,6 +128,8 @@ public class CoreConstants {
         //Kituoni Specific Form
         public static final String COMPLETE_REFERRAL = "complete_referral_form";
 
+        public static final String FACILITY_VISIT = "facility_visit_form";
+
         /**
          * NOTE: This method must be called first before using any of the forms. Preferable onCreate()
          * method of Application
@@ -141,6 +143,8 @@ public class CoreConstants {
         }
 
         public static String getKituoniCompleteReferral(){return COMPLETE_REFERRAL;}
+
+        public static String getFAcilityVisitForm(){return  FACILITY_VISIT;}
 
         public static String getAddoRecordServiceOther() { return ADDO_RECORD_SERVICE_OTHER; }
 
