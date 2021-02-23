@@ -50,7 +50,9 @@ public class FamilyDao extends AbstractDao {
                     new String[]{});
             while (cursor.moveToNext()) {
                 Entity entity = readCursor(cursor);
-                entitySet.add(entity);
+                if (!entity.getVoided()) {
+                    entitySet.add(entity);
+                }
             }
         } catch (Exception e) {
             Timber.e(e);
@@ -70,8 +72,13 @@ public class FamilyDao extends AbstractDao {
         entity.setLastName(cursor.getString(cursor.getColumnIndex("last_name")));
         entity.setGender(cursor.getString(cursor.getColumnIndex("gender")));
         entity.setFamilyId(cursor.getString(cursor.getColumnIndex("relational_id")));
+        entity.setVoided(getMemberClosedStatus(cursor.getString(cursor.getColumnIndex("is_closed"))));
 
         return entity;
+    }
+
+    private static Boolean getMemberClosedStatus(String isClosed) {
+        return "1".equalsIgnoreCase(isClosed);
     }
 
     public static Map<String, Integer> getFamilyServiceSchedule(String familyBaseEntityID) {

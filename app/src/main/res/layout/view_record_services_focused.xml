@@ -34,7 +34,7 @@
         android:id="@+id/referral_focus"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="4dp"
-        android:text="ANC Danger Signs"
+        android:text=""
         android:textColor="@color/second_grey"
         android:fontFamily="@font/google_sans_regular"/>
 
@@ -56,7 +56,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="4dp"
         android:textSize="16sp"
-        android:text="Vaginal bleeding, Severe headache, Blurred vision, Convulsions/Seizures, true"
+        android:text=""
         android:textColor="@color/second_grey"
         android:fontFamily="@font/google_sans_regular"/>
 
@@ -76,7 +76,7 @@
         android:id="@+id/referral_date"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="4dp"
-        android:text="Mar 27th 2020"
+        android:text=""
         android:textColor="@color/second_grey"
         android:fontFamily="@font/google_sans_regular"/>
 
@@ -96,7 +96,7 @@
         android:id="@+id/referral_source"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="4dp"
-        android:text="Community Health Worker"
+        android:text=""
         android:textColor="@color/second_grey"
         android:fontFamily="@font/google_sans_regular"/>
 
@@ -116,7 +116,7 @@
         android:id="@+id/referee"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="4dp"
-        android:text="chwone"
+        android:text=""
         android:textColor="@color/second_grey"
         android:fontFamily="@font/google_sans_regular"/>
 
@@ -137,7 +137,7 @@
             android:gravity="center"
             android:fontFamily="@font/google_sans_medium"
             android:textSize="12sp"
-            android:text="@string/close_referral"
+            android:text="@string/capture_facility_visit"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
