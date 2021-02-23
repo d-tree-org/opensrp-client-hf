@@ -328,7 +328,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
                 //confirmMarkingAsDone();
                 break;
             case R.id.tv_attended_facility:
-                confirmFacilityVisit();
+                confirmFacilityVisit(getFormUtils().getFormJson(CoreConstants.JSON_FORM.getFAcilityVisitForm()));
                 break;
             default:
                 super.onClick(view);
@@ -336,23 +336,22 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
         }
     }
 
-    private void confirmFacilityVisit(){
+    private void confirmFacilityVisit(JSONObject jsonForm){
 
         try{
 
             DateTime date = DateTime.now();
             String dateString = Utils.convertDateFormat(date);
 
-            JSONObject form = new JSONObject();
-            form.put("base_entity_id", baseEntityId);
-            form.put("visit_date", dateString);
+            jsonForm.put("base_entity_id", baseEntityId);
+            jsonForm.put("visit_date", dateString);
 
             new AlertDialog.Builder(this)
                     .setView(R.layout.dialog_complete_referral_confirmation)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // Continue with delete operation
-                            submitFacilityVisit(form);
+                            submitFacilityVisit(jsonForm);
                         }
                     })
                     .setNegativeButton(android.R.string.no, null)
@@ -365,17 +364,7 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     }
 
     public void startFormActivity(JSONObject jsonForm, String formTitle) {
-        Form form = new Form();
-        form.setName(formTitle);
-        form.setActionBarBackground(R.color.family_actionbar);
-        form.setNavigationBackground(R.color.family_navigation);
-        form.setHomeAsUpIndicator(R.mipmap.ic_cross_white);
-        form.setSaveLabel("FINISH");
-        form.setHideSaveLabel(true);
-        form.setWizard(true);
-
         confirmMarkingAsDone(jsonForm);
-
     }
 
     private FormUtils getFormUtils() {
