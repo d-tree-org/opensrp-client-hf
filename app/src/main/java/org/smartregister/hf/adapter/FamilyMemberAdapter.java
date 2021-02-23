@@ -124,11 +124,18 @@ public class FamilyMemberAdapter extends ArrayAdapter<Entity> {
             CommonPersonObjectClient commonPersonObjectClient = (CommonPersonObjectClient) view.getTag();
             String entityType = Utils.getValue(commonPersonObjectClient.getColumnmaps(), ChildDBConstants.KEY.ENTITY_TYPE, false);
             if (CoreConstants.TABLE_NAME.FAMILY_MEMBER.equals(entityType)) {
-                if (!(isAncMember(commonPersonObjectClient.entityId()) || isPncMember(commonPersonObjectClient.entityId()) || isAdolescent(commonPersonObjectClient.entityId()))) {
+
+                /*if (!(isAncMember(commonPersonObjectClient.entityId()) || isPncMember(commonPersonObjectClient.entityId()) || isAdolescent(commonPersonObjectClient.entityId()))) {
                     goToOtherMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
                 } else {
                     goToFocusMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
-                }
+                }*/
+
+                /**
+                 * Changed to open the same screen for both focused and non focused group members
+                 */
+                goToFocusMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
+
             } else {
                 goToFocusMemberProfileActivity(commonPersonObjectClient, fragmentArguments);
             }

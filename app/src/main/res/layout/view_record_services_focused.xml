@@ -137,7 +137,7 @@
             android:gravity="center"
             android:fontFamily="@font/google_sans_medium"
             android:textSize="12sp"
-            android:text="@string/close_referral"
+            android:text="@string/capture_facility_visit"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
