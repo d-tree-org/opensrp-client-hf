@@ -186,7 +186,7 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
             Obs observation = new Obs().withFieldType("formsubmissionField")
                     .withFormSubmissionField(org.smartregister.hf.util.Constants.FORM_CONSTANTS.FORM_SUBMISSION_FIELD.FACILITY_VISIT_INFORMATION)
                     .withFieldCode(org.smartregister.hf.util.Constants.FORM_CONSTANTS.FORM_SUBMISSION_FIELD.FACILITY_VISIT_INFORMATION)
-                    .withValue(new JSONObject(observationValue.toString()))
+                    .withValue(observationValue)
                     .withFieldDataType("text").withParentCode("")
                     .withHumanReadableValues(new ArrayList<>());
 
