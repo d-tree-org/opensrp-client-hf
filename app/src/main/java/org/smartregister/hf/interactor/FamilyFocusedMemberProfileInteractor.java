@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
+import org.json.JSONObject;
 import org.smartregister.chw.anc.AncLibrary;
 import org.smartregister.chw.anc.domain.Visit;
 import org.smartregister.chw.anc.domain.VisitDetail;
@@ -26,6 +27,7 @@ import org.smartregister.family.util.Utils;
 import org.smartregister.hf.contract.FamilyFocusedMemberProfileContract;
 import org.smartregister.hf.dao.AdolescentDao;
 import org.smartregister.hf.dao.AncDao;
+import org.smartregister.hf.dao.ChildDao;
 import org.smartregister.hf.dao.PNCDao;
 import org.smartregister.hf.util.CoreConstants;
 import org.smartregister.hf.util.TaksUtils;
@@ -163,6 +165,33 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
             JsonFormUtils.tagEvent(allSharedPreferences, baseEvent);
             baseEvent.setLocationId(getClientLocationId(relationalId));
 
+            /// How do you set the Observations
+            JSONObject observationValue = new JSONObject();
+
+            try {
+                JSONObject object = new JSONObject(jsonString.get(CoreConstants.EventType.FACILITY_VISIT));
+                JSONObject referralInformation;
+                if (object.has("referral_information")){
+                    referralInformation = (JSONObject) object.get("referral_information");
+                }else{
+                    referralInformation = new JSONObject();
+                    referralInformation.put("has_referral", "no");
+                    referralInformation.put("visit_type", "Walk In Client/No Referral");
+                }
+                observationValue = referralInformation;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            Obs observation = new Obs().withFieldType("formsubmissionField")
+                    .withFormSubmissionField(org.smartregister.hf.util.Constants.FORM_CONSTANTS.FORM_SUBMISSION_FIELD.FACILITY_VISIT_INFORMATION)
+                    .withFieldCode(org.smartregister.hf.util.Constants.FORM_CONSTANTS.FORM_SUBMISSION_FIELD.FACILITY_VISIT_INFORMATION)
+                    .withValue(observationValue)
+                    .withFieldDataType("text").withParentCode("")
+                    .withHumanReadableValues(new ArrayList<>());
+
+            baseEvent.addObs(observation);
+
             String visitID = (editMode) ?
                     visitRepository().getLatestVisit(memberID, getEncounterType(memberID)).getVisitId() :
                     JsonFormUtils.generateRandomUUIDString();
@@ -216,8 +245,10 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
             return CoreConstants.EventType.PNC_HF_VISIT;
         } else if (AdolescentDao.isAdolescentMember(baseEntityId)) {
             return CoreConstants.EventType.ADOLESCENT_HF_VISIT;
-        } else {
+        } else if (ChildDao.isChildClient(baseEntityId)){
             return CoreConstants.EventType.CHILD_HF_VISIT;
+        }else {
+            return CoreConstants.EventType.FACILITY_VISIT;
         }
     }
 
