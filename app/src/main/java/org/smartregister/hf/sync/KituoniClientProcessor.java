@@ -3,10 +3,8 @@ package org.smartregister.hf.sync;
 import android.content.ContentValues;
 import android.content.Context;
 
-import org.apache.commons.lang3.StringUtils;
 import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.util.Constants;
-import org.smartregister.clientandeventmodel.DateUtil;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.domain.db.Client;
@@ -14,15 +12,12 @@ import org.smartregister.domain.db.Event;
 import org.smartregister.domain.db.EventClient;
 import org.smartregister.domain.db.Obs;
 import org.smartregister.domain.jsonmapping.ClientClassification;
-import org.smartregister.domain.jsonmapping.Column;
 import org.smartregister.domain.jsonmapping.Table;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.immunization.service.intent.RecurringIntentService;
 import org.smartregister.immunization.service.intent.VaccineIntentService;
 import org.smartregister.sync.ClientProcessorForJava;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

@@ -19,7 +19,7 @@ import timber.log.Timber;
 /**
  * Author : Isaya Mollel on 06/09/2019.
  */
-public class AddoJobCreator implements JobCreator {
+public class KituoniJobCreator implements JobCreator {
 
     @Nullable
     @Override
