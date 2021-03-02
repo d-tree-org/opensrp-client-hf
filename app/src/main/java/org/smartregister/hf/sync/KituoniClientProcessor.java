@@ -31,7 +31,7 @@ import java.util.Locale;
 
 import timber.log.Timber;
 
-public class AddoClientProcessor extends ClientProcessorForJava {
+public class KituoniClientProcessor extends ClientProcessorForJava {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS", Locale.getDefault());
 
@@ -39,13 +39,13 @@ public class AddoClientProcessor extends ClientProcessorForJava {
     private Table vaccineTable;
     private Table serviceTable;
 
-    private AddoClientProcessor(Context context) {
+    private KituoniClientProcessor(Context context) {
         super(context);
     }
 
     public static ClientProcessorForJava getInstance(Context context) {
         if (instance == null) {
-            instance = new AddoClientProcessor(context);
+            instance = new KituoniClientProcessor(context);
         }
         return instance;
     }
@@ -139,12 +139,6 @@ public class AddoClientProcessor extends ClientProcessorForJava {
         }
     }
 
-    private void processHomeVisit(EventClient eventClient) {
-        List<Obs> observations = eventClient.getEvent().getObs();
-
-//        ChildUtils.addToHomeVisitTable(eventClient.getEvent().getBaseEntityId(), eventClient.getEvent().getFormSubmissionId(), observations);
-    }
-
     private void processVaccineCardEvent(EventClient eventClient) {
         List<Obs> observations = eventClient.getEvent().getObs();
 //        ChildUtils.addToChildTable(eventClient.getEvent().getBaseEntityId(), observations);
@@ -162,229 +156,12 @@ public class AddoClientProcessor extends ClientProcessorForJava {
     // possible to delegate
     private Boolean processVaccine(EventClient vaccine, Table vaccineTable, boolean outOfCatchment) {
         return true;
-
-//        try {
-//            if (vaccine == null || vaccine.getEvent() == null) {
-//                return false;
-//            }
-//
-//            if (vaccineTable == null) {
-//                return false;
-//            }
-//
-//            Timber.d("Starting processVaccine table: " + vaccineTable.name);
-//
-//            ContentValues contentValues = processCaseModel(vaccine, vaccineTable);
-//
-//            // updateFamilyRelations the values to db
-//            if (contentValues != null && contentValues.size() > 0) {
-//                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//                Date date = simpleDateFormat.parse(contentValues.getAsString(VaccineRepository.DATE));
-//
-//                VaccineRepository vaccineRepository = ChwApplication.getInstance().vaccineRepository();
-//                Vaccine vaccineObj = new Vaccine();
-//                vaccineObj.setBaseEntityId(contentValues.getAsString(VaccineRepository.BASE_ENTITY_ID));
-//                vaccineObj.setName(contentValues.getAsString(VaccineRepository.NAME));
-//                if (contentValues.containsKey(VaccineRepository.CALCULATION)) {
-//                    vaccineObj.setCalculation(parseInt(contentValues.getAsString(VaccineRepository.CALCULATION)));
-//                }
-//                vaccineObj.setDate(date);
-//                vaccineObj.setAnmId(contentValues.getAsString(VaccineRepository.ANMID));
-//                vaccineObj.setLocationId(contentValues.getAsString(VaccineRepository.LOCATION_ID));
-//                vaccineObj.setSyncStatus(VaccineRepository.TYPE_Synced);
-//                vaccineObj.setFormSubmissionId(vaccine.getEvent().getFormSubmissionId());
-//                vaccineObj.setEventId(vaccine.getEvent().getEventId());
-//                vaccineObj.setOutOfCatchment(outOfCatchment ? 1 : 0);
-//
-//                String createdAtString = contentValues.getAsString(VaccineRepository.CREATED_AT);
-//                Date createdAt = getDate(createdAtString);
-//                vaccineObj.setCreatedAt(createdAt);
-//
-//                addVaccine(vaccineRepository, vaccineObj);
-//
-//                Timber.d("Ending processVaccine table: " + vaccineTable.name);
-//            }
-//            return true;
-//
-//        } catch (Exception e) {
-//
-//            Timber.e(e, "Process Vaccine Error");
-//            return null;
-//        }
     }
 
     // possible to delegate
     private Boolean processService(EventClient service, Table serviceTable) {
         return true;
-//
-//        try {
-//
-//            if (service == null || service.getEvent() == null) {
-//                return false;
-//            }
-//
-//            if (serviceTable == null) {
-//                return false;
-//            }
-//
-//            Timber.d("Starting processService table: " + serviceTable.name);
-//
-//            ContentValues contentValues = processCaseModel(service, serviceTable);
-//
-//            // updateFamilyRelations the values to db
-//            if (contentValues != null && contentValues.size() > 0) {
-//                String name = contentValues.getAsString(RecurringServiceTypeRepository.NAME);
-//
-//                if (StringUtils.isNotBlank(name)) {
-//                    name = name.replaceAll("_", " ").replace("dose", "").trim();
-//                }
-//
-//
-//                String eventDateStr = contentValues.getAsString(RecurringServiceRecordRepository.DATE);
-//                Date date = getDate(eventDateStr);
-//                String value = null;
-//
-//                if (StringUtils.containsIgnoreCase(name, "Exclusive breastfeeding")) {
-//                    value = contentValues.getAsString(RecurringServiceRecordRepository.VALUE);
-//                }
-//
-//                RecurringServiceTypeRepository recurringServiceTypeRepository = ImmunizationLibrary.getInstance().getInstance().recurringServiceTypeRepository();
-//                List<ServiceType> serviceTypeList = recurringServiceTypeRepository.searchByName(name);
-//                if (serviceTypeList == null || serviceTypeList.isEmpty()) {
-//                    return false;
-//                }
-//
-//                if (date == null) {
-//                    return false;
-//                }
-//
-//                RecurringServiceRecordRepository recurringServiceRecordRepository = ImmunizationLibrary.getInstance().getInstance().recurringServiceRecordRepository();
-//                ServiceRecord serviceObj = new ServiceRecord();
-//                serviceObj.setBaseEntityId(contentValues.getAsString(RecurringServiceRecordRepository.BASE_ENTITY_ID));
-//                serviceObj.setName(name);
-//                serviceObj.setDate(date);
-//                serviceObj.setAnmId(contentValues.getAsString(RecurringServiceRecordRepository.ANMID));
-//                serviceObj.setLocationId(contentValues.getAsString(RecurringServiceRecordRepository.LOCATION_ID));
-//                serviceObj.setSyncStatus(RecurringServiceRecordRepository.TYPE_Synced);
-//                serviceObj.setFormSubmissionId(service.getEvent().getFormSubmissionId());
-//                serviceObj.setEventId(service.getEvent().getEventId()); //FIXME hard coded id
-//                serviceObj.setValue(value);
-//                serviceObj.setRecurringServiceId(serviceTypeList.get(0).getId());
-//
-//                String createdAtString = contentValues.getAsString(RecurringServiceRecordRepository.CREATED_AT);
-//                Date createdAt = getDate(createdAtString);
-//                serviceObj.setCreatedAt(createdAt);
-//
-//                recurringServiceRecordRepository.add(serviceObj);
-//
-//                Timber.d("Ending processService table: " + serviceTable.name);
-//            }
-//            return true;
-//
-//        } catch (Exception e) {
-//            Timber.e(e, "Process Service Error");
-//            return null;
-//        }
     }
-
-    private Integer parseInt(String string) {
-        try {
-            return Integer.valueOf(string);
-        } catch (NumberFormatException e) {
-            Timber.e(e);
-        }
-        return null;
-    }
-
-    private Float parseFloat(String string) {
-        try {
-            return Float.valueOf(string);
-        } catch (NumberFormatException e) {
-            Timber.e(e);
-        }
-        return null;
-    }
-
-    private Date getDate(String eventDateStr) {
-        Date date = null;
-        if (StringUtils.isNotBlank(eventDateStr)) {
-            try {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ");
-                date = dateFormat.parse(eventDateStr);
-            } catch (ParseException e) {
-                try {
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-                    date = dateFormat.parse(eventDateStr);
-                } catch (ParseException pe) {
-                    try {
-                        date = DateUtil.parseDate(eventDateStr);
-                    } catch (ParseException pee) {
-                        Timber.e(pee, pee.toString());
-                    }
-                }
-            }
-        }
-        return date;
-    }
-
-    private ContentValues processCaseModel(EventClient eventClient, Table table) {
-        try {
-            List<Column> columns = table.columns;
-            ContentValues contentValues = new ContentValues();
-
-            for (Column column : columns) {
-                processCaseModel(eventClient.getEvent(), eventClient.getClient(), column, contentValues);
-            }
-
-            return contentValues;
-        } catch (Exception e) {
-            Timber.e(e);
-        }
-        return null;
-    }
-
-//    public static void addVaccine(VaccineRepository vaccineRepository, Vaccine vaccine) {
-//        try {
-//            if (vaccineRepository == null || vaccine == null) {
-//                return;
-//            }
-//
-//            // Add the vaccine
-//            vaccineRepository.add(vaccine);
-//
-//            String name = vaccine.getName();
-//            if (StringUtils.isBlank(name)) {
-//                return;
-//            }
-//
-//            // Update vaccines in the same group where either can be given
-//            // For example measles 1 / mr 1
-//            name = VaccineRepository.removeHyphen(name);
-//            String ftsVaccineName = null;
-//
-//            if (VaccineRepo.Vaccine.measles1.display().equalsIgnoreCase(name)) {
-//                ftsVaccineName = VaccineRepo.Vaccine.mr1.display();
-//            } else if (VaccineRepo.Vaccine.mr1.display().equalsIgnoreCase(name)) {
-//                ftsVaccineName = VaccineRepo.Vaccine.measles1.display();
-//            } else if (VaccineRepo.Vaccine.measles2.display().equalsIgnoreCase(name)) {
-//                ftsVaccineName = VaccineRepo.Vaccine.mr2.display();
-//            } else if (VaccineRepo.Vaccine.mr2.display().equalsIgnoreCase(name)) {
-//                ftsVaccineName = VaccineRepo.Vaccine.measles2.display();
-//            }
-//
-//            if (ftsVaccineName != null) {
-//                ftsVaccineName = VaccineRepository.addHyphen(ftsVaccineName.toLowerCase());
-//                Vaccine ftsVaccine = new Vaccine();
-//                ftsVaccine.setBaseEntityId(vaccine.getBaseEntityId());
-//                ftsVaccine.setName(ftsVaccineName);
-//                vaccineRepository.updateFtsSearch(ftsVaccine);
-//            }
-//
-//        } catch (Exception e) {
-//            Timber.e(e);
-//        }
-//
-//    }
 
     private void processRemoveMember(String baseEntityId, Date eventDate) {
 
