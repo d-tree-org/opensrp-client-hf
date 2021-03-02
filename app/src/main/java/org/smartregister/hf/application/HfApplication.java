@@ -16,10 +16,10 @@ import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.activity.FamilyProfileActivity;
 import org.smartregister.hf.activity.LoginActivity;
 import org.smartregister.hf.helper.RulesEngineHelper;
-import org.smartregister.hf.job.AddoJobCreator;
+import org.smartregister.hf.job.KituoniJobCreator;
 import org.smartregister.hf.repository.AddoRepository;
 import org.smartregister.hf.service.AddoAuthorizationService;
-import org.smartregister.hf.sync.AddoClientProcessor;
+import org.smartregister.hf.sync.KituoniClientProcessor;
 import org.smartregister.hf.util.ChildDBConstants;
 import org.smartregister.hf.util.Constants;
 import org.smartregister.hf.util.CoreConstants;
@@ -93,13 +93,13 @@ public class HfApplication extends DrishtiApplication {
         ConfigurableViewsLibrary.init(context);
         FamilyLibrary.init(context, getMetadata(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
-        FamilyLibrary.getInstance().setClientProcessorForJava(AddoClientProcessor.getInstance(getApplicationContext()));
+        FamilyLibrary.getInstance().setClientProcessorForJava(KituoniClientProcessor.getInstance(getApplicationContext()));
         SimPrintsLibrary.init(mInstance, BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_MODULE_ID, getRepository());
         AncLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
         this.jsonSpecHelper = new JsonSpecHelper(this);
 
-        JobManager.create(this).addJobCreator(new AddoJobCreator());
+        JobManager.create(this).addJobCreator(new KituoniJobCreator());
 
         //initOfflineSchedules();
         //scheduleJobs();
@@ -235,7 +235,7 @@ public class HfApplication extends DrishtiApplication {
 
     public static ClientProcessorForJava getClientProcessor(android.content.Context context) {
         if (clientProcessor == null) {
-            clientProcessor = AddoClientProcessor.getInstance(context);
+            clientProcessor = KituoniClientProcessor.getInstance(context);
             //clientProcessor = FamilyLibrary.getInstance().getClientProcessorForJava();
         }
         return clientProcessor;
