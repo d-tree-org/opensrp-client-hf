@@ -6,6 +6,7 @@ import android.os.Build;
 
 import com.evernote.android.job.JobManager;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import org.smartregister.AllConstants;
@@ -16,10 +17,10 @@ import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.activity.FamilyProfileActivity;
 import org.smartregister.hf.activity.LoginActivity;
 import org.smartregister.hf.helper.RulesEngineHelper;
-import org.smartregister.hf.job.AddoJobCreator;
+import org.smartregister.hf.job.KituoniJobCreator;
 import org.smartregister.hf.repository.AddoRepository;
-import org.smartregister.hf.service.AddoAuthorizationService;
-import org.smartregister.hf.sync.AddoClientProcessor;
+import org.smartregister.hf.service.KituoniAuthorizationService;
+import org.smartregister.hf.sync.KituoniClientProcessor;
 import org.smartregister.hf.util.ChildDBConstants;
 import org.smartregister.hf.util.Constants;
 import org.smartregister.hf.util.CoreConstants;
@@ -58,7 +59,7 @@ public class HfApplication extends DrishtiApplication {
     private static CommonFtsObject commonFtsObject;
     private static ClientProcessorForJava clientProcessor;
     private RulesEngineHelper rulesEngineHelper;
-
+    private static FirebaseAnalytics mFirebaseAnalytics;
     public static synchronized HfApplication getInstance() {
         return (HfApplication) mInstance;
     }
@@ -81,10 +82,13 @@ public class HfApplication extends DrishtiApplication {
         FirebaseApp.initializeApp(getApplicationContext());
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
 
+        // Innitialize Firebase Analytics instance
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
 
         //Initialize Modules
         P2POptions p2POptions = new P2POptions(true);
-        p2POptions.setAuthorizationService(new AddoAuthorizationService());
+        p2POptions.setAuthorizationService(new KituoniAuthorizationService());
 
         CoreLibrary.init(context, new HfSyncConfiguration(), BuildConfig.BUILD_TIMESTAMP, p2POptions);
         CoreLibrary.getInstance().setEcClientFieldsFile(Constants.EC_CLIENT_FIELDS);
@@ -93,13 +97,13 @@ public class HfApplication extends DrishtiApplication {
         ConfigurableViewsLibrary.init(context);
         FamilyLibrary.init(context, getMetadata(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
-        FamilyLibrary.getInstance().setClientProcessorForJava(AddoClientProcessor.getInstance(getApplicationContext()));
+        FamilyLibrary.getInstance().setClientProcessorForJava(KituoniClientProcessor.getInstance(getApplicationContext()));
         SimPrintsLibrary.init(mInstance, BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_MODULE_ID, getRepository());
         AncLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
         this.jsonSpecHelper = new JsonSpecHelper(this);
 
-        JobManager.create(this).addJobCreator(new AddoJobCreator());
+        JobManager.create(this).addJobCreator(new KituoniJobCreator());
 
         //initOfflineSchedules();
         //scheduleJobs();
@@ -155,6 +159,13 @@ public class HfApplication extends DrishtiApplication {
             Timber.e(e);
         }
         return repository;
+    }
+
+    public FirebaseAnalytics getFirebaseAnalytics(){
+        if (mFirebaseAnalytics == null)
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        return mFirebaseAnalytics;
     }
 
     public void notifyAppContextChange() {
@@ -235,7 +246,7 @@ public class HfApplication extends DrishtiApplication {
 
     public static ClientProcessorForJava getClientProcessor(android.content.Context context) {
         if (clientProcessor == null) {
-            clientProcessor = AddoClientProcessor.getInstance(context);
+            clientProcessor = KituoniClientProcessor.getInstance(context);
             //clientProcessor = FamilyLibrary.getInstance().getClientProcessorForJava();
         }
         return clientProcessor;

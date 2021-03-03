@@ -517,8 +517,8 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
             case DBConstants.KEY.FAMILY_SOURCE_INCOME:
                 jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, Utils.getValue(client.getColumnmaps(), DBConstants.KEY.FAMILY_SOURCE_INCOME, false));
                 break;
-            case AddoDBConstants.NEAREST_HEALTH_FACILITY:
-                jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, Utils.getValue(client.getColumnmaps(), AddoDBConstants.NEAREST_HEALTH_FACILITY, false));
+            case KituoniDBConstants.NEAREST_HEALTH_FACILITY:
+                jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, Utils.getValue(client.getColumnmaps(), KituoniDBConstants.NEAREST_HEALTH_FACILITY, false));
                 break;
             case DBConstants.KEY.GPS:
                 jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, Utils.getValue(client.getColumnmaps(), DBConstants.KEY.GPS, false));

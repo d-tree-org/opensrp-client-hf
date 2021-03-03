@@ -524,15 +524,15 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
         JSON_DB_MAP = new HashMap<>();
         JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.SEX, DBConstants.KEY.GENDER);
         JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.NATIONAL_ID, org.smartregister.hf.util.Constants.JsonAssets.NATIONAL_ID);
-        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.VOTER_ID, AddoDBConstants.VOTER_ID);
-        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.DRIVER_LICENSE, AddoDBConstants.DRIVER_LICENSE);
-        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.PASSPORT, AddoDBConstants.PASSPORT);
-        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.INSURANCE_PROVIDER, AddoDBConstants.INSURANCE_PROVIDER);
-        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.INSURANCE_PROVIDER_OTHER, AddoDBConstants.INSURANCE_PROVIDER_OTHER);
-        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.INSURANCE_PROVIDER_NUMBER,AddoDBConstants.INSURANCE_PROVIDER_NUMBER);
-        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.DISABILITIES, AddoDBConstants.DISABILITIES);
-        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.DISABILITY_TYPE, AddoDBConstants.DISABILITY_TYPE);
-        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.OTHER_LEADER, AddoDBConstants.OTHER_LEADER);
+        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.VOTER_ID, KituoniDBConstants.VOTER_ID);
+        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.DRIVER_LICENSE, KituoniDBConstants.DRIVER_LICENSE);
+        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.PASSPORT, KituoniDBConstants.PASSPORT);
+        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.INSURANCE_PROVIDER, KituoniDBConstants.INSURANCE_PROVIDER);
+        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.INSURANCE_PROVIDER_OTHER, KituoniDBConstants.INSURANCE_PROVIDER_OTHER);
+        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.INSURANCE_PROVIDER_NUMBER, KituoniDBConstants.INSURANCE_PROVIDER_NUMBER);
+        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.DISABILITIES, KituoniDBConstants.DISABILITIES);
+        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.DISABILITY_TYPE, KituoniDBConstants.DISABILITY_TYPE);
+        JSON_DB_MAP.put(org.smartregister.hf.util.Constants.JsonAssets.OTHER_LEADER, KituoniDBConstants.OTHER_LEADER);
 
         // get the event and the client from ec model
         try{
@@ -766,9 +766,9 @@ public class JsonFormUtils extends org.smartregister.family.util.JsonFormUtils {
 
                 break;
 
-            case AddoDBConstants.NEAREST_HEALTH_FACILITY:
+            case KituoniDBConstants.NEAREST_HEALTH_FACILITY:
 
-                jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, Utils.getValue(client.getColumnmaps(), AddoDBConstants.NEAREST_HEALTH_FACILITY, false));
+                jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, Utils.getValue(client.getColumnmaps(), KituoniDBConstants.NEAREST_HEALTH_FACILITY, false));
 
                 break;
 
