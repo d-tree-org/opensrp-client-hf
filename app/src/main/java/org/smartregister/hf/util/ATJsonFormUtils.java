@@ -39,15 +39,15 @@ public class ATJsonFormUtils {
         JSON_DB_MAP = new HashMap<>();
         JSON_DB_MAP.put(CoreConstants.JsonAssets.SEX, DBConstants.KEY.GENDER);
         JSON_DB_MAP.put(CoreConstants.JsonAssets.NATIONAL_ID, CoreConstants.JsonAssets.NATIONAL_ID);
-        JSON_DB_MAP.put(CoreConstants.JsonAssets.VOTER_ID, AddoDBConstants.VOTER_ID);
-        JSON_DB_MAP.put(CoreConstants.JsonAssets.DRIVER_LICENSE, AddoDBConstants.DRIVER_LICENSE);
-        JSON_DB_MAP.put(CoreConstants.JsonAssets.PASSPORT, AddoDBConstants.PASSPORT);
-        JSON_DB_MAP.put(CoreConstants.JsonAssets.INSURANCE_PROVIDER, AddoDBConstants.INSURANCE_PROVIDER);
-        JSON_DB_MAP.put(CoreConstants.JsonAssets.INSURANCE_PROVIDER_OTHER, AddoDBConstants.INSURANCE_PROVIDER_OTHER);
-        JSON_DB_MAP.put(CoreConstants.JsonAssets.INSURANCE_PROVIDER_NUMBER, AddoDBConstants.INSURANCE_PROVIDER_NUMBER);
-        JSON_DB_MAP.put(CoreConstants.JsonAssets.DISABILITIES, AddoDBConstants.DISABILITIES);
-        JSON_DB_MAP.put(CoreConstants.JsonAssets.DISABILITY_TYPE, AddoDBConstants.DISABILITY_TYPE);
-        JSON_DB_MAP.put(CoreConstants.JsonAssets.OTHER_LEADER, AddoDBConstants.OTHER_LEADER);
+        JSON_DB_MAP.put(CoreConstants.JsonAssets.VOTER_ID, KituoniDBConstants.VOTER_ID);
+        JSON_DB_MAP.put(CoreConstants.JsonAssets.DRIVER_LICENSE, KituoniDBConstants.DRIVER_LICENSE);
+        JSON_DB_MAP.put(CoreConstants.JsonAssets.PASSPORT, KituoniDBConstants.PASSPORT);
+        JSON_DB_MAP.put(CoreConstants.JsonAssets.INSURANCE_PROVIDER, KituoniDBConstants.INSURANCE_PROVIDER);
+        JSON_DB_MAP.put(CoreConstants.JsonAssets.INSURANCE_PROVIDER_OTHER, KituoniDBConstants.INSURANCE_PROVIDER_OTHER);
+        JSON_DB_MAP.put(CoreConstants.JsonAssets.INSURANCE_PROVIDER_NUMBER, KituoniDBConstants.INSURANCE_PROVIDER_NUMBER);
+        JSON_DB_MAP.put(CoreConstants.JsonAssets.DISABILITIES, KituoniDBConstants.DISABILITIES);
+        JSON_DB_MAP.put(CoreConstants.JsonAssets.DISABILITY_TYPE, KituoniDBConstants.DISABILITY_TYPE);
+        JSON_DB_MAP.put(CoreConstants.JsonAssets.OTHER_LEADER, KituoniDBConstants.OTHER_LEADER);
     }
 
     public JSONObject getAutoJsonEditMemberFormString(String title, String formName, Context context, CommonPersonObjectClient client, String eventType, String familyName, boolean isPrimaryCaregiver) {

@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * Author : Isaya Mollel on 2019-10-18.
  */
-public class AddoAuthorizationService implements P2PAuthorizationService {
+public class KituoniAuthorizationService implements P2PAuthorizationService {
 
     private Map<String, Object> authorizationDetails = new HashMap<>();
 
