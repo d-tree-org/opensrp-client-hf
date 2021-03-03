@@ -1,6 +1,6 @@
 package org.smartregister.hf.util;
 
-public interface AddoDBConstants {
+public interface KituoniDBConstants {
 
     String VOTER_ID = "voter_id";
     String DRIVER_LICENSE = "driver_license";

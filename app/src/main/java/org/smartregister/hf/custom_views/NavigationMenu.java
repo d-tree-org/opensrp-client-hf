@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +25,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.ybq.android.spinkit.style.FadingCircle;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.smartregister.hf.R;
 import org.smartregister.hf.adapter.NavigationAdapter;
 import org.smartregister.hf.application.HfApplication;
@@ -37,6 +41,7 @@ import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.util.LangUtils;
 
 import java.lang.ref.WeakReference;
+import java.sql.Timestamp;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -381,6 +386,14 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         if (activityWeakReference.get() != null && !activityWeakReference.get().isDestroyed()) {
             mPresenter.refreshNavigationCount(activityWeakReference.get());
         }
+
+        DateTime now = new DateTime();
+
+        //Log on firebase analytics that the sync has successfully been completed
+        Bundle params = new Bundle();
+        params.putString("provider_id", HfApplication.getInstance().getContext().allSharedPreferences().fetchRegisteredANM());
+        params.putString("timestamp", now.toString());
+        HfApplication.getInstance().getFirebaseAnalytics().logEvent("sync_completed", params);
 
     }
 
