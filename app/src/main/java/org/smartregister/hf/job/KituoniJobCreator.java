@@ -35,6 +35,8 @@ public class KituoniJobCreator implements JobCreator {
                 return new ValidateSyncDataServiceJob();
             case ImageUploadServiceJob.TAG:
                 return new ImageUploadServiceJob();
+            case KituoniVisitServiceJob.TAG:
+                return new KituoniVisitServiceJob();
             case P2pServiceJob.TAG:
                 return new P2pServiceJob();
             case KituoniTaskServiceJob.TAG:
