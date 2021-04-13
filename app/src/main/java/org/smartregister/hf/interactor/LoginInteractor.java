@@ -2,6 +2,7 @@ package org.smartregister.hf.interactor;
 
 import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.job.KituoniTaskServiceJob;
+import org.smartregister.hf.job.KituoniVisitServiceJob;
 import org.smartregister.job.SyncServiceJob;
 import org.smartregister.login.interactor.BaseLoginInteractor;
 import org.smartregister.view.contract.BaseLoginContract;
@@ -30,5 +31,6 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
     protected void scheduleJobsImmediately() {
         super.scheduleJobsImmediately();
         KituoniTaskServiceJob.scheduleJobImmediately(KituoniTaskServiceJob.TAG);
+        KituoniVisitServiceJob.scheduleJobImmediately(KituoniVisitServiceJob.TAG);
     }
 }
