@@ -43,7 +43,6 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
     private TextView tvNoVillage;
     private EmptystateView emptystateView;
 
-    private TextView totalReferralCount;
     private TextView threeDaystodayReferralCount;
     private TextView attendedReferralCount;
 
@@ -70,7 +69,6 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
             titleView.setVisibility(View.GONE);
         }
 
-        totalReferralCount = view.findViewById(R.id.total_referrals_count);
         threeDaystodayReferralCount = view.findViewById(R.id.three_days_total_referral_count);
         attendedReferralCount = view.findViewById(R.id.attended_referral_count);
 
@@ -140,11 +138,9 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
     }
 
     private void getReferralCount(){
-        int totalCount = TaksUtils.getReferralCount();
         int todayCount = TaksUtils.getTodayReferrals();
         int attended = TaksUtils.getAttendedReferrals();
 
-        totalReferralCount.setText(totalCount+"");
         threeDaystodayReferralCount.setText(todayCount+"");
         attendedReferralCount.setText(attended+"");
     }
