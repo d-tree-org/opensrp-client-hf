@@ -55,6 +55,30 @@ public class TaksUtils {
         return 0;
     }
 
+    public static int getLastThreeDaysTotalReferralCount(){
+
+        Cursor cursor = null;
+
+        String q = "select * from task " +
+                "where status = '"+ Task.TaskStatus.READY +"' and " +
+                "business_status = 'Referred' and " +
+                "datetime(authored_on/1000, 'unixepoch') > date('now', 'start of day', '-2 days')";
+
+        try {
+            cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
+            cursor.moveToFirst();
+            return cursor.getCount();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            //be a good citizen
+            if (cursor != null){
+                cursor.close();
+            }
+        }
+        return 0;
+    }
+
     public static int getAttendedReferrals(){
         Cursor cursor = null;
         DateTime today = new DateTime();
@@ -63,7 +87,7 @@ public class TaksUtils {
         try {
             String q = "select * from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"')" +
                     " AND business_status = 'Referred' " +
-                    " AND authored_on > "+startOfDay.getMillis();
+                    " AND last_modified > "+startOfDay.getMillis();
             cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
             cursor.moveToFirst();
             return cursor.getCount();
