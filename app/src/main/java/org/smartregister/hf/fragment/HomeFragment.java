@@ -14,12 +14,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.common.api.internal.TaskUtil;
+
 import org.smartregister.hf.R;
 import org.smartregister.hf.activity.HomeActivity;
 import org.smartregister.hf.adapter.AddoLocationRecyclerViewProviderAdapter;
 import org.smartregister.hf.contract.AddoHomeFragmentContract;
 import org.smartregister.hf.custom_views.NavigationMenu;
 import org.smartregister.hf.model.AddoHomeFragmentModel;
+import org.smartregister.hf.model.DashboardDataModel;
 import org.smartregister.hf.presenter.AddoHomeFragmentPresenter;
 import org.smartregister.hf.util.TaksUtils;
 import org.smartregister.hf.view.EmptystateView;
@@ -134,15 +137,13 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getReferralCount();
+        presenter().getDashboardData();
     }
 
-    private void getReferralCount(){
-        int todayCount = TaksUtils.getTodayReferrals();
-        int attended = TaksUtils.getAttendedReferrals();
-
-        threeDaystodayReferralCount.setText(todayCount+"");
-        attendedReferralCount.setText(attended+"");
+    @Override
+    public void showDashboardInformation(DashboardDataModel data) {
+        threeDaystodayReferralCount.setText(String.valueOf(data.getLastThreeDaysReferralCount()));
+        attendedReferralCount.setText(String.valueOf(data.getReferralsAttendedTodayCount()));
     }
 
     @Override
