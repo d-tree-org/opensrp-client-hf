@@ -16,8 +16,8 @@
 
     <string name="select_village">Chagua kijiji cha mteja kutoka kwenye listi</string>
     <string name="total_number_referrals">Rufaa \nZote</string>
-    <string name="today_number_referrals">Rufaa za \nLeo</string>
-    <string name="attended_referrals">Zilizofanyiwa \nKazi</string>
+    <string name="today_number_referrals">Rufaa tangu siku tatu zilizopita</string>
+    <string name="attended_referrals">Rufaa zilizofanyiwa kazi leo</string>
     <string name="village_name">Jina la Kijiji</string>
     <string name="patient_name_age">Jina, Umri</string>
     <string name="has_referral">Ana Rufaa</string>
