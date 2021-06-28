@@ -14,12 +14,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.common.api.internal.TaskUtil;
+
 import org.smartregister.hf.R;
 import org.smartregister.hf.activity.HomeActivity;
 import org.smartregister.hf.adapter.AddoLocationRecyclerViewProviderAdapter;
 import org.smartregister.hf.contract.AddoHomeFragmentContract;
 import org.smartregister.hf.custom_views.NavigationMenu;
 import org.smartregister.hf.model.AddoHomeFragmentModel;
+import org.smartregister.hf.model.DashboardDataModel;
 import org.smartregister.hf.presenter.AddoHomeFragmentPresenter;
 import org.smartregister.hf.util.TaksUtils;
 import org.smartregister.hf.view.EmptystateView;
@@ -43,8 +46,7 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
     private TextView tvNoVillage;
     private EmptystateView emptystateView;
 
-    private TextView totalReferralCount;
-    private TextView todayReferralCount;
+    private TextView threeDaystodayReferralCount;
     private TextView attendedReferralCount;
 
     @Override
@@ -70,8 +72,7 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
             titleView.setVisibility(View.GONE);
         }
 
-        totalReferralCount = view.findViewById(R.id.total_referrals_count);
-        todayReferralCount = view.findViewById(R.id.today_referral_count);
+        threeDaystodayReferralCount = view.findViewById(R.id.three_days_total_referral_count);
         attendedReferralCount = view.findViewById(R.id.attended_referral_count);
 
         tvNoVillage = view.findViewById(R.id.empty_view);
@@ -118,7 +119,7 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup
             container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_addo_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_hf_home, container, false);
         model = new ViewModelProvider(requireActivity(), new ViewModelProvider.Factory() {
             @NonNull
             @Override
@@ -136,17 +137,13 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getReferralCount();
+        presenter().getDashboardData();
     }
 
-    private void getReferralCount(){
-        int totalCount = TaksUtils.getReferralCount();
-        int todayCount = TaksUtils.getTodayReferrals();
-        int attended = TaksUtils.getAttendedReferrals();
-
-        totalReferralCount.setText(totalCount+"");
-        todayReferralCount.setText(todayCount+"");
-        attendedReferralCount.setText(attended+"");
+    @Override
+    public void showDashboardInformation(DashboardDataModel data) {
+        threeDaystodayReferralCount.setText(String.valueOf(data.getLastThreeDaysReferralCount()));
+        attendedReferralCount.setText(String.valueOf(data.getReferralsAttendedTodayCount()));
     }
 
     @Override

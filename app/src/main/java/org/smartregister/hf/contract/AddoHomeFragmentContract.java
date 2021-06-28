@@ -2,6 +2,7 @@ package org.smartregister.hf.contract;
 
 import org.smartregister.configurableviews.model.RegisterConfiguration;
 import org.smartregister.configurableviews.model.ViewConfiguration;
+import org.smartregister.hf.model.DashboardDataModel;
 import org.smartregister.view.contract.BaseRegisterFragmentContract;
 
 import java.util.List;
@@ -13,8 +14,9 @@ public interface AddoHomeFragmentContract {
 
         void initializeAdapter(Set<org.smartregister.configurableviews.model.View> visibleColumns);
 
-
         AddoHomeFragmentContract.Presenter presenter();
+
+        void showDashboardInformation(DashboardDataModel data);
 
     }
 
@@ -23,6 +25,8 @@ public interface AddoHomeFragmentContract {
         List<String> getLocations();
 
         void processViewConfigurations();
+
+        void getDashboardData();
 
     }
 
@@ -38,6 +42,10 @@ public interface AddoHomeFragmentContract {
     }
 
     interface Interactor {
+        void fetchDashboardData(InteractorCallback callback);
+    }
 
+    interface InteractorCallback {
+        void onDashboardDataFetched(DashboardDataModel dashboardData);
     }
 }

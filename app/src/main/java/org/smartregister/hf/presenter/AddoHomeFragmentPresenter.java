@@ -1,37 +1,46 @@
 package org.smartregister.hf.presenter;
 
 import org.smartregister.hf.contract.AddoHomeFragmentContract;
+import org.smartregister.hf.interactor.AddoHomeFragmentInteractor;
 import org.smartregister.hf.model.AddoHomeFragmentModel;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
 import org.smartregister.configurableviews.model.View;
+import org.smartregister.hf.model.DashboardDataModel;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class AddoHomeFragmentPresenter implements AddoHomeFragmentContract.Presenter {
+public class AddoHomeFragmentPresenter implements AddoHomeFragmentContract.Presenter, AddoHomeFragmentContract.InteractorCallback {
 
     protected WeakReference<AddoHomeFragmentContract.View> viewReference;
-
     protected AddoHomeFragmentContract.Model model;
-
     protected RegisterConfiguration config;
-
-
     protected Set<View> visibleColumns = new TreeSet<>();
-
     private String viewConfigurationIdentifier;
+    private AddoHomeFragmentContract.Interactor interactor;
 
     public AddoHomeFragmentPresenter(AddoHomeFragmentContract.View viewReference, AddoHomeFragmentContract.Model model,
                                      String viewConfigurationIdentifier) {
         this.viewReference = new WeakReference<>(viewReference);
         this.model = AddoHomeFragmentModel.getInstance();
         this.viewConfigurationIdentifier = viewConfigurationIdentifier;
+        this.interactor = new AddoHomeFragmentInteractor();
     }
 
     @Override
     public void processViewConfigurations() {
+    }
+
+    @Override
+    public void getDashboardData() {
+        interactor.fetchDashboardData(this);
+    }
+
+    @Override
+    public void onDashboardDataFetched(DashboardDataModel dashboardData) {
+        getView().showDashboardInformation(dashboardData);
     }
 
     private void setVisibleColumns(Set<org.smartregister.configurableviews.model.View> visibleColumns) {
@@ -49,17 +58,14 @@ public class AddoHomeFragmentPresenter implements AddoHomeFragmentContract.Prese
     public void initializeQueries(String s) {
 
     }
-
     @Override
     public void startSync() {
 
     }
-
     @Override
     public void searchGlobally(String s) {
 
     }
-
     @Override
     public List<String> getLocations() {
         return model.getAddoUserAllowedLocation();

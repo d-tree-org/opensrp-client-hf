@@ -18,6 +18,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:visibility="gone"
             android:layout_height="match_parent">
 
             <LinearLayout
@@ -52,6 +53,7 @@
 
         <View
             android:layout_width="1dp"
+            android:visibility="gone"
             android:layout_height="match_parent"
             android:background="@color/second_grey"
             android:layout_marginTop="42dp"
@@ -77,13 +79,15 @@
                     android:text="@string/today_number_referrals"
                     android:textSize="14sp"
                     android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
                     android:fontFamily="@font/google_sans_bold"
                     android:textColor="@color/white"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/today_referral_count"
+                    android:id="@+id/three_days_total_referral_count"
                     android:layout_marginTop="6dp"
                     android:text="0"
                     android:textSize="16sp"
@@ -120,6 +124,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/attended_referrals"
                     android:textSize="14sp"
+                    android:paddingRight="16dp"
+                    android:paddingLeft="16dp"
                     android:gravity="center"
                     android:fontFamily="@font/google_sans_bold"
                     android:textColor="@color/white"/>
