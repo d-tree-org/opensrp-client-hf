@@ -118,7 +118,7 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup
             container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_addo_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_hf_home, container, false);
         model = new ViewModelProvider(requireActivity(), new ViewModelProvider.Factory() {
             @NonNull
             @Override
