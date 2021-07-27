@@ -446,7 +446,7 @@
     <string name="referral_date">Date of Referral</string>
     <string name="referal_source">Referal Source</string>
     <string name="close_referral">Mark as Done</string>
-    <string name="capture_facility_visit"> Arrived </string>
+    <string name="capture_facility_visit"> Yes, Arrived </string>
     <string name="referral_details">Referral Details</string>
     <string name="select_the_person_message">Select the person to receive services</string>
 
@@ -454,5 +454,6 @@
     <string name="complete_referral_confirmation"> Has the client visited the health facility? </string>
 
     <string name="okay"> OK </string>
+    <string name="has_the_client_arrived_at_the_facility">Has the client arrived at the facility?</string>
 
 </resources>
