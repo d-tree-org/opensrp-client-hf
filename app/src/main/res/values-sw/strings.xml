@@ -55,10 +55,14 @@
     <string name="global_search">Tafuta kote</string>
 
     <string name="complete_referral"> Hakiki Tembeleo </string>
-    <string name="complete_referral_confirmation"> Je, mteja amefika katika kituo cha afya? </string>
+    <string name="complete_referral_confirmation"> Hakiki, mteja amefika katika kituo cha afya? </string>
 
-    <string name="cancel">HAPANA</string>
-    <string name="okay"> NDIO </string>
+    <string name="cancel">SITISHA</string>
+    <string name="okay"> SAWA </string>
+
+    <string name="no">HAPANA</string>
+    <string name="yes"> NDIO </string>
+
     <string name="has_the_client_arrived_at_the_facility"> Je, mteja amefika katika kituo cha kutolea huduma za afya?</string>
 
 </resources>
