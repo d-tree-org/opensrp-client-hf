@@ -149,12 +149,6 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
     }
 
     @Override
-    public void showDashboardInformation(DashboardDataModel data) {
-        //threeDaystodayReferralCount.setText(String.valueOf(data.getLastThreeDaysReferralCount()));
-        //attendedReferralCount.setText(String.valueOf(data.getReferralsAttendedTodayCount()));
-    }
-
-    @Override
     public void initializeAdapter
             (Set<org.smartregister.configurableviews.model.View> visibleColumns) {
     }
