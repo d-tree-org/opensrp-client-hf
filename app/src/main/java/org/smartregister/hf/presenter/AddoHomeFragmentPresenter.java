@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class AddoHomeFragmentPresenter implements AddoHomeFragmentContract.Presenter, AddoHomeFragmentContract.InteractorCallback {
+public class AddoHomeFragmentPresenter implements AddoHomeFragmentContract.Presenter{
 
     protected WeakReference<AddoHomeFragmentContract.View> viewReference;
     protected AddoHomeFragmentContract.Model model;
@@ -31,16 +31,6 @@ public class AddoHomeFragmentPresenter implements AddoHomeFragmentContract.Prese
 
     @Override
     public void processViewConfigurations() {
-    }
-
-    @Override
-    public void getDashboardData() {
-        interactor.fetchDashboardData(this);
-    }
-
-    @Override
-    public void onDashboardDataFetched(DashboardDataModel dashboardData) {
-        getView().showDashboardInformation(dashboardData);
     }
 
     private void setVisibleColumns(Set<org.smartregister.configurableviews.model.View> visibleColumns) {
