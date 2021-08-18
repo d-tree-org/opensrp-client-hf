@@ -147,8 +147,7 @@
     <string name="family">%s Family</string>
     <string name="remove_entire_family">Removing entire family</string>
     <string name="remove_warning_family">Are you sure you want to remove the %s Family\'s record? This will remove the family\'s entire record AND all of the %s family members\' health records from your device. This action cannot be undone.</string>
-    <string name="cancel">CANCEL</string>
-    <string name="submit">SUBMIT</string>
+
     <string name="profile_change_dialog_message">Before you remove this member, you must select a new family head.</string>
     <string name="select_caregiver">Select a new primary caregiver</string>
     <string name="select_family_head">Select a new family head</string>
@@ -286,8 +285,6 @@
     <string name="counseled">Counseled : </string>
     <string name="not_counseled">Not counseled : </string>
 
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
     <string name="device_to_device_sync">Device-to-device Sync</string>
 
     <!-- home visit strings-->
@@ -446,13 +443,21 @@
     <string name="referral_date">Date of Referral</string>
     <string name="referal_source">Referal Source</string>
     <string name="close_referral">Mark as Done</string>
-    <string name="capture_facility_visit"> Arrived </string>
+    <string name="capture_facility_visit"> Yes, Arrived </string>
     <string name="referral_details">Referral Details</string>
     <string name="select_the_person_message">Select the person to receive services</string>
 
     <string name="complete_referral"> Record Attendance </string>
-    <string name="complete_referral_confirmation"> Has the client visited the health facility? </string>
+    <string name="complete_referral_confirmation"> Confirming, Client has visited the health facility? </string>
 
+    <string name="submit">SUBMIT</string>
+
+    <string name="cancel"> CANCEL </string>
     <string name="okay"> OK </string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="has_the_client_arrived_at_the_facility">Has the client arrived at the facility?</string>
 
 </resources>

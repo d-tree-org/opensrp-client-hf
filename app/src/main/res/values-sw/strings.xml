@@ -41,7 +41,7 @@
     <string name="referral_date">Tarehe ya Rufaa</string>
     <string name="referal_source">Chanzo cha Rufaa</string>
     <string name="close_referral">Imefanyika</string>
-    <string name="capture_facility_visit"> Amefika </string>
+    <string name="capture_facility_visit"> Ndio, Amefika </string>
     <string name="referral_details">Taarifa za Rufaa</string>
 
     <string name="nav_logout_as">Ondoka kama</string>
@@ -55,9 +55,14 @@
     <string name="global_search">Tafuta kote</string>
 
     <string name="complete_referral"> Hakiki Tembeleo </string>
-    <string name="complete_referral_confirmation"> Je, mteja amefika katika kituo cha afya? </string>
+    <string name="complete_referral_confirmation"> Hakiki, mteja amefika katika kituo cha afya? </string>
 
-    <string name="cancel">HAPANA</string>
-    <string name="okay"> NDIO </string>
+    <string name="cancel">SITISHA</string>
+    <string name="okay"> SAWA </string>
+
+    <string name="no">HAPANA</string>
+    <string name="yes"> NDIO </string>
+
+    <string name="has_the_client_arrived_at_the_facility"> Je, mteja amefika katika kituo cha kutolea huduma za afya?</string>
 
 </resources>
