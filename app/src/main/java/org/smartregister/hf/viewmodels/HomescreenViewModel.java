@@ -8,6 +8,10 @@ import org.smartregister.hf.contract.AddoHomeFragmentContract;
 import org.smartregister.hf.interactor.AddoHomeFragmentInteractor;
 import org.smartregister.hf.model.DashboardDataModel;
 
+/**
+ * Author : Isaya Mollel on 2021-01-18.
+ */
+
 public class HomescreenViewModel extends ViewModel {
 
     private final MutableLiveData<String> selectedVillage = new MutableLiveData<String>();
