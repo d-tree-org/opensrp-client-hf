@@ -9,23 +9,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.common.api.internal.TaskUtil;
-
 import org.smartregister.hf.R;
-import org.smartregister.hf.activity.HomeActivity;
 import org.smartregister.hf.adapter.AddoLocationRecyclerViewProviderAdapter;
 import org.smartregister.hf.contract.AddoHomeFragmentContract;
 import org.smartregister.hf.custom_views.NavigationMenu;
 import org.smartregister.hf.model.AddoHomeFragmentModel;
 import org.smartregister.hf.model.DashboardDataModel;
 import org.smartregister.hf.presenter.AddoHomeFragmentPresenter;
-import org.smartregister.hf.util.TaksUtils;
 import org.smartregister.hf.view.EmptystateView;
+import org.smartregister.hf.viewmodels.HomescreenViewModel;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 import org.smartregister.view.fragment.BaseRegisterFragment;
@@ -42,12 +40,12 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<String> villageLocations = new ArrayList<>();
-    private HomeActivity.AddoHomeSharedViewModel model;
+    private HomescreenViewModel model;
     private TextView tvNoVillage;
     private EmptystateView emptystateView;
 
-    private TextView threeDaystodayReferralCount;
-    private TextView attendedReferralCount;
+    private TextView pastThreeDaysReferrals;
+    private TextView todaysAttendedReferrals;
 
     @Override
     public void setupViews(View view) {
@@ -72,8 +70,8 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
             titleView.setVisibility(View.GONE);
         }
 
-        threeDaystodayReferralCount = view.findViewById(R.id.three_days_total_referral_count);
-        attendedReferralCount = view.findViewById(R.id.attended_referral_count);
+        pastThreeDaysReferrals = view.findViewById(R.id.three_days_total_referral_count);
+        todaysAttendedReferrals = view.findViewById(R.id.attended_referral_count);
 
         tvNoVillage = view.findViewById(R.id.empty_view);
         emptystateView = view.findViewById(R.id.ev_no_villages);
@@ -124,9 +122,9 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                return (T) new HomeActivity.AddoHomeSharedViewModel();
+                return (T) new HomescreenViewModel();
             }
-        }).get(HomeActivity.AddoHomeSharedViewModel.class);
+        }).get(HomescreenViewModel.class);
         this.rootView = view;
         this.setupViews(view);
 
@@ -137,13 +135,23 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter().getDashboardData();
+        fetchDashboardMetrics();
+    }
+
+    private void fetchDashboardMetrics(){
+        model.getMetrics().observe(this, new Observer<DashboardDataModel>() {
+            @Override
+            public void onChanged(DashboardDataModel dashboardDataModel) {
+                pastThreeDaysReferrals.setText(String.valueOf(dashboardDataModel.getLastThreeDaysReferralCount()));
+                todaysAttendedReferrals.setText(String.valueOf(dashboardDataModel.getReferralsAttendedTodayCount()));
+            }
+        });
     }
 
     @Override
     public void showDashboardInformation(DashboardDataModel data) {
-        threeDaystodayReferralCount.setText(String.valueOf(data.getLastThreeDaysReferralCount()));
-        attendedReferralCount.setText(String.valueOf(data.getReferralsAttendedTodayCount()));
+        //threeDaystodayReferralCount.setText(String.valueOf(data.getLastThreeDaysReferralCount()));
+        //attendedReferralCount.setText(String.valueOf(data.getReferralsAttendedTodayCount()));
     }
 
     @Override
