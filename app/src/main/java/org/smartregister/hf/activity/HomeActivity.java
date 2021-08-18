@@ -63,11 +63,6 @@ public class HomeActivity extends BaseFamilyRegisterActivity {
         return new HomeFragment();
     }
 
-    /*@Override
-    protected Fragment[] getOtherFragments() {
-        return new Fragment[0];
-    }*/
-
     @Override
     protected Fragment[] getOtherFragments() {
 
