@@ -98,17 +98,4 @@ public class HomeActivity extends BaseFamilyRegisterActivity {
         }
     }
 
-    public static class AddoHomeSharedViewModel extends ViewModel {
-        private final MutableLiveData<String> selectedVillage = new MutableLiveData<String>();
-
-        public AddoHomeSharedViewModel() {}
-
-        public void setSelectedVillage(String village) {
-            selectedVillage.setValue(village);
-        }
-
-        public LiveData<String> getSelectedVillage() {
-            return selectedVillage;
-        }
-    }
 }
