@@ -22,4 +22,9 @@ public class AddoHomeFragmentInteractor implements AddoHomeFragmentContract.Inte
         callback.onDashboardDataFetched(dashboardData);
 
     }
+
+    public void fetchByVillageReferralCount(){
+
+    }
+
 }

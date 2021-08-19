@@ -75,9 +75,9 @@
             </RelativeLayout>
 
             <View
-                android:layout_width="2dp"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/primary_dark_color"
+                android:background="@color/second_grey"
                 android:layout_marginTop="42dp"
                 android:layout_marginBottom="42dp"
                 android:layout_marginLeft="8dp"
