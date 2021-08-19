@@ -459,5 +459,6 @@
     <string name="no">No</string>
 
     <string name="has_the_client_arrived_at_the_facility">Has the client arrived at the facility?</string>
+    <string name="referral_summary">Referral Summary</string>
 
 </resources>

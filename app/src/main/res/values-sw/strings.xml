@@ -64,5 +64,6 @@
     <string name="yes"> NDIO </string>
 
     <string name="has_the_client_arrived_at_the_facility"> Je, mteja amefika katika kituo cha kutolea huduma za afya?</string>
+    <string name="referral_summary">Takwimu za Rufaa</string>
 
 </resources>
