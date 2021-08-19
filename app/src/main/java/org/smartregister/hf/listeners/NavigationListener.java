@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import org.smartregister.hf.R;
 import org.smartregister.hf.activity.HomeActivity;
+import org.smartregister.hf.activity.ReportsActivity;
 import org.smartregister.hf.adapter.NavigationAdapter;
 import org.smartregister.hf.util.Constants;
 
@@ -33,14 +34,8 @@ public class NavigationListener implements View.OnClickListener {
                     case Constants.DrawerMenu.ALL_FAMILIES:
                         startRegisterActivity(HomeActivity.class);
                         break;
-                    case Constants.DrawerMenu.ANC:
-                        Toast.makeText(activity.getApplicationContext(), Constants.DrawerMenu.ANC, Toast.LENGTH_SHORT).show();
-                        break;
-                    case Constants.DrawerMenu.ANC_CLIENTS:
-                        Toast.makeText(activity.getApplicationContext(), Constants.DrawerMenu.ANC_CLIENTS, Toast.LENGTH_SHORT).show();
-                        break;
-                    case Constants.DrawerMenu.CHILD_CLIENTS:
-                        Toast.makeText(activity.getApplicationContext(), Constants.DrawerMenu.CHILD_CLIENTS, Toast.LENGTH_SHORT).show();
+                    case Constants.DrawerMenu.REPORTS:
+                        startRegisterActivity(ReportsActivity.class);
                         break;
                     default:
                         break;
