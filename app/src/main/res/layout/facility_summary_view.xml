@@ -39,45 +39,45 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_centerInParent="true"
                     android:gravity="center"
-                    android:layout_centerInParent="true">
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:src="@mipmap/ic_filter_list"/>
+                        android:src="@mipmap/ic_filter_list" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/today_number_referrals"
-                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/google_sans_regular"
                         android:gravity="center"
                         android:paddingLeft="16dp"
                         android:paddingRight="16dp"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/google_sans_regular"
-                        android:textColor="@color/white"/>
+                        android:text="@string/today_number_referrals"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/three_days_total_referral_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/three_days_total_referral_count"
                         android:layout_marginTop="6dp"
+                        android:fontFamily="@font/google_sans_bold"
                         android:text="0"
-                        android:textSize="18sp"
                         android:textColor="@color/white"
-                        android:fontFamily="@font/google_sans_bold"/>
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
             </RelativeLayout>
 
             <View
-                android:layout_width="1dp"
+                android:layout_width="2dp"
                 android:layout_height="match_parent"
-                android:background="@color/second_grey"
+                android:background="@color/primary_dark_color"
                 android:layout_marginTop="42dp"
                 android:layout_marginBottom="42dp"
                 android:layout_marginLeft="8dp"
