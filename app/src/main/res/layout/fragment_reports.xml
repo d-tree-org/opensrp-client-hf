@@ -31,7 +31,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/dashboard_fragment"
+        android:id="@+id/report_dashboard_fragment"
         android:background="@color/white"/>
 
     <RelativeLayout
