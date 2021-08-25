@@ -247,7 +247,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-immunization'
     }
 // New package from github 1.1.14-SNAPSHOT
-    implementation('org.smartregister:opensrp-client-simprints-riddler:1.2.1-RESEARCH-SNAPSHOT') {
+    implementation('org.smartregister:opensrp-client-simprints-riddler:1.2.6-RESEARCH-SNAPSHOT') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-family'
