@@ -22,6 +22,7 @@ import org.smartregister.view.customcontrols.FontVariant;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Set;
 
 public class ReportFragment extends BaseRegisterFragment implements ReportsFragmentContract.View {
@@ -30,7 +31,7 @@ public class ReportFragment extends BaseRegisterFragment implements ReportsFragm
 
     @Override
     public void setupViews(View view) {
-        super.setupViews(view);
+        rootView = view;
 
         Toolbar toolbar = view.findViewById(org.smartregister.R.id.register_toolbar);
         toolbar.setContentInsetsAbsolute(0, 0);
@@ -117,8 +118,11 @@ public class ReportFragment extends BaseRegisterFragment implements ReportsFragm
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        FragmentTransaction t = getActivity().getSupportFragmentManager().beginTransaction();
-        //Add reports dashboard
+        FragmentTransaction t = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+        ReportsDashboardFragment rdf = new ReportsDashboardFragment();
+        t.replace(R.id.report_dashboard_fragment, rdf);
+        t.addToBackStack(null);
+        t.commit();
     }
 
     @Override
@@ -137,7 +141,7 @@ public class ReportFragment extends BaseRegisterFragment implements ReportsFragm
 
     @Override
     protected int getLayout() {
-        return R.layout.reports_activity_fragment;
+        return R.layout.fragment_reports;
     }
 
     @Override
