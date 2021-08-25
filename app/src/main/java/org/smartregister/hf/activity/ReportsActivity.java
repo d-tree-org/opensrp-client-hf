@@ -48,7 +48,8 @@ public class ReportsActivity extends BaseRegisterActivity {
 
     @Override
     protected Fragment[] getOtherFragments() {
-        return new Fragment[0];
+        Fragment fragment = new ReportFragment();
+        return new Fragment[]{fragment};
     }
 
     @Override
