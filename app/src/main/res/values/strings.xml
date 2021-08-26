@@ -18,8 +18,9 @@
     <string name="search_results_return">Return to Search Results</string>
     <string name="global_search">Global Search</string>
 
-    <string name="all_ward_referrals"> All Ward Referrals </string>
-    <string name="all_ward_attended_referrals"> All Ward Attended Referrals </string>
+    <string name="all_ward_referrals"> All issued Referrals (Ward) </string>
+    <string name="all_ward_attended_referrals"> All Attended Referrals (Ward) </string>
+    <string name="all_ward_current_month_attended_referrals"> Current Month Attended Referrals (Ward) </string>
 
     <string name="title_family_detail">Family Detail</string>
     <string name="child_register_title">Child Clients</string>

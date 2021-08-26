@@ -73,8 +73,8 @@
     <string name="has_the_client_arrived_at_the_facility"> Je, mteja amefika katika kituo cha kutolea huduma za afya?</string>
 
 
-    <string name="all_ward_referrals"> Rufaa za kata nzima </string>
-
-    <string name="all_ward_attended_referrals"> Rufaa zilizohudumiwa kata nzima </string>
+    <string name="all_ward_referrals"> Rufaa zote zilizotolewa (Kata) </string>
+    <string name="all_ward_attended_referrals"> Rufaa zilizohudumiwa (Kata) </string>
+    <string name="all_ward_current_month_attended_referrals"> Rufaa zilizohudumiwa mwezi huu (Kata) </string>
 
 </resources>
