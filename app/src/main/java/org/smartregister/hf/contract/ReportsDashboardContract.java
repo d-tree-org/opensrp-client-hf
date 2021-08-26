@@ -2,6 +2,7 @@ package org.smartregister.hf.contract;
 
 import android.view.ViewGroup;
 
+import org.smartregister.reporting.contract.ReportContract;
 import org.smartregister.reporting.domain.IndicatorQuery;
 import org.smartregister.reporting.domain.IndicatorTally;
 import org.smartregister.reporting.domain.ReportIndicator;
@@ -27,12 +28,8 @@ public interface ReportsDashboardContract {
         void scheduleDailyTallyJob();
     }
 
-    public interface Model {
-        void addIndicator(ReportIndicator indicator);
+    public interface Model extends ReportContract.Model {
 
-        void addIndicatorQuery(IndicatorQuery query);
-
-        List<Map<String, IndicatorTally>> getIndicatorsDailyTallies();
     }
 
     public interface Presenter {
