@@ -149,6 +149,9 @@ public class ReportsDashboardFragment extends Fragment implements ReportsDashboa
         NumericDisplayModel allAttendedReferralsWard = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.allAttendedReferrals, R.string.all_ward_attended_referrals, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), allAttendedReferralsWard).createView());
 
+        NumericDisplayModel currentMonthAttendedReferralsWard = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.currentMonthAttendedReferrals, R.string.all_ward_current_month_attended_referrals, indicatorTallies);
+        mainLayout.addView(new NumericIndicatorView(getContext(), currentMonthAttendedReferralsWard).createView());
+
     }
 
     View getTitleView(String titleText){
