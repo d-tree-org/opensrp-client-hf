@@ -11,6 +11,7 @@ import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.custom_views.NavigationMenu;
 import org.smartregister.hf.fragment.ReportFragment;
 import org.smartregister.hf.presenter.ReportsPresenter;
+import org.smartregister.hf.util.Constants;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
@@ -77,5 +78,12 @@ public class ReportsActivity extends BaseRegisterActivity {
         return null;
     }
 
-
+    @Override
+    protected void onResumption() {
+        super.onResumption();
+        NavigationMenu menu = NavigationMenu.getInstance(this, null, null);
+        if (menu != null) {
+            menu.getNavigationAdapter().setSelectedView(Constants.DrawerMenu.REPORTS);
+        }
+    }
 }
