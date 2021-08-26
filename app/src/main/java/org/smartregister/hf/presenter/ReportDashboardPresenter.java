@@ -3,6 +3,8 @@ package org.smartregister.hf.presenter;
 import org.smartregister.hf.contract.ReportsDashboardContract;
 import org.smartregister.hf.interactor.ReportDashboardInteractor;
 import org.smartregister.hf.model.ReportDashboardModel;
+import org.smartregister.reporting.contract.ReportContract;
+import org.smartregister.reporting.domain.BaseReportIndicatorsModel;
 import org.smartregister.reporting.domain.IndicatorQuery;
 import org.smartregister.reporting.domain.IndicatorTally;
 import org.smartregister.reporting.domain.ReportIndicator;
@@ -14,13 +16,13 @@ import java.util.Map;
 public class ReportDashboardPresenter implements ReportsDashboardContract.Presenter {
 
     private WeakReference<ReportsDashboardContract.View> weakReference;
-    private ReportsDashboardContract.Model model;
+    private ReportContract.Model model;
     private ReportsDashboardContract.Interactor interactor;
 
     public ReportDashboardPresenter(ReportsDashboardContract.View view){
         this.weakReference = new WeakReference<>(view);
         this.interactor = new ReportDashboardInteractor();
-        this.model = new ReportDashboardModel();
+        this.model = new BaseReportIndicatorsModel();
     }
 
     @Override
