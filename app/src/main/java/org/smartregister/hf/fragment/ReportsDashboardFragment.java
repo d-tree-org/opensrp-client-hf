@@ -17,7 +17,6 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
 
-import org.apache.commons.lang3.AnnotationUtils;
 import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.presenter.ReportDashboardPresenter;
 import org.smartregister.hf.util.ChartUtils;
@@ -68,6 +67,11 @@ public class ReportsDashboardFragment extends Fragment implements ReportsDashboa
         String allAttendedReferralW = "select * from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"')" +
                 " AND business_status = 'Referred' ";
 
+        String currentMonthAttendedReferralW = "select * from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"')" +
+                " AND business_status = 'Referred' and" +
+                " datetime(authored_on/1000, 'unixepoch') > date('now', 'start of month')";
+
+
         ReportIndicator allReferralsIndicator = new ReportIndicator();
         allReferralsIndicator.setKey(ChartUtils.allReferrals);
         allReferralsIndicator.setDescription("All Referrals Issued to facility within the ward");
@@ -78,6 +82,10 @@ public class ReportsDashboardFragment extends Fragment implements ReportsDashboa
         allAttendedReferralsIndicator.setDescription("All Attended Referrals within a ward");
         reportIndicators.add(allAttendedReferralsIndicator);
 
+        ReportIndicator currentMonthAttendedReferralsIndicator = new ReportIndicator();
+        currentMonthAttendedReferralsIndicator.setKey(ChartUtils.currentMonthAttendedReferrals);
+        currentMonthAttendedReferralsIndicator.setDescription("Current Month Attended Referrals within a ward");
+        reportIndicators.add(currentMonthAttendedReferralsIndicator);
 
         IndicatorQuery allReferralsIndicatorQuery = new IndicatorQuery();
         allReferralsIndicatorQuery.setIndicatorCode(ChartUtils.allReferrals);
@@ -92,6 +100,13 @@ public class ReportsDashboardFragment extends Fragment implements ReportsDashboa
         allAttendedReferralsQuery.setId(null);
         allAttendedReferralsQuery.setQuery(allAttendedReferralW);
         indicatorQueries.add(allAttendedReferralsQuery);
+
+        IndicatorQuery currentMonthAttendedReferralsQuery = new IndicatorQuery();
+        currentMonthAttendedReferralsQuery.setIndicatorCode(ChartUtils.currentMonthAttendedReferrals);
+        currentMonthAttendedReferralsQuery.setDbVersion(0);
+        currentMonthAttendedReferralsQuery.setId(null);
+        currentMonthAttendedReferralsQuery.setQuery(currentMonthAttendedReferralW);
+        indicatorQueries.add(currentMonthAttendedReferralsQuery);
 
         //Add Indicators to the presenter
         presenter.addIndicators(reportIndicators);
