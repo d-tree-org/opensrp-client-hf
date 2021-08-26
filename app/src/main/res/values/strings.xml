@@ -18,6 +18,8 @@
     <string name="search_results_return">Return to Search Results</string>
     <string name="global_search">Global Search</string>
 
+    <string name="all_ward_referrals"> All Ward Referrals </string>
+
     <string name="title_family_detail">Family Detail</string>
     <string name="child_register_title">Child Clients</string>
     <string name="return_to_all_children">Return to all children</string>
