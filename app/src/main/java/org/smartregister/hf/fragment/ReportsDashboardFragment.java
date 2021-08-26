@@ -43,6 +43,7 @@ public class ReportsDashboardFragment extends Fragment implements ReportsDashboa
     private boolean activityStarted = false;
     private boolean hasLoadedSampleData = true;
 
+    private View spacerView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,6 +118,7 @@ public class ReportsDashboardFragment extends Fragment implements ReportsDashboa
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        spacerView = inflater.inflate(R.layout.report_spacer_view, container, false);
         View rootView = inflater.inflate(R.layout.fragment_report_dashboard, container, false);
         return rootView;
     }
@@ -141,7 +143,7 @@ public class ReportsDashboardFragment extends Fragment implements ReportsDashboa
     }
 
     private void createReportViews(ViewGroup mainLayout){
-        mainLayout.addView(getTitleView("All Referrals Issued to the ward"));
+        mainLayout.addView(getTitleView("All Referrals Indicators within the ward"));
 
         NumericDisplayModel allReferralsWard = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.allReferrals, R.string.all_ward_referrals, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), allReferralsWard).createView());
@@ -151,6 +153,10 @@ public class ReportsDashboardFragment extends Fragment implements ReportsDashboa
 
         NumericDisplayModel currentMonthAttendedReferralsWard = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.currentMonthAttendedReferrals, R.string.all_ward_current_month_attended_referrals, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), currentMonthAttendedReferralsWard).createView());
+
+        mainLayout.addView(spacerView);
+
+        mainLayout.addView(getTitleView("Referral Indicators within the facility"));
 
     }
 
