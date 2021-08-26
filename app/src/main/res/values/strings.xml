@@ -19,6 +19,7 @@
     <string name="global_search">Global Search</string>
 
     <string name="all_ward_referrals"> All Ward Referrals </string>
+    <string name="all_ward_attended_referrals"> All Ward Attended Referrals </string>
 
     <string name="title_family_detail">Family Detail</string>
     <string name="child_register_title">Child Clients</string>
