@@ -59,6 +59,11 @@ public class ReportsDashboardFragment extends Fragment implements ReportsDashboa
     }
 
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
     private void addReportIndicators(){
         List<ReportIndicator> reportIndicators = new ArrayList<>();
         List<IndicatorQuery> indicatorQueries = new ArrayList<>();
@@ -175,6 +180,11 @@ public class ReportsDashboardFragment extends Fragment implements ReportsDashboa
     @Override
     public void setIndicatorTallies(List<Map<String, IndicatorTally>> tallies) {
         this.indicatorTallies = tallies;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 
     @NonNull
