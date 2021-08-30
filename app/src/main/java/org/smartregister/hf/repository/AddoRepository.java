@@ -10,6 +10,9 @@ import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.application.HfApplication;
 import org.smartregister.chw.anc.repository.VisitRepository;
 import org.smartregister.configurableviews.repository.ConfigurableViewsRepository;
+import org.smartregister.reporting.repository.DailyIndicatorCountRepository;
+import org.smartregister.reporting.repository.IndicatorQueryRepository;
+import org.smartregister.reporting.repository.IndicatorRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.repository.SettingsRepository;
@@ -42,6 +45,10 @@ public class AddoRepository extends Repository {
 
         UniqueIdRepository.createTable(database);
         SettingsRepository.onUpgrade(database);
+
+        IndicatorRepository.createTable(database);
+        IndicatorQueryRepository.createTable(database);
+        DailyIndicatorCountRepository.createTable(database);
 
         TaskRepository.createTable(database);
 
