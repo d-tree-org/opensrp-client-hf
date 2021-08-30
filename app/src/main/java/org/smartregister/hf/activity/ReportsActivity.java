@@ -12,6 +12,8 @@ import org.smartregister.hf.custom_views.NavigationMenu;
 import org.smartregister.hf.fragment.ReportFragment;
 import org.smartregister.hf.presenter.ReportsPresenter;
 import org.smartregister.hf.util.Constants;
+import org.smartregister.reporting.ReportingLibrary;
+import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
@@ -24,6 +26,10 @@ public class ReportsActivity extends BaseRegisterActivity {
         super.onCreate(savedInstanceState);
         NavigationMenu.getInstance(this, null, null);
         HfApplication.getInstance().notifyAppContextChange();
+
+        String indicatorsConfigurationFile = "config/indicator-definitions.yml";
+        ReportingLibrary.getInstance().initIndicatorData(indicatorsConfigurationFile, HfApplication.getInstance().getRepository().getReadableDatabase(HfApplication.getInstance().getPassword()));
+        RecurringIndicatorGeneratingJob.scheduleJobImmediately(RecurringIndicatorGeneratingJob.TAG);
     }
 
     @Override
