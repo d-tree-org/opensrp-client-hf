@@ -74,6 +74,11 @@ public class ReportsActivity extends BaseRegisterActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
     public List<String> getViewIdentifiers() {
         return null;
     }
