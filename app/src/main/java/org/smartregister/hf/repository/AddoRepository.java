@@ -63,7 +63,19 @@ public class AddoRepository extends Repository {
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
 
-        //ChwRepositoryFlv.onUpgrade(context, db, oldVersion, newVersion);
+        int upgradeTo = oldVersion +1;
+
+        while (upgradeTo <= newVersion ) {
+
+            // implementation for database upgrades if any
+
+            if (upgradeTo == 11) {
+                //Specific for version 11
+                //upgradeToVersion11(context, db);
+            }
+            upgradeTo++;
+
+        }
     }
 
 
