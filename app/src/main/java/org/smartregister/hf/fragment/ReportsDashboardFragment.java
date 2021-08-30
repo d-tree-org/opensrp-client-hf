@@ -95,21 +95,21 @@ public class ReportsDashboardFragment extends Fragment implements ReportsDashboa
 
         IndicatorQuery allReferralsIndicatorQuery = new IndicatorQuery();
         allReferralsIndicatorQuery.setIndicatorCode(ChartUtils.allReferrals);
-        allReferralsIndicatorQuery.setDbVersion(0);
+        allReferralsIndicatorQuery.setDbVersion(11);
         allReferralsIndicatorQuery.setId(null);
         allReferralsIndicatorQuery.setQuery(allReferralsIssuedW);
         indicatorQueries.add(allReferralsIndicatorQuery);
 
         IndicatorQuery allAttendedReferralsQuery = new IndicatorQuery();
         allAttendedReferralsQuery.setIndicatorCode(ChartUtils.allAttendedReferrals);
-        allAttendedReferralsQuery.setDbVersion(0);
+        allAttendedReferralsQuery.setDbVersion(11);
         allAttendedReferralsQuery.setId(null);
         allAttendedReferralsQuery.setQuery(allAttendedReferralW);
         indicatorQueries.add(allAttendedReferralsQuery);
 
         IndicatorQuery currentMonthAttendedReferralsQuery = new IndicatorQuery();
         currentMonthAttendedReferralsQuery.setIndicatorCode(ChartUtils.currentMonthAttendedReferrals);
-        currentMonthAttendedReferralsQuery.setDbVersion(0);
+        currentMonthAttendedReferralsQuery.setDbVersion(11);
         currentMonthAttendedReferralsQuery.setId(null);
         currentMonthAttendedReferralsQuery.setQuery(currentMonthAttendedReferralW);
         indicatorQueries.add(currentMonthAttendedReferralsQuery);
