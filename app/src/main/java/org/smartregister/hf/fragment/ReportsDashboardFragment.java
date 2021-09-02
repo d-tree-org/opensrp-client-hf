@@ -20,6 +20,7 @@ import androidx.loader.content.Loader;
 import org.smartregister.hf.application.HfApplication;
 import org.smartregister.hf.presenter.ReportDashboardPresenter;
 import org.smartregister.hf.util.ChartUtils;
+import org.smartregister.reporting.contract.ReportContract;
 import org.smartregister.reporting.domain.IndicatorQuery;
 import org.smartregister.reporting.domain.IndicatorTally;
 import org.smartregister.reporting.domain.ReportIndicator;
@@ -33,9 +34,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ReportsDashboardFragment extends Fragment implements ReportsDashboardContract.View, LoaderManager.LoaderCallbacks<List<Map<String, IndicatorTally>>> {
+public class ReportsDashboardFragment extends Fragment implements ReportContract.View, LoaderManager.LoaderCallbacks<List<Map<String, IndicatorTally>>> {
 
-    private static ReportsDashboardContract.Presenter presenter;
+    private static ReportContract.Presenter presenter;
     private ViewGroup visualizationsViewGroup;
     private List<Map<String, IndicatorTally>> indicatorTallies;
 
@@ -44,6 +45,21 @@ public class ReportsDashboardFragment extends Fragment implements ReportsDashboa
     private boolean hasLoadedSampleData = true;
 
     private View spacerView;
+
+
+    public ReportsDashboardFragment(){}
+
+    public static ReportsDashboardFragment newInstance(){
+        ReportsDashboardFragment rdf = new ReportsDashboardFragment();
+        Bundle args = new Bundle();
+        rdf.setArguments(args);
+        return rdf;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,12 +72,6 @@ public class ReportsDashboardFragment extends Fragment implements ReportsDashboa
         presenter.scheduleRecurringTallyJob();
 
         getLoaderManager().initLoader(0, null, this).forceLoad();
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
     }
 
     private void addReportIndicators(){
