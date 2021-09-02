@@ -1,12 +1,16 @@
 package org.smartregister.hf.interactor;
 
 import org.smartregister.hf.contract.ReportsDashboardContract;
+import org.smartregister.reporting.contract.ReportContract;
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
 
-public class ReportDashboardInteractor implements ReportsDashboardContract.Interactor {
+import java.util.concurrent.TimeUnit;
+
+public class ReportDashboardInteractor implements ReportContract.Interactor {
 
     @Override
     public void scheduleDailyTallyJob() {
-        RecurringIndicatorGeneratingJob.scheduleJobImmediately(RecurringIndicatorGeneratingJob.TAG);
+        RecurringIndicatorGeneratingJob.scheduleJob(RecurringIndicatorGeneratingJob.TAG,
+                TimeUnit.MINUTES.toMillis(1), TimeUnit.MINUTES.toMillis(1));
     }
 }
