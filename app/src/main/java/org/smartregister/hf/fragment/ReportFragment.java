@@ -118,8 +118,9 @@ public class ReportFragment extends BaseRegisterFragment implements ReportsFragm
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         FragmentTransaction t = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        ReportsDashboardFragment rdf = new ReportsDashboardFragment();
+        ReportsDashboardFragment rdf = ReportsDashboardFragment.newInstance();
         t.replace(R.id.report_dashboard_fragment, rdf);
         t.addToBackStack(null);
         t.commit();
