@@ -2,7 +2,6 @@ package org.smartregister.hf.presenter;
 
 import org.smartregister.hf.contract.ReportsDashboardContract;
 import org.smartregister.hf.interactor.ReportDashboardInteractor;
-import org.smartregister.hf.model.ReportDashboardModel;
 import org.smartregister.reporting.contract.ReportContract;
 import org.smartregister.reporting.domain.BaseReportIndicatorsModel;
 import org.smartregister.reporting.domain.IndicatorQuery;
@@ -13,13 +12,13 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Map;
 
-public class ReportDashboardPresenter implements ReportsDashboardContract.Presenter {
+public class ReportDashboardPresenter implements ReportContract.Presenter {
 
-    private WeakReference<ReportsDashboardContract.View> weakReference;
+    private WeakReference<ReportContract.View> weakReference;
     private ReportContract.Model model;
-    private ReportsDashboardContract.Interactor interactor;
+    private ReportContract.Interactor interactor;
 
-    public ReportDashboardPresenter(ReportsDashboardContract.View view){
+    public ReportDashboardPresenter(ReportContract.View view){
         this.weakReference = new WeakReference<>(view);
         this.interactor = new ReportDashboardInteractor();
         this.model = new BaseReportIndicatorsModel();
@@ -56,7 +55,7 @@ public class ReportDashboardPresenter implements ReportsDashboardContract.Presen
             interactor.scheduleDailyTallyJob();
     }
 
-    public ReportsDashboardContract.View getView(){
+    public ReportContract.View getView(){
         if (weakReference != null){
             return weakReference.get();
         }
