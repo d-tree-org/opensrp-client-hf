@@ -78,15 +78,23 @@ public class ReportsDashboardFragment extends Fragment implements ReportContract
         List<ReportIndicator> reportIndicators = new ArrayList<>();
         List<IndicatorQuery> indicatorQueries = new ArrayList<>();
 
-        String allReferralsIssuedW = "select * from task where business_status = 'Referred' ";
+        String allReferralsIssuedW = "select count(*) from task where business_status = 'Referred' ";
 
-        String allAttendedReferralW = "select * from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"')" +
+        String allAttendedReferralW = "select count(*) from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"')" +
                 " AND business_status = 'Referred' ";
 
-        String currentMonthAttendedReferralW = "select * from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"')" +
+        String currentMonthIssuedReferralW = "select count(*) from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"', '"+ Task.TaskStatus.READY +"' )" +
                 " AND business_status = 'Referred' and" +
-                " datetime(authored_on/1000, 'unixepoch') > date('now', 'start of month')";
+                " datetime(last_modified/1000, 'unixepoch') > date('now', 'start of month')";
 
+        String currentMonthAttendedReferralW = "select count(*) from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"')" +
+                " AND business_status = 'Referred' and" +
+                " datetime(last_modified/1000, 'unixepoch') > date('now', 'start of month')";
+
+
+        String totalHfAttendedReferrals = "select count(*) from visits";
+
+        String currentMonthHfAttendedReferrals = "select count(*) from visits where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month')";
 
         ReportIndicator allReferralsIndicator = new ReportIndicator();
         allReferralsIndicator.setKey(ChartUtils.allReferrals);
@@ -98,10 +106,25 @@ public class ReportsDashboardFragment extends Fragment implements ReportContract
         allAttendedReferralsIndicator.setDescription("All Attended Referrals within a ward");
         reportIndicators.add(allAttendedReferralsIndicator);
 
+        ReportIndicator currentMonthIssuedReferralsIndicator = new ReportIndicator();
+        currentMonthIssuedReferralsIndicator.setKey(ChartUtils.currentMonthIssuedReferrals);
+        currentMonthIssuedReferralsIndicator.setDescription("Current Month Issued Referrals within a Ward");
+        reportIndicators.add(currentMonthIssuedReferralsIndicator);
+
         ReportIndicator currentMonthAttendedReferralsIndicator = new ReportIndicator();
         currentMonthAttendedReferralsIndicator.setKey(ChartUtils.currentMonthAttendedReferrals);
         currentMonthAttendedReferralsIndicator.setDescription("Current Month Attended Referrals within a ward");
         reportIndicators.add(currentMonthAttendedReferralsIndicator);
+
+        ReportIndicator totalHfAttendedReferralsIndicator = new ReportIndicator();
+        totalHfAttendedReferralsIndicator.setKey(ChartUtils.totalHfAttendedReferrals);
+        totalHfAttendedReferralsIndicator.setDescription("Total Referrals Attended by this facility");
+        reportIndicators.add(totalHfAttendedReferralsIndicator);
+
+        ReportIndicator currentMonthHfAttendedReferralsIndicator = new ReportIndicator();
+        currentMonthHfAttendedReferralsIndicator.setKey(ChartUtils.currentMonthHfAttendedReferrals);
+        currentMonthHfAttendedReferralsIndicator.setDescription("Current Month Referrals Attended by this facility");
+        reportIndicators.add(currentMonthHfAttendedReferralsIndicator);
 
         IndicatorQuery allReferralsIndicatorQuery = new IndicatorQuery();
         allReferralsIndicatorQuery.setIndicatorCode(ChartUtils.allReferrals);
@@ -117,12 +140,33 @@ public class ReportsDashboardFragment extends Fragment implements ReportContract
         allAttendedReferralsQuery.setQuery(allAttendedReferralW);
         indicatorQueries.add(allAttendedReferralsQuery);
 
+        IndicatorQuery currentMonthIssuedReferralsQuery = new IndicatorQuery();
+        currentMonthIssuedReferralsQuery.setIndicatorCode(ChartUtils.currentMonthIssuedReferrals);
+        currentMonthIssuedReferralsQuery.setDbVersion(11);
+        currentMonthIssuedReferralsQuery.setId(null);
+        currentMonthIssuedReferralsQuery.setQuery(currentMonthIssuedReferralW);
+        indicatorQueries.add(currentMonthIssuedReferralsQuery);
+
         IndicatorQuery currentMonthAttendedReferralsQuery = new IndicatorQuery();
         currentMonthAttendedReferralsQuery.setIndicatorCode(ChartUtils.currentMonthAttendedReferrals);
         currentMonthAttendedReferralsQuery.setDbVersion(11);
         currentMonthAttendedReferralsQuery.setId(null);
         currentMonthAttendedReferralsQuery.setQuery(currentMonthAttendedReferralW);
         indicatorQueries.add(currentMonthAttendedReferralsQuery);
+
+        IndicatorQuery totalHfAttendedReferralsQuery = new IndicatorQuery();
+        totalHfAttendedReferralsQuery.setIndicatorCode(ChartUtils.totalHfAttendedReferrals);
+        totalHfAttendedReferralsQuery.setDbVersion(11);
+        totalHfAttendedReferralsQuery.setId(null);
+        totalHfAttendedReferralsQuery.setQuery(totalHfAttendedReferrals);
+        indicatorQueries.add(totalHfAttendedReferralsQuery);
+
+        IndicatorQuery CurrentMonthHfAttendedReferralsQuery = new IndicatorQuery();
+        CurrentMonthHfAttendedReferralsQuery.setIndicatorCode(ChartUtils.currentMonthHfAttendedReferrals);
+        CurrentMonthHfAttendedReferralsQuery.setDbVersion(11);
+        CurrentMonthHfAttendedReferralsQuery.setId(null);
+        CurrentMonthHfAttendedReferralsQuery.setQuery(currentMonthHfAttendedReferrals);
+        indicatorQueries.add(CurrentMonthHfAttendedReferralsQuery);
 
         //Add Indicators to the presenter
         presenter.addIndicators(reportIndicators);
@@ -166,12 +210,21 @@ public class ReportsDashboardFragment extends Fragment implements ReportContract
         NumericDisplayModel allAttendedReferralsWard = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.allAttendedReferrals, R.string.all_ward_attended_referrals, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), allAttendedReferralsWard).createView());
 
+        NumericDisplayModel currentMonthIssuedReferralsWard = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.currentMonthIssuedReferrals, R.string.all_ward_current_month_issued_referrals, indicatorTallies);
+        mainLayout.addView(new NumericIndicatorView(getContext(), currentMonthIssuedReferralsWard).createView());
+
         NumericDisplayModel currentMonthAttendedReferralsWard = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.currentMonthAttendedReferrals, R.string.all_ward_current_month_attended_referrals, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), currentMonthAttendedReferralsWard).createView());
 
         mainLayout.addView(spacerView);
 
         mainLayout.addView(getTitleView("Referral Indicators within the facility"));
+
+        NumericDisplayModel totalAttendedReferralsHf = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.totalHfAttendedReferrals, R.string.hf_total_attended_referrals, indicatorTallies);
+        mainLayout.addView(new NumericIndicatorView(getContext(), totalAttendedReferralsHf).createView());
+
+        NumericDisplayModel currentMonthAttendedReferralsHf = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.currentMonthHfAttendedReferrals, R.string.hf_total_attended_referrals, indicatorTallies);
+        mainLayout.addView(new NumericIndicatorView(getContext(), currentMonthAttendedReferralsHf).createView());
 
     }
 
