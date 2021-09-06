@@ -14,6 +14,8 @@
 
     <string name="return_to_home">Rudi Mwanzo</string>
 
+    <string name="activity_reports">Takwimu</string>
+
     <string name="menu_all_families">All Families</string>
     <string name="menu_hf_referrals">Referrals</string>
     <string name="menu_hf_report">Reports</string>
@@ -34,6 +36,7 @@
     <string name="skip_to_search">Ruka mpaka kutafuta</string>
     <string name="return_to_select_village">Rudi kuchagua kijiji</string>
     <string name="scan_fingerprint">Skani alama za vidole</string>
+    <string name="scan_fp_message_instruction">Kupata taarifa, skani alama za vidole!</string>
 
     <string name="return_to_family_profile">Rudi kwenye taarifa binafsi za kaya</string>
 
