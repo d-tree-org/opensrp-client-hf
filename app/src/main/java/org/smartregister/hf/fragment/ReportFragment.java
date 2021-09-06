@@ -70,7 +70,7 @@ public class ReportFragment extends BaseRegisterFragment implements ReportsFragm
         CustomFontTextView titleView = (CustomFontTextView)view.findViewById(R.id.txt_title_label);
         if (titleView != null) {
             titleView.setVisibility(View.VISIBLE);
-            titleView.setText("Monthly Activity");
+            titleView.setText(getResources().getString(R.string.activity_reports));
             titleView.setFontVariant(FontVariant.REGULAR);
         }
 
