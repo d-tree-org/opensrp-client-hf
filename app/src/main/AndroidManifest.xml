@@ -94,8 +94,8 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".activity.ReportsActivity"
-            android:launchMode="singleTask"
             android:theme="@style/AddoTheme.NoActionBar"
+            android:label="@string/activity_reports"
             android:screenOrientation="portrait"/>
 
         <meta-data
