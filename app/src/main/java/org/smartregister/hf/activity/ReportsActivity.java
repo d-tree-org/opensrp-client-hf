@@ -29,6 +29,7 @@ public class ReportsActivity extends BaseRegisterActivity {
 
         String indicatorsConfigurationFile = "config/indicator-definitions.yml";
         ReportingLibrary.getInstance().initIndicatorData(indicatorsConfigurationFile, HfApplication.getInstance().getRepository().getReadableDatabase(HfApplication.getInstance().getPassword()));
+
         RecurringIndicatorGeneratingJob.scheduleJobImmediately(RecurringIndicatorGeneratingJob.TAG);
     }
 
