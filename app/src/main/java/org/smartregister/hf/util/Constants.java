@@ -25,6 +25,7 @@ public class Constants {
         public static final String MALARIA = "Malaria";
         public static final String REFERRALS = "Referrals";
         public static final String REPORTS = "Reports";
+        public static final String HOME = "Home";
     }
 
     public static final class PEER_TO_PEER {

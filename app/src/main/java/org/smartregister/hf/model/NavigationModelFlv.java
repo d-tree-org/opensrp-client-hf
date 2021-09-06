@@ -17,7 +17,7 @@ public class NavigationModelFlv implements NavigationModel.Flavor {
 
         if (navigationOptions.size() == 0 ) {
 
-            NavigationOption opt1 = new NavigationOption(R.mipmap.ic_home, 0, R.string.menu_hf_home, Constants.DrawerMenu.ALL_FAMILIES, 0);
+            NavigationOption opt1 = new NavigationOption(R.mipmap.ic_home, 0, R.string.menu_hf_home, Constants.DrawerMenu.HOME, 0);
             NavigationOption opt2 = new NavigationOption(R.drawable.ic_reporting, 0, R.string.menu_hf_report, Constants.DrawerMenu.REPORTS, 0);
 
             navigationOptions.addAll(asList(opt1, opt2));

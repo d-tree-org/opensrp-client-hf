@@ -31,7 +31,7 @@ public class NavigationListener implements View.OnClickListener {
                 //All cases down here needs to be changed to reflect the ADDO application. Based on
                 // the functionality we need to define a new navigation menu for ADDO application
                 switch (tag) {
-                    case Constants.DrawerMenu.ALL_FAMILIES:
+                    case Constants.DrawerMenu.HOME:
                         startRegisterActivity(HomeActivity.class);
                         break;
                     case Constants.DrawerMenu.REPORTS:
