@@ -8,6 +8,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ReportDashboardInteractor implements ReportContract.Interactor {
 
+    public ReportDashboardInteractor(){}
+
     @Override
     public void scheduleDailyTallyJob() {
         RecurringIndicatorGeneratingJob.scheduleJob(RecurringIndicatorGeneratingJob.TAG,
