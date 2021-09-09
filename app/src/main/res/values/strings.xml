@@ -20,11 +20,11 @@
     <string name="search_results_return">Return to Search Results</string>
     <string name="global_search">Global Search</string>
 
-    <string name="all_ward_referrals"> All issued Referrals (Ward) </string>
-    <string name="all_ward_attended_referrals"> All Attended Referrals (Ward) </string>
+    <string name="all_ward_referrals"> Last month issued Referrals (Ward) </string>
+    <string name="all_ward_attended_referrals"> Last month Attended Referrals (Ward) </string>
     <string name="all_ward_current_month_attended_referrals"> Current Month Attended Referrals (Ward) </string>
     <string name="all_ward_current_month_issued_referrals"> Current Month Issued Referrals (Ward) </string>
-    <string name="hf_total_attended_referrals"> Total Attended Referrals By this Facility </string>
+    <string name="hf_last_month_attended_referrals"> Last Month Attended Referrals By this Facility </string>
     <string name="hf_current_month_attended_referrals"> Current Month Attended Referrals By this Facility </string>
 
     <string name="title_family_detail">Family Detail</string>
