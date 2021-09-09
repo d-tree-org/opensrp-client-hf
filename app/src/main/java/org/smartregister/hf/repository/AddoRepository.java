@@ -6,6 +6,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.AllConstants;
+import org.smartregister.chw.anc.repository.VisitDetailsRepository;
 import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.application.HfApplication;
 import org.smartregister.chw.anc.repository.VisitRepository;
@@ -40,8 +41,6 @@ public class AddoRepository extends Repository {
         EventClientRepository.createTable(database, EventClientRepository.Table.client, EventClientRepository.client_column.values());
         EventClientRepository.createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
         ConfigurableViewsRepository.createTable(database);
-        //HomeVisitRepository.createTable(database); Not needed for Addo
-        //HomeVisitServiceRepository.createTable(database); Not needed for Addo
 
         UniqueIdRepository.createTable(database);
         SettingsRepository.onUpgrade(database);
@@ -53,6 +52,7 @@ public class AddoRepository extends Repository {
         TaskRepository.createTable(database);
 
         VisitRepository.createTable(database);
+        VisitDetailsRepository.createTable(database);
         onUpgrade(database, 1, BuildConfig.DATABASE_VERSION);
 
     }

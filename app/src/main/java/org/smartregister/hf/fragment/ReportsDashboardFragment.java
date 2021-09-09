@@ -26,7 +26,6 @@ import org.smartregister.reporting.domain.IndicatorTally;
 import org.smartregister.reporting.domain.ReportIndicator;
 import org.smartregister.domain.Task;
 import org.smartregister.hf.R;
-import org.smartregister.hf.contract.ReportsDashboardContract;
 import org.smartregister.reporting.model.NumericDisplayModel;
 import org.smartregister.reporting.view.NumericIndicatorView;
 
@@ -78,23 +77,29 @@ public class ReportsDashboardFragment extends Fragment implements ReportContract
         List<ReportIndicator> reportIndicators = new ArrayList<>();
         List<IndicatorQuery> indicatorQueries = new ArrayList<>();
 
-        String allReferralsIssuedW = "select count(*) from task where business_status = 'Referred' ";
+        String lastMonthReferralsIssuedW = "select count(*) from task where business_status = 'Referred' and " +
+                " datetime(authored_on/1000, 'unixepoch') > date('now', 'start of month', '-1 months') and" +
+                " datetime(authored_on/1000, 'unixepoch') < date('now', 'start of month')";
 
-        String allAttendedReferralW = "select count(*) from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"')" +
-                " AND business_status = 'Referred' ";
+        String lastMonthAttendedReferralW = "select count(*) from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"')" +
+                " AND business_status = 'Referred' " +
+                " datetime(last_modified/1000, 'unixepoch') > date('now', 'start of month', '-1 months') and" +
+                " datetime(last_modified/1000, 'unixepoch') < date('now', 'start of month')";
 
         String currentMonthIssuedReferralW = "select count(*) from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"', '"+ Task.TaskStatus.READY +"' )" +
                 " AND business_status = 'Referred' and" +
-                " datetime(last_modified/1000, 'unixepoch') > date('now', 'start of month')";
+                " datetime(authored_on/1000, 'unixepoch') > date('now', 'start of month')";
 
         String currentMonthAttendedReferralW = "select count(*) from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"')" +
                 " AND business_status = 'Referred' and" +
                 " datetime(last_modified/1000, 'unixepoch') > date('now', 'start of month')";
 
 
-        String totalHfAttendedReferrals = "select count(*) from visits";
+        String lastMonthHfAttendedReferrals = "select count(*) from visits where visit_json like '%\"referral_date\"%' and " +
+                " datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month', '-1 months')";
 
-        String currentMonthHfAttendedReferrals = "select count(*) from visits where datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month')";
+        String currentMonthHfAttendedReferrals = "select count(*) from visits where visit_json like '%\"referral_date\"%' and" +
+                " datetime(visit_date/1000, 'unixepoch') > date('now', 'start of month')";
 
         ReportIndicator allReferralsIndicator = new ReportIndicator();
         allReferralsIndicator.setKey(ChartUtils.allReferrals);
@@ -130,14 +135,14 @@ public class ReportsDashboardFragment extends Fragment implements ReportContract
         allReferralsIndicatorQuery.setIndicatorCode(ChartUtils.allReferrals);
         allReferralsIndicatorQuery.setDbVersion(11);
         allReferralsIndicatorQuery.setId(null);
-        allReferralsIndicatorQuery.setQuery(allReferralsIssuedW);
+        allReferralsIndicatorQuery.setQuery(lastMonthReferralsIssuedW);
         indicatorQueries.add(allReferralsIndicatorQuery);
 
         IndicatorQuery allAttendedReferralsQuery = new IndicatorQuery();
         allAttendedReferralsQuery.setIndicatorCode(ChartUtils.allAttendedReferrals);
         allAttendedReferralsQuery.setDbVersion(11);
         allAttendedReferralsQuery.setId(null);
-        allAttendedReferralsQuery.setQuery(allAttendedReferralW);
+        allAttendedReferralsQuery.setQuery(lastMonthAttendedReferralW);
         indicatorQueries.add(allAttendedReferralsQuery);
 
         IndicatorQuery currentMonthIssuedReferralsQuery = new IndicatorQuery();
@@ -158,7 +163,7 @@ public class ReportsDashboardFragment extends Fragment implements ReportContract
         totalHfAttendedReferralsQuery.setIndicatorCode(ChartUtils.totalHfAttendedReferrals);
         totalHfAttendedReferralsQuery.setDbVersion(11);
         totalHfAttendedReferralsQuery.setId(null);
-        totalHfAttendedReferralsQuery.setQuery(totalHfAttendedReferrals);
+        totalHfAttendedReferralsQuery.setQuery(lastMonthHfAttendedReferrals);
         indicatorQueries.add(totalHfAttendedReferralsQuery);
 
         IndicatorQuery CurrentMonthHfAttendedReferralsQuery = new IndicatorQuery();
@@ -220,10 +225,10 @@ public class ReportsDashboardFragment extends Fragment implements ReportContract
 
         mainLayout.addView(getTitleView("Referral Indicators within the facility"));
 
-        NumericDisplayModel totalAttendedReferralsHf = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.totalHfAttendedReferrals, R.string.hf_total_attended_referrals, indicatorTallies);
+        NumericDisplayModel totalAttendedReferralsHf = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.totalHfAttendedReferrals, R.string.hf_last_month_attended_referrals, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), totalAttendedReferralsHf).createView());
 
-        NumericDisplayModel currentMonthAttendedReferralsHf = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.currentMonthHfAttendedReferrals, R.string.hf_total_attended_referrals, indicatorTallies);
+        NumericDisplayModel currentMonthAttendedReferralsHf = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.currentMonthHfAttendedReferrals, R.string.hf_current_month_attended_referrals, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), currentMonthAttendedReferralsHf).createView());
 
     }
