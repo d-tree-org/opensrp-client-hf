@@ -250,8 +250,8 @@ public class HfApplication extends DrishtiApplication {
 
     public static ClientProcessorForJava getClientProcessor(android.content.Context context) {
         if (clientProcessor == null) {
-            //clientProcessor = KituoniClientProcessor.getInstance(context);
-            clientProcessor = FamilyLibrary.getInstance().getClientProcessorForJava();
+            clientProcessor = KituoniClientProcessor.getInstance(context);
+            //clientProcessor = FamilyLibrary.getInstance().getClientProcessorForJava();
         }
         return clientProcessor;
     }
