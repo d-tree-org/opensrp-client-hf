@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import org.smartregister.hf.R;
 import org.smartregister.hf.activity.HomeActivity;
+import org.smartregister.hf.activity.ReportsActivity;
 import org.smartregister.hf.adapter.NavigationAdapter;
 import org.smartregister.hf.util.Constants;
 
@@ -28,19 +29,13 @@ public class NavigationListener implements View.OnClickListener {
             if (v.getTag() instanceof String) {
                 String tag = (String) v.getTag();
                 //All cases down here needs to be changed to reflect the ADDO application. Based on
-                // the funcitonality we need to define a new navigation menu for ADDO application
+                // the functionality we need to define a new navigation menu for ADDO application
                 switch (tag) {
-                    case Constants.DrawerMenu.ALL_FAMILIES:
+                    case Constants.DrawerMenu.HOME:
                         startRegisterActivity(HomeActivity.class);
                         break;
-                    case Constants.DrawerMenu.ANC:
-                        Toast.makeText(activity.getApplicationContext(), Constants.DrawerMenu.ANC, Toast.LENGTH_SHORT).show();
-                        break;
-                    case Constants.DrawerMenu.ANC_CLIENTS:
-                        Toast.makeText(activity.getApplicationContext(), Constants.DrawerMenu.ANC_CLIENTS, Toast.LENGTH_SHORT).show();
-                        break;
-                    case Constants.DrawerMenu.CHILD_CLIENTS:
-                        Toast.makeText(activity.getApplicationContext(), Constants.DrawerMenu.CHILD_CLIENTS, Toast.LENGTH_SHORT).show();
+                    case Constants.DrawerMenu.REPORTS:
+                        startRegisterActivity(ReportsActivity.class);
                         break;
                     default:
                         break;

@@ -21,8 +21,13 @@
             android:layout_marginLeft="32dp"
             android:padding="4dp">
 
+            <include
+                android:id="@+id/element_arrived"
+                layout="@layout/element_arrived_text"/>
+
             <org.smartregister.view.customcontrols.CustomFontTextView
                 android:id="@+id/tv_attended_facility"
+                android:layout_below="@id/element_arrived"
                 style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

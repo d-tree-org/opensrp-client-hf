@@ -43,7 +43,7 @@ android {
         buildConfigField "String[]", "ALLOWED_LOCATION_LEVELS", '{"Village"}'
         buildConfigField "String", 'DEFAULT_LOCATION', '"Village"'
         buildConfigField "boolean", 'SUPPORT_QR', 'true'
-        buildConfigField "int", "DATABASE_VERSION", '1'
+        buildConfigField "int", "DATABASE_VERSION", '11'
 
         buildConfigField "String", 'opensrp_url', '"https://opensrp-dev.d-tree.org/opensrp/"'
         buildConfigField "String", 'opensrp_url_debug', '"https://opensrp-dev.d-tree.org/opensrp/"'
@@ -247,7 +247,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-immunization'
     }
 // New package from github 1.1.14-SNAPSHOT
-    implementation('org.smartregister:opensrp-client-simprints-riddler:1.2.1-RESEARCH-SNAPSHOT') {
+    implementation('org.smartregister:opensrp-client-simprints-riddler:1.2.6-RESEARCH-SNAPSHOT') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-family'
@@ -259,6 +259,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+        exclude group: 'com.rengwuxian.materialedittext', module: 'library'
+    }
+
+    implementation ('org.smartregister:opensrp-client-reporting:0.0.17-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
         exclude group: 'com.rengwuxian.materialedittext', module: 'library'
     }
 

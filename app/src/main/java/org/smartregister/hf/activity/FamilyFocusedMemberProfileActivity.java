@@ -348,13 +348,13 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
 
             new AlertDialog.Builder(this)
                     .setView(R.layout.dialog_complete_referral_confirmation)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // Continue with delete operation
                             submitFacilityVisit(jsonForm);
                         }
                     })
-                    .setNegativeButton(android.R.string.no, null)
+                    .setNegativeButton(R.string.no, null)
                     .setIcon(android.R.drawable.alert_light_frame)
                     .show();
 
@@ -414,13 +414,13 @@ public class FamilyFocusedMemberProfileActivity extends BaseProfileActivity impl
     void confirmMarkingAsDone(JSONObject jsonForm){
         new AlertDialog.Builder(this)
                 .setView(R.layout.dialog_complete_referral_confirmation)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
                         createFacilityReferralClosureEvent(jsonForm);
                     }
                 })
-                .setNegativeButton(android.R.string.no, null)
+                .setNegativeButton(R.string.no, null)
                 .setIcon(android.R.drawable.alert_light_frame)
                 .show();
     }

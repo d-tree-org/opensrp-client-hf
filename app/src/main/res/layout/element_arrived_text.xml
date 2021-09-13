@@ -1,0 +1,18 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/has_the_client_arrived_at_the_facility"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:fontFamily="@font/google_sans_regular"
+        android:id="@+id/arrived_message"/>
+
+</RelativeLayout>

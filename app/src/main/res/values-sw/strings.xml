@@ -14,10 +14,19 @@
 
     <string name="return_to_home">Rudi Mwanzo</string>
 
+    <string name="activity_reports">Takwimu</string>
+
+    <string name="menu_all_families">All Families</string>
+    <string name="menu_hf_referrals">Referrals</string>
+    <string name="menu_hf_report">Reports</string>
+    <string name="menu_anc_clients">ANC Clients</string>
+    <string name="menu_child_clients">Child Clients</string>
+    <string name="menu_hiv_clients">HIV Clients</string>
+
     <string name="select_village">Chagua kijiji cha mteja kutoka kwenye listi</string>
     <string name="total_number_referrals">Rufaa \nZote</string>
-    <string name="today_number_referrals">Rufaa za \nLeo</string>
-    <string name="attended_referrals">Zilizofanyiwa \nKazi</string>
+    <string name="today_number_referrals">Rufaa tangu siku tatu zilizopita</string>
+    <string name="attended_referrals">Rufaa zilizofanyiwa kazi leo</string>
     <string name="village_name">Jina la Kijiji</string>
     <string name="patient_name_age">Jina, Umri</string>
     <string name="has_referral">Ana Rufaa</string>
@@ -27,6 +36,7 @@
     <string name="skip_to_search">Ruka mpaka kutafuta</string>
     <string name="return_to_select_village">Rudi kuchagua kijiji</string>
     <string name="scan_fingerprint">Skani alama za vidole</string>
+    <string name="scan_fp_message_instruction">Kupata taarifa, skani alama za vidole!</string>
 
     <string name="return_to_family_profile">Rudi kwenye taarifa binafsi za kaya</string>
 
@@ -41,7 +51,7 @@
     <string name="referral_date">Tarehe ya Rufaa</string>
     <string name="referal_source">Chanzo cha Rufaa</string>
     <string name="close_referral">Imefanyika</string>
-    <string name="capture_facility_visit"> Amefika </string>
+    <string name="capture_facility_visit"> Ndio, Amefika </string>
     <string name="referral_details">Taarifa za Rufaa</string>
 
     <string name="nav_logout_as">Ondoka kama</string>
@@ -55,9 +65,22 @@
     <string name="global_search">Tafuta kote</string>
 
     <string name="complete_referral"> Hakiki Tembeleo </string>
-    <string name="complete_referral_confirmation"> Je, mteja amefika katika kituo cha afya? </string>
+    <string name="complete_referral_confirmation"> Hakiki, mteja amefika katika kituo cha afya? </string>
 
-    <string name="cancel">HAPANA</string>
-    <string name="okay"> NDIO </string>
+    <string name="cancel">SITISHA</string>
+    <string name="okay"> SAWA </string>
+
+    <string name="no">HAPANA</string>
+    <string name="yes"> NDIO </string>
+
+    <string name="has_the_client_arrived_at_the_facility"> Je, mteja amefika katika kituo cha kutolea huduma za afya?</string>
+
+    <string name="all_ward_referrals"> Rufaa zilizotolewa mwezi uliopita (Kata) </string>
+    <string name="all_ward_attended_referrals"> Rufaa zilizohudumiwa mwezi uliopita(Kata) </string>
+    <string name="all_ward_current_month_attended_referrals"> Rufaa zilizohudumiwa mwezi huu (Kata) </string>
+    <string name="all_ward_current_month_issued_referrals"> Rufaa zilizohudumiwa mwezi huu (Kata) </string>
+    <string name="hf_last_month_attended_referrals"> Rufaa zote zilizohudumiwa mwezi uliopita kituoni </string>
+    <string name="hf_current_month_attended_referrals"> Rufaa zilizohudumiwa katika kituo mwezi huu </string>
+
 
 </resources>
