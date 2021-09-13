@@ -7,16 +7,25 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
 
+    <string name="activity_reports"> Reports Activity </string>
+
     <string name="menu_all_families">All Families</string>
     <string name="menu_hf_home">Home</string>
     <string name="menu_hf_referrals">Referrals</string>
-    <string name="menu_addo_report">Reports</string>
+    <string name="menu_hf_report">Reports</string>
     <string name="menu_anc_clients">ANC Clients</string>
     <string name="menu_child_clients">Child Clients</string>
     <string name="menu_hiv_clients">HIV Clients</string>
 
     <string name="search_results_return">Return to Search Results</string>
     <string name="global_search">Global Search</string>
+
+    <string name="all_ward_referrals"> Last month issued Referrals (Ward) </string>
+    <string name="all_ward_attended_referrals"> Last month Attended Referrals (Ward) </string>
+    <string name="all_ward_current_month_attended_referrals"> Current Month Attended Referrals (Ward) </string>
+    <string name="all_ward_current_month_issued_referrals"> Current Month Issued Referrals (Ward) </string>
+    <string name="hf_last_month_attended_referrals"> Last Month Attended Referrals By this Facility </string>
+    <string name="hf_current_month_attended_referrals"> Current Month Attended Referrals By this Facility </string>
 
     <string name="title_family_detail">Family Detail</string>
     <string name="child_register_title">Child Clients</string>
@@ -147,8 +156,7 @@
     <string name="family">%s Family</string>
     <string name="remove_entire_family">Removing entire family</string>
     <string name="remove_warning_family">Are you sure you want to remove the %s Family\'s record? This will remove the family\'s entire record AND all of the %s family members\' health records from your device. This action cannot be undone.</string>
-    <string name="cancel">CANCEL</string>
-    <string name="submit">SUBMIT</string>
+
     <string name="profile_change_dialog_message">Before you remove this member, you must select a new family head.</string>
     <string name="select_caregiver">Select a new primary caregiver</string>
     <string name="select_family_head">Select a new family head</string>
@@ -286,8 +294,6 @@
     <string name="counseled">Counseled : </string>
     <string name="not_counseled">Not counseled : </string>
 
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
     <string name="device_to_device_sync">Device-to-device Sync</string>
 
     <!-- home visit strings-->
@@ -423,8 +429,8 @@
     <string name="item_1_placeholder">Item 1 Placeholder</string>
     <string name="select_village">Select Client\'s Village from the list</string>
     <string name="total_number_referrals">Total \nReferrals</string>
-    <string name="today_number_referrals">Today\'s \nReferrals</string>
-    <string name="attended_referrals">Attended \nReferrals</string>
+    <string name="today_number_referrals">Referrals in the last 3 Days</string>
+    <string name="attended_referrals">Today\'s Attended Referrals</string>
     <string name="village_name">Village Name</string>
     <string name="patient_name_age">Patient Name, Age</string>
     <string name="has_referral">Has Referral</string>
@@ -446,13 +452,21 @@
     <string name="referral_date">Date of Referral</string>
     <string name="referal_source">Referal Source</string>
     <string name="close_referral">Mark as Done</string>
-    <string name="capture_facility_visit"> Arrived </string>
+    <string name="capture_facility_visit"> Yes, Arrived </string>
     <string name="referral_details">Referral Details</string>
     <string name="select_the_person_message">Select the person to receive services</string>
 
     <string name="complete_referral"> Record Attendance </string>
-    <string name="complete_referral_confirmation"> Has the client visited the health facility? </string>
+    <string name="complete_referral_confirmation"> Confirming, Client has visited the health facility? </string>
 
+    <string name="submit">SUBMIT</string>
+
+    <string name="cancel"> CANCEL </string>
     <string name="okay"> OK </string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="has_the_client_arrived_at_the_facility">Has the client arrived at the facility?</string>
 
 </resources>

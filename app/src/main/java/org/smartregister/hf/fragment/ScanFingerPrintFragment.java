@@ -20,6 +20,7 @@ import org.smartregister.hf.activity.HomeActivity;
 import org.smartregister.hf.contract.ScanFingerPrintFragmentContract;
 import org.smartregister.hf.presenter.ScanFingerPrintFragmentPresenter;
 import org.smartregister.hf.util.Constants;
+import org.smartregister.hf.viewmodels.HomescreenViewModel;
 import org.smartregister.simprint.SimPrintsIdentifyActivity;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.fragment.BaseRegisterFragment;
@@ -31,7 +32,7 @@ import static org.smartregister.hf.BuildConfig.SIMPRINT_MODULE_ID;
 
 public class ScanFingerPrintFragment extends BaseRegisterFragment implements ScanFingerPrintFragmentContract.View {
 
-    private HomeActivity.AddoHomeSharedViewModel model;
+    private HomescreenViewModel model;
     private static String SIMPRINTS_MODULE_ID;
 
     @Nullable
@@ -43,9 +44,9 @@ public class ScanFingerPrintFragment extends BaseRegisterFragment implements Sca
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                return (T) new HomeActivity.AddoHomeSharedViewModel();
+                return (T) new HomescreenViewModel();
             }
-        }).get(HomeActivity.AddoHomeSharedViewModel.class);
+        }).get(HomescreenViewModel.class);
         this.rootView = view;
         setupViews(view);
 
