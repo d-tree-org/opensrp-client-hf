@@ -16,8 +16,6 @@ public interface AddoHomeFragmentContract {
 
         AddoHomeFragmentContract.Presenter presenter();
 
-        void showDashboardInformation(DashboardDataModel data);
-
     }
 
     interface Presenter extends BaseRegisterFragmentContract.Presenter{
@@ -25,8 +23,6 @@ public interface AddoHomeFragmentContract {
         List<String> getLocations();
 
         void processViewConfigurations();
-
-        void getDashboardData();
 
     }
 
