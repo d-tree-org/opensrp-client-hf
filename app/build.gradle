@@ -29,7 +29,7 @@ android {
         applicationId "org.smartregister.hf"
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
-        versionCode 10
+        versionCode 11
         versionName "0.6.3"
         multiDexEnabled true
 
