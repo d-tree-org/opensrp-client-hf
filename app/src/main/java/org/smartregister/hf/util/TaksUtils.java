@@ -87,7 +87,7 @@ public class TaksUtils {
         try {
             String q = "select * from task where status IN ('"+ Task.TaskStatus.COMPLETED +"', '"+ Task.TaskStatus.IN_PROGRESS +"')" +
                     " AND business_status = 'Referred' " +
-                    " AND last_modified > "+startOfDay.getMillis();
+                    " AND last_modified > "+startOfDay.getMillis(); //TODO: When app sync for the first time this field is changed for all the tasks
             cursor = HfApplication.getInstance().getRepository().getReadableDatabase().rawQuery(q, null);
             cursor.moveToFirst();
             return cursor.getCount();

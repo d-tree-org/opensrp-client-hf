@@ -7,16 +7,25 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
 
+    <string name="activity_reports"> Reports Activity </string>
+
     <string name="menu_all_families">All Families</string>
     <string name="menu_hf_home">Home</string>
     <string name="menu_hf_referrals">Referrals</string>
-    <string name="menu_addo_report">Reports</string>
+    <string name="menu_hf_report">Reports</string>
     <string name="menu_anc_clients">ANC Clients</string>
     <string name="menu_child_clients">Child Clients</string>
     <string name="menu_hiv_clients">HIV Clients</string>
 
     <string name="search_results_return">Return to Search Results</string>
     <string name="global_search">Global Search</string>
+
+    <string name="all_ward_referrals"> Last month issued Referrals (Ward) </string>
+    <string name="all_ward_attended_referrals"> Last month Attended Referrals (Ward) </string>
+    <string name="all_ward_current_month_attended_referrals"> Current Month Attended Referrals (Ward) </string>
+    <string name="all_ward_current_month_issued_referrals"> Current Month Issued Referrals (Ward) </string>
+    <string name="hf_last_month_attended_referrals"> Last Month Attended Referrals By this Facility </string>
+    <string name="hf_current_month_attended_referrals"> Current Month Attended Referrals By this Facility </string>
 
     <string name="title_family_detail">Family Detail</string>
     <string name="child_register_title">Child Clients</string>

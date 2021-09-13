@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/google_sans_bold"
                 android:gravity="center"
-                android:text="@string/scan_fp_message"
+                android:text="@string/scan_fingerprint"
                 android:textColor="@color/text_light"
                 android:textSize="24sp" />
 

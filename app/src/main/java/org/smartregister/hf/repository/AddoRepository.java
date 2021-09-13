@@ -6,9 +6,14 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.AllConstants;
+import org.smartregister.chw.anc.repository.VisitDetailsRepository;
+import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.application.HfApplication;
 import org.smartregister.chw.anc.repository.VisitRepository;
 import org.smartregister.configurableviews.repository.ConfigurableViewsRepository;
+import org.smartregister.reporting.repository.DailyIndicatorCountRepository;
+import org.smartregister.reporting.repository.IndicatorQueryRepository;
+import org.smartregister.reporting.repository.IndicatorRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.repository.SettingsRepository;
@@ -36,16 +41,19 @@ public class AddoRepository extends Repository {
         EventClientRepository.createTable(database, EventClientRepository.Table.client, EventClientRepository.client_column.values());
         EventClientRepository.createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
         ConfigurableViewsRepository.createTable(database);
-        //HomeVisitRepository.createTable(database); Not needed for Addo
-        //HomeVisitServiceRepository.createTable(database); Not needed for Addo
 
         UniqueIdRepository.createTable(database);
         SettingsRepository.onUpgrade(database);
 
+        IndicatorRepository.createTable(database);
+        IndicatorQueryRepository.createTable(database);
+        DailyIndicatorCountRepository.createTable(database);
+
         TaskRepository.createTable(database);
 
         VisitRepository.createTable(database);
-        onUpgrade(database, 1, 2);
+        VisitDetailsRepository.createTable(database);
+        onUpgrade(database, 1, BuildConfig.DATABASE_VERSION);
 
     }
 
@@ -55,7 +63,19 @@ public class AddoRepository extends Repository {
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
 
-        //ChwRepositoryFlv.onUpgrade(context, db, oldVersion, newVersion);
+        int upgradeTo = oldVersion +1;
+
+        while (upgradeTo <= newVersion ) {
+
+            // implementation for database upgrades if any
+
+            if (upgradeTo == 11) {
+                //Specific for version 11
+                //upgradeToVersion11(context, db);
+            }
+            upgradeTo++;
+
+        }
     }
 
 

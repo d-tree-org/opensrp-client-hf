@@ -90,7 +90,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
 
         CustomFontTextView titleView = view.findViewById(R.id.txt_title_label);
         if (titleView != null) {
-            titleView.setText(R.string.addo_app_home);
+            titleView.setText(R.string.app_name);
             titleView.setPadding(0, titleView.getTop(), titleView.getPaddingRight(),
                     titleView.getPaddingBottom());
         }
@@ -288,7 +288,7 @@ public class FamilyRegisterFragment extends BaseFamilyRegisterFragment {
         filter(searchText(), "", presenter().getMainCondition(), false);
         dueOnlyLayout.setTag(null);
         switchViews(dueOnlyLayout, false);
-        Toast.makeText(this.getActivity(), R.string.confirm_remove_text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getActivity(), "", Toast.LENGTH_SHORT).show();
         //clientsView.setVisibility(View.VISIBLE);
 
     }

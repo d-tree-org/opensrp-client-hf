@@ -93,6 +93,11 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".activity.ReportsActivity"
+            android:theme="@style/AddoTheme.NoActionBar"
+            android:label="@string/activity_reports"
+            android:screenOrientation="portrait"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="3f94f9c3caeff331b3a2bd8c2182b663ad6a955a" />
@@ -119,6 +124,7 @@
         <service android:name="org.smartregister.sync.intent.ExtendedSyncIntentService" />
         <service android:name="org.smartregister.sync.intent.ValidateIntentService" />
         <service android:name="org.smartregister.service.ImageUploadSyncService" />
+        <service android:name="org.smartregister.reporting.service.IndicatorGeneratorIntentService" />
 
         <uses-library
             android:name="org.apache.http.legacy"

@@ -151,6 +151,34 @@
             "creates_case": [
               "ec_family_member"
             ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "ANC Health Facility Visit",
+            "creates_case": [
+              "ec_family_member"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "PNC Health Facility Visit",
+            "creates_case": [
+              "ec_family_member"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "Adolescent Health Facility Visit",
+            "creates_case": [
+              "ec_family_member"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "Child Health Facility Visit",
+            "creates_case": [
+              "ec_family_member"
+            ]
           }
         ]
       }
