@@ -82,5 +82,7 @@
     <string name="hf_last_month_attended_referrals"> Rufaa zote zilizohudumiwa mwezi uliopita kituoni </string>
     <string name="hf_current_month_attended_referrals"> Rufaa zilizohudumiwa katika kituo mwezi huu </string>
 
+    <string name="ward_indicator_category">Takwimu za Kata Nzima</string>
+    <string name="facility_indicator_category"> Takwimu za Kituoni </string>
 
 </resources>
