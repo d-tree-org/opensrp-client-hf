@@ -207,7 +207,7 @@ public class ReportsDashboardFragment extends Fragment implements ReportContract
     }
 
     private void createReportViews(ViewGroup mainLayout){
-        mainLayout.addView(getTitleView("All Referrals Indicators within the ward"));
+        mainLayout.addView(getTitleView(getResources().getString(R.string.ward_indicator_category)));
 
         NumericDisplayModel allReferralsWard = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.allReferrals, R.string.all_ward_referrals, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), allReferralsWard).createView());
@@ -223,7 +223,7 @@ public class ReportsDashboardFragment extends Fragment implements ReportContract
 
         mainLayout.addView(spacerView);
 
-        mainLayout.addView(getTitleView("Referral Indicators within the facility"));
+        mainLayout.addView(getTitleView(getResources().getString(R.string.facility_indicator_category)));
 
         NumericDisplayModel totalAttendedReferralsHf = getIndicatorDisplayModel(LATEST_COUNT, ChartUtils.totalHfAttendedReferrals, R.string.hf_last_month_attended_referrals, indicatorTallies);
         mainLayout.addView(new NumericIndicatorView(getContext(), totalAttendedReferralsHf).createView());
