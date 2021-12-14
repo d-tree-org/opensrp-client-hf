@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import org.smartregister.hf.contract.AddoHomeFragmentContract;
+import org.smartregister.hf.contract.HomeFragmentContract;
 import org.smartregister.hf.interactor.AddoHomeFragmentInteractor;
 import org.smartregister.hf.model.DashboardDataModel;
 
@@ -38,7 +38,7 @@ public class HomescreenViewModel extends ViewModel {
     private void loadAttendedReferrals(){
         AddoHomeFragmentInteractor interactor = new AddoHomeFragmentInteractor();
         metrics  = new MutableLiveData<>();
-        interactor.fetchDashboardData(new AddoHomeFragmentContract.InteractorCallback() {
+        interactor.fetchDashboardData(new HomeFragmentContract.InteractorCallback() {
             @Override
             public void onDashboardDataFetched(DashboardDataModel dashboardData) {
                 metrics.setValue(dashboardData);

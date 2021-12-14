@@ -8,13 +8,13 @@ import org.smartregister.view.contract.BaseRegisterFragmentContract;
 import java.util.List;
 import java.util.Set;
 
-public interface AddoHomeFragmentContract {
+public interface HomeFragmentContract {
 
     interface View extends BaseRegisterFragmentContract.View {
 
         void initializeAdapter(Set<org.smartregister.configurableviews.model.View> visibleColumns);
 
-        AddoHomeFragmentContract.Presenter presenter();
+        HomeFragmentContract.Presenter presenter();
 
     }
 
