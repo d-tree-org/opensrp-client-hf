@@ -40,12 +40,12 @@ public class VillageClientsProvider implements RecyclerViewProvider<VillageClien
     private final Set<org.smartregister.configurableviews.model.View> visibleColumns;
 
     public VillageClientsProvider(Context context, View.OnClickListener paginationClickListener, View.OnClickListener onClickListener,
-                                  Set<org.smartregister.configurableviews.model.View> visibleColumns){
+                                  Set<org.smartregister.configurableviews.model.View> vc){
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.onClickListener = onClickListener;
         this.paginationClickListener = paginationClickListener;
         this.context = context;
-        this.visibleColumns = visibleColumns;
+        this.visibleColumns = vc;
     }
 
     @Override
