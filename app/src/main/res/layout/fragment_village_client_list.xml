@@ -52,7 +52,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:padding="10dp"
-            android:text="@string/empty_string"
+            android:text="@string/no_record_found"
             android:visibility="gone" />
 
     </FrameLayout>
