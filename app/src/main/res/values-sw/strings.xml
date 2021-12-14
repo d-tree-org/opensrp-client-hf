@@ -64,6 +64,8 @@
     <string name="search_results_return">Rudi kwenye matokeo</string>
     <string name="global_search">Tafuta kote</string>
 
+    <string name="no_record_found">Rekodi haijapatikana</string>
+
     <string name="complete_referral"> Hakiki Tembeleo </string>
     <string name="complete_referral_confirmation"> Hakiki, mteja amefika katika kituo cha afya? </string>
 
