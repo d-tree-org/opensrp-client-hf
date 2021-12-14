@@ -65,6 +65,9 @@
     <string name="global_search">Tafuta kote</string>
 
     <string name="no_record_found">Rekodi haijapatikana</string>
+    <string name="search_bar_hint">Ingiza jina la kwanza au la mwisho</string>
+    <string name="patient_name"> Jina </string>
+    <string name="age_13y">Umri: 13y</string>
 
     <string name="complete_referral"> Hakiki Tembeleo </string>
     <string name="complete_referral_confirmation"> Hakiki, mteja amefika katika kituo cha afya? </string>
