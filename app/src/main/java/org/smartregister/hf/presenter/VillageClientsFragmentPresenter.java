@@ -7,13 +7,14 @@ import org.smartregister.hf.util.CoreConstants;
 
 import java.lang.ref.WeakReference;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class VillageClientsFragmentPresenter implements VillageClientsFragmentContract.Presenter {
 
     private WeakReference<VillageClientsFragmentContract.View> viewReference;
     private VillageClientsFragmentContract.Model model;
 
-    private Set<View> visibleColumns;
+    private Set<View> visibleColumns = new TreeSet<>();
     private String viewConfigurationsIdentifier;
     private String selectedVillage;
 
