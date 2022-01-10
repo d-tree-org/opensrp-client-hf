@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.smartregister.hf.R;
 import org.smartregister.hf.adapter.AddoLocationRecyclerViewProviderAdapter;
-import org.smartregister.hf.contract.AddoHomeFragmentContract;
+import org.smartregister.hf.contract.HomeFragmentContract;
 import org.smartregister.hf.custom_views.NavigationMenu;
 import org.smartregister.hf.model.AddoHomeFragmentModel;
 import org.smartregister.hf.model.DashboardDataModel;
@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragmentContract.View {
+public class HomeFragment extends BaseRegisterFragment implements HomeFragmentContract.View {
 
     private RecyclerView addoLocationView;
     private RecyclerView.Adapter mAdapter;
@@ -98,9 +98,12 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
 
         AddoLocationRecyclerViewProviderAdapter mAdapter = new AddoLocationRecyclerViewProviderAdapter(villageLocations
                 , this.getActivity());
+
+        assert view != null;
         view.setAdapter(mAdapter);
+
         mAdapter.setOnItemClickListener(village -> {
-            // if the selected item is other village then take the user to Advanced search otherwise fp scan
+        // if the selected item is other village then take the user to Advanced search otherwise fp scan
             if (!village.equalsIgnoreCase(String.valueOf(R.string.addo_other_village))) {
                 model.setSelectedVillage(village);
                 ((BaseRegisterActivity) Objects.requireNonNull(getActivity())).switchToFragment(2);
@@ -154,8 +157,8 @@ public class HomeFragment extends BaseRegisterFragment implements AddoHomeFragme
     }
 
     @Override
-    public AddoHomeFragmentContract.Presenter presenter() {
-        return (AddoHomeFragmentContract.Presenter) presenter;
+    public HomeFragmentContract.Presenter presenter() {
+        return (HomeFragmentContract.Presenter) presenter;
     }
 
     @Override

@@ -4,7 +4,7 @@ import android.util.Log;
 
 import org.smartregister.CoreLibrary;
 import org.smartregister.hf.BuildConfig;
-import org.smartregister.hf.contract.AddoHomeFragmentContract;
+import org.smartregister.hf.contract.HomeFragmentContract;
 import org.smartregister.hf.fragment.HomeFragment;
 import org.smartregister.configurableviews.ConfigurableViewsLibrary;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class AddoHomeFragmentModel implements AddoHomeFragmentContract.Model {
+public class AddoHomeFragmentModel implements HomeFragmentContract.Model {
 
     public static AddoHomeFragmentModel instance;
 

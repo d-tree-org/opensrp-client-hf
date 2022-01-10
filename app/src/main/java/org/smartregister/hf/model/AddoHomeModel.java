@@ -1,11 +1,11 @@
 package org.smartregister.hf.model;
 
 import org.json.JSONObject;
-import org.smartregister.hf.contract.AddoHomeContract;
+import org.smartregister.hf.contract.HomeContract;
 
 import java.util.List;
 
-public class AddoHomeModel implements AddoHomeContract.Model {
+public class AddoHomeModel implements HomeContract.Model {
     @Override
     public void registerViewConfigurations(List<String> var1) {
 
