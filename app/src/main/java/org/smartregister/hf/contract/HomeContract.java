@@ -2,12 +2,11 @@ package org.smartregister.hf.contract;
 
 import org.json.JSONObject;
 import org.smartregister.view.contract.BaseRegisterContract;
-import org.smartregister.view.contract.BaseRegisterFragmentContract;
 
 import java.util.Date;
 import java.util.List;
 
-public interface AddoHomeContract {
+public interface HomeContract {
 
     interface Model {
         void registerViewConfigurations(List<String> var1);
@@ -19,7 +18,7 @@ public interface AddoHomeContract {
     }
 
     interface View extends BaseRegisterContract.View {
-        AddoHomeContract.Presenter getPresenter();
+        HomeContract.Presenter getPresenter();
     }
 
     interface Presenter extends BaseRegisterContract.Presenter {

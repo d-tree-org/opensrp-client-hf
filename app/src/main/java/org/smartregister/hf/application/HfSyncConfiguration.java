@@ -41,6 +41,8 @@ public class HfSyncConfiguration extends SyncConfiguration {
             locationIds = locationIds.subList(index, locationIds.size());
         }
 
+        locationIds.add(userLocationId);
+
         return StringUtils.join(locationIds, ",");
     }
 

@@ -1,28 +1,28 @@
 package org.smartregister.hf.contract;
 
 import org.smartregister.configurableviews.model.RegisterConfiguration;
+import org.smartregister.configurableviews.model.View;
 import org.smartregister.configurableviews.model.ViewConfiguration;
 import org.smartregister.view.contract.BaseRegisterFragmentContract;
 
-import java.util.List;
 import java.util.Set;
 
-public interface AddoHomeFragmentContract {
+public interface VillageClientsFragmentContract {
 
     interface View extends BaseRegisterFragmentContract.View {
-
-        void initializeAdapter(Set<org.smartregister.configurableviews.model.View> visibleColumns);
-
-
-        AddoHomeFragmentContract.Presenter presenter();
-
+        void initializeAdapter(Set<org.smartregister.configurableviews.model.View> configurableColumns);
+        VillageClientsFragmentContract.Presenter presenter();
     }
 
-    interface Presenter extends BaseRegisterFragmentContract.Presenter{
+    interface Presenter extends BaseRegisterFragmentContract.Presenter {
 
-        List<String> getLocations();
+        String getMainCondition();
 
-        void processViewConfigurations();
+        String getMainTable();
+
+        String getCountSelect();
+
+        void setSelectedVillage(String selectedVillage);
 
     }
 
@@ -34,10 +34,10 @@ public interface AddoHomeFragmentContract {
 
         Set<org.smartregister.configurableviews.model.View> getRegisterActiveColumns(String viewConfigurationIdentifier);
 
-        List<String> getAddoUserAllowedLocation();
+        String countSelect(String tableName, String mainCondition);
+
+        String mainSelect(String tableName, String mainCondition);
+
     }
 
-    interface Interactor {
-
-    }
 }

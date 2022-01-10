@@ -35,6 +35,7 @@ import org.smartregister.family.domain.FamilyMetadata;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
+import org.smartregister.reporting.ReportingLibrary;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.Repository;
 import org.smartregister.simprint.SimPrintsLibrary;
@@ -100,6 +101,9 @@ public class HfApplication extends DrishtiApplication {
         FamilyLibrary.getInstance().setClientProcessorForJava(KituoniClientProcessor.getInstance(getApplicationContext()));
         SimPrintsLibrary.init(mInstance, BuildConfig.SIMPRINT_PROJECT_ID, BuildConfig.SIMPRINT_MODULE_ID, getRepository());
         AncLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
+
+        // Init Reporting library
+        ReportingLibrary.init(context, getRepository(), null, BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
 
         this.jsonSpecHelper = new JsonSpecHelper(this);
 
@@ -218,7 +222,7 @@ public class HfApplication extends DrishtiApplication {
                     DBConstants.KEY.LAST_NAME, DBConstants.KEY.UNIQUE_ID};
         } else if (tableName.equals(Constants.TABLE_NAME.FAMILY_MEMBER) || tableName.equals(Constants.TABLE_NAME.CHILD)) {
             return new String[]{DBConstants.KEY.BASE_ENTITY_ID, DBConstants.KEY.FIRST_NAME, DBConstants.KEY.MIDDLE_NAME,
-                    DBConstants.KEY.LAST_NAME, DBConstants.KEY.UNIQUE_ID};
+                    DBConstants.KEY.LAST_NAME, DBConstants.KEY.UNIQUE_ID, DBConstants.KEY.DOD};
         }
         return null;
     }

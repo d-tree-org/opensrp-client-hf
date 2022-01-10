@@ -16,6 +16,7 @@ import org.smartregister.hf.custom_views.NavigationMenu;
 import org.smartregister.hf.fragment.HomeFragment;
 import org.smartregister.hf.fragment.AdvancedSearchFragment;
 import org.smartregister.hf.fragment.ScanFingerPrintFragment;
+import org.smartregister.hf.fragment.VillageClientsFragment;
 import org.smartregister.hf.util.Constants;
 import org.smartregister.family.activity.BaseFamilyRegisterActivity;
 import org.smartregister.family.model.BaseFamilyRegisterModel;
@@ -63,17 +64,12 @@ public class HomeActivity extends BaseFamilyRegisterActivity {
         return new HomeFragment();
     }
 
-    /*@Override
-    protected Fragment[] getOtherFragments() {
-        return new Fragment[0];
-    }*/
-
     @Override
     protected Fragment[] getOtherFragments() {
 
         Fragment[] fragments = new Fragment[3];
         fragments[0] = new AdvancedSearchFragment(true);
-        fragments[1] = new ScanFingerPrintFragment();
+        fragments[1] = new VillageClientsFragment();
         fragments[2] = new AdvancedSearchFragment(false);
 
         return fragments;
@@ -103,17 +99,4 @@ public class HomeActivity extends BaseFamilyRegisterActivity {
         }
     }
 
-    public static class AddoHomeSharedViewModel extends ViewModel {
-        private final MutableLiveData<String> selectedVillage = new MutableLiveData<String>();
-
-        public AddoHomeSharedViewModel() {}
-
-        public void setSelectedVillage(String village) {
-            selectedVillage.setValue(village);
-        }
-
-        public LiveData<String> getSelectedVillage() {
-            return selectedVillage;
-        }
-    }
 }

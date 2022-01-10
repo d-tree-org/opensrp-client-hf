@@ -164,7 +164,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         ivLogo.setImageResource(R.drawable.ic_addo_image);
 
         TextView tvLogo = rootView.findViewById(R.id.tvLogo);
-        tvLogo.setText("Afyatek ADDO App");
+        tvLogo.setText("Afyatek Kituoni App");
 
         if (pbSync != null) {
 
