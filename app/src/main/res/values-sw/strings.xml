@@ -64,6 +64,11 @@
     <string name="search_results_return">Rudi kwenye matokeo</string>
     <string name="global_search">Tafuta kote</string>
 
+    <string name="no_record_found">Rekodi haijapatikana</string>
+    <string name="search_bar_hint">Ingiza jina la kwanza au la mwisho</string>
+    <string name="patient_name"> Jina </string>
+    <string name="age_13y">Umri: 13y</string>
+
     <string name="complete_referral"> Hakiki Tembeleo </string>
     <string name="complete_referral_confirmation"> Hakiki, mteja amefika katika kituo cha afya? </string>
 
@@ -82,5 +87,7 @@
     <string name="hf_last_month_attended_referrals"> Rufaa zote zilizohudumiwa mwezi uliopita kituoni </string>
     <string name="hf_current_month_attended_referrals"> Rufaa zilizohudumiwa katika kituo mwezi huu </string>
 
+    <string name="ward_indicator_category">Takwimu za Kata Nzima</string>
+    <string name="facility_indicator_category"> Takwimu za Kituoni </string>
 
 </resources>

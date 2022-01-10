@@ -1,16 +1,13 @@
 package org.smartregister.hf.interactor;
 
-import org.smartregister.hf.contract.AddoHomeContract;
-import org.smartregister.hf.contract.AddoHomeFragmentContract;
+import org.smartregister.hf.contract.HomeFragmentContract;
 import org.smartregister.hf.model.DashboardDataModel;
 import org.smartregister.hf.util.TaksUtils;
 
-import java.util.Date;
-
-public class AddoHomeFragmentInteractor implements AddoHomeFragmentContract.Interactor {
+public class AddoHomeFragmentInteractor implements HomeFragmentContract.Interactor {
 
     @Override
-    public void fetchDashboardData(AddoHomeFragmentContract.InteractorCallback callback) {
+    public void fetchDashboardData(HomeFragmentContract.InteractorCallback callback) {
 
         int lastThreeDaysReferralCount = TaksUtils.getLastThreeDaysTotalReferralCount();
         int attended = TaksUtils.getAttendedReferrals();
