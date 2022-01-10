@@ -27,6 +27,9 @@
     <string name="hf_last_month_attended_referrals"> Last Month Attended Referrals By this Facility </string>
     <string name="hf_current_month_attended_referrals"> Current Month Attended Referrals By this Facility </string>
 
+    <string name="ward_indicator_category">All Referrals Indicators within the Ward</string>
+    <string name="facility_indicator_category"> All Referrals Indicators within the Facility </string>
+
     <string name="title_family_detail">Family Detail</string>
     <string name="child_register_title">Child Clients</string>
     <string name="return_to_all_children">Return to all children</string>
