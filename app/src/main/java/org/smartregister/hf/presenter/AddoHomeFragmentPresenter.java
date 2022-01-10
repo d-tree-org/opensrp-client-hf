@@ -1,27 +1,26 @@
 package org.smartregister.hf.presenter;
 
-import org.smartregister.hf.contract.AddoHomeFragmentContract;
+import org.smartregister.hf.contract.HomeFragmentContract;
 import org.smartregister.hf.interactor.AddoHomeFragmentInteractor;
 import org.smartregister.hf.model.AddoHomeFragmentModel;
 import org.smartregister.configurableviews.model.RegisterConfiguration;
 import org.smartregister.configurableviews.model.View;
-import org.smartregister.hf.model.DashboardDataModel;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class AddoHomeFragmentPresenter implements AddoHomeFragmentContract.Presenter{
+public class AddoHomeFragmentPresenter implements HomeFragmentContract.Presenter{
 
-    protected WeakReference<AddoHomeFragmentContract.View> viewReference;
-    protected AddoHomeFragmentContract.Model model;
+    protected WeakReference<HomeFragmentContract.View> viewReference;
+    protected HomeFragmentContract.Model model;
     protected RegisterConfiguration config;
     protected Set<View> visibleColumns = new TreeSet<>();
     private String viewConfigurationIdentifier;
-    private AddoHomeFragmentContract.Interactor interactor;
+    private HomeFragmentContract.Interactor interactor;
 
-    public AddoHomeFragmentPresenter(AddoHomeFragmentContract.View viewReference, AddoHomeFragmentContract.Model model,
+    public AddoHomeFragmentPresenter(HomeFragmentContract.View viewReference, HomeFragmentContract.Model model,
                                      String viewConfigurationIdentifier) {
         this.viewReference = new WeakReference<>(viewReference);
         this.model = AddoHomeFragmentModel.getInstance();
@@ -37,7 +36,7 @@ public class AddoHomeFragmentPresenter implements AddoHomeFragmentContract.Prese
         this.visibleColumns = visibleColumns;
     }
 
-    protected AddoHomeFragmentContract.View getView() {
+    protected HomeFragmentContract.View getView() {
         if (viewReference != null)
             return viewReference.get();
         else

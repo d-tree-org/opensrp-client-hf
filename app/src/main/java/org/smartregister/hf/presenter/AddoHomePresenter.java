@@ -1,19 +1,19 @@
 package org.smartregister.hf.presenter;
 
-import org.smartregister.hf.contract.AddoHomeContract;
-import org.smartregister.hf.contract.AddoHomeContract.View;
+import org.smartregister.hf.contract.HomeContract;
+import org.smartregister.hf.contract.HomeContract.View;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class AddoHomePresenter implements AddoHomeContract.Presenter {
+public class AddoHomePresenter implements HomeContract.Presenter {
 
     private WeakReference<View> viewReference;
-    private AddoHomeContract.Model model;
-    private AddoHomeContract.Interactor interactor;
+    private HomeContract.Model model;
+    private HomeContract.Interactor interactor;
 
-    public AddoHomePresenter(AddoHomeContract.View addoHomeView, AddoHomeContract.Model model,
-                             AddoHomeContract.Interactor interactor) {
+    public AddoHomePresenter(HomeContract.View addoHomeView, HomeContract.Model model,
+                             HomeContract.Interactor interactor) {
 
         this.viewReference = new WeakReference(addoHomeView);
         this.model = model;

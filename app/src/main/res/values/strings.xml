@@ -20,6 +20,11 @@
     <string name="search_results_return">Return to Search Results</string>
     <string name="global_search">Global Search</string>
 
+    <string name="no_record_found">No Record Found</string>
+    <string name="search_bar_hint">Enter first name or last name</string>
+    <string name="patient_name"> Patient Name </string>
+    <string name="age_13y">Age: 13y</string>
+
     <string name="all_ward_referrals"> Last month issued Referrals (Ward) </string>
     <string name="all_ward_attended_referrals"> Last month Attended Referrals (Ward) </string>
     <string name="all_ward_current_month_attended_referrals"> Current Month Attended Referrals (Ward) </string>
