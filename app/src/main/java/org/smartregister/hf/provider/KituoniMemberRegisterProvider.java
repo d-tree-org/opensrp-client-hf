@@ -33,7 +33,7 @@ import java.util.Set;
 
 import timber.log.Timber;
 
-import org.smartregister.hf.util.TaksUtils;
+import org.smartregister.hf.util.TaskUtils;
 
 public class KituoniMemberRegisterProvider extends FamilyMemberRegisterProvider {
 
@@ -59,7 +59,7 @@ public class KituoniMemberRegisterProvider extends FamilyMemberRegisterProvider 
 
         CommonPersonObjectClient pc = (CommonPersonObjectClient) client;
 
-        if (TaksUtils.clientHasReferral(pc.entityId())){
+        if (TaskUtils.clientHasReferral(pc.entityId())){
             vh.clientReferred.setVisibility(View.VISIBLE);
         }else {
             vh.clientReferred.setVisibility(View.GONE);

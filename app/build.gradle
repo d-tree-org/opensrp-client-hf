@@ -29,8 +29,8 @@ android {
         applicationId "org.smartregister.hf"
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
-        versionCode 9
-        versionName "0.6.1"
+        versionCode 10
+        versionName "0.7.0"
         multiDexEnabled true
 
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
@@ -268,6 +268,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.rengwuxian.materialedittext', module: 'library'
+    }
+
+    implementation ("org.smartregister:opensrp-client-chw-referral:1.1.2-SNAPSHOT@aar"){
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+        exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
         exclude group: 'com.rengwuxian.materialedittext', module: 'library'
     }
 

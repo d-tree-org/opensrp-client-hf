@@ -16,6 +16,7 @@
     <string name="menu_anc_clients">ANC Clients</string>
     <string name="menu_child_clients">Child Clients</string>
     <string name="menu_hiv_clients">HIV Clients</string>
+    <string name="menu_referrals">Referrals</string>
 
     <string name="search_results_return">Return to Search Results</string>
     <string name="global_search">Global Search</string>
@@ -448,6 +449,18 @@
     <string name="skip_to_search">Skip to search</string>
     <string name="return_to_select_village">Return to select village</string>
     <string name="scan_fingerprint">Scan fingerprint</string>
+
+    <!-- Referral register -->
+    <string name="child_hf_referral_text">Child - HF Referral</string>
+    <string name="child_addo_linkage_text">Child - ADDO Linkage</string>
+    <string name="anc_hf_referral_text">ANC - HF Referral</string>
+    <string name="anc_addo_linkage_text">ANC - ADDO Linkage</string>
+    <string name="adolescent_hf_referral_text">Adolescent - HF Referral</string>
+    <string name="adolescent_addo_linkage_text">Adolescent - ADDO Linkage</string>
+    <string name="pnc_hf_referral_text">PNC - HF Referral</string>
+    <string name="pnc_addo_linkage_text">PNC - ADDO Linkage</string>
+    <string name="followup">FOLLOW UP</string>
+    <string name="arrived_text"> Arrived </string>
 
     <string name="return_to_family_profile">Return to family profile</string>
 
