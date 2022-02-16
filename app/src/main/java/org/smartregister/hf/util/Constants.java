@@ -10,6 +10,7 @@ public class Constants {
         public static final String FAMILY_MEMBER_REGISTER = "family_member_register";
         public static final String ANC_REGISTER = "anc_register";
         public static final String MALARIA_REGISTER = "anc_malaria_confirmation";
+        public static final String REFERRAL_REGISTER = "referrals_register";
 
     }
 
@@ -390,6 +391,18 @@ public class Constants {
 
         public static final String TEST_ENVIROMENT = "test";
         public static final String PRODUCTION_ENVIROMENT = "production";
+    }
+
+    public interface DB_CONSTANTS {
+        String ID = "_id";
+
+        String PRIORITY = "priority";
+        String AUTHORED_ON = "authored_on";
+        String TASK_STATUS = "status";
+        String TASK_CODE = "code";
+        String TASK_STATUS_READY = "READY";
+        String TASK_STATUS_REFERRAL = "Referral";
+        String TASK_STATUS_IN_PROGRESS = "IN PROGRESS";
     }
 
 }

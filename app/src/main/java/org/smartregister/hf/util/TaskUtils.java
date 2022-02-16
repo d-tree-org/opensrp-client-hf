@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 /**
  * Author : Isaya Mollel on 2020-05-18.
  */
-public class TaksUtils {
+public class TaskUtils {
 
     public static int getReferralCount(){
         Cursor cursor = null;
