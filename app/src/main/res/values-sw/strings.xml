@@ -50,6 +50,8 @@
     <string name="pnc_addo_linkage_text">Aliyejifungua - Ushauri kwenda DLDM</string>
     <string name="followup">FUATILIA</string>
     <string name="arrived_text"> Amewasili </string>
+    <string name="overdue">Imechelew&#160;</string>
+    <string name="due">Tayari&#160;</string>
 
     <string name="return_to_family_profile">Rudi kwenye taarifa binafsi za kaya</string>
 
