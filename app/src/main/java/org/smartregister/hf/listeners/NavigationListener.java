@@ -3,10 +3,10 @@ package org.smartregister.hf.listeners;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
-import android.widget.Toast;
 
 import org.smartregister.hf.R;
 import org.smartregister.hf.activity.HomeActivity;
+import org.smartregister.hf.activity.ReferralRegisterActivity;
 import org.smartregister.hf.activity.ReportsActivity;
 import org.smartregister.hf.adapter.NavigationAdapter;
 import org.smartregister.hf.util.Constants;
@@ -36,6 +36,9 @@ public class NavigationListener implements View.OnClickListener {
                         break;
                     case Constants.DrawerMenu.REPORTS:
                         startRegisterActivity(ReportsActivity.class);
+                        break;
+                    case Constants.DrawerMenu.REFERRALS:
+                        startRegisterActivity(ReferralRegisterActivity.class);
                         break;
                     default:
                         break;

@@ -20,7 +20,6 @@ import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.domain.Task;
-import org.smartregister.family.interactor.FamilyOtherMemberProfileInteractor;
 import org.smartregister.family.util.AppExecutors;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.Utils;
@@ -30,7 +29,7 @@ import org.smartregister.hf.dao.AncDao;
 import org.smartregister.hf.dao.ChildDao;
 import org.smartregister.hf.dao.PNCDao;
 import org.smartregister.hf.util.CoreConstants;
-import org.smartregister.hf.util.TaksUtils;
+import org.smartregister.hf.util.TaskUtils;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.repository.AllSharedPreferences;
 
@@ -69,7 +68,7 @@ public class FamilyFocusedMemberProfileInteractor implements FamilyFocusedMember
 
         String forId = baseEntityId;
 
-        Set<Task> tasks = TaksUtils.getReferralTask(forId);
+        Set<Task> tasks = TaskUtils.getReferralTask(forId);
         try {
             Task referralTasks = tasks.iterator().next();
             if (referralTasks != null){

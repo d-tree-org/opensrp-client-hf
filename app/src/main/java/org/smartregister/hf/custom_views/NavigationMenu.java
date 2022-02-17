@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -25,7 +24,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.ybq.android.spinkit.style.FadingCircle;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
