@@ -5,11 +5,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
+import android.widget.Button;
 
+import org.smartregister.AllConstants;
+import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.R;
 import org.smartregister.hf.fragment.SwitchEnvironmentFragment;
 import org.smartregister.hf.presenter.LoginPresenter;
 import org.smartregister.hf.util.Constants;
+import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.util.Utils;
 import org.smartregister.view.activity.BaseLoginActivity;
 import org.smartregister.view.contract.BaseLoginContract;
 
@@ -73,13 +78,37 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     public void setServerURL() {
         try {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            String env = sharedPreferences.getString(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT,"");
-            if(env.isEmpty()){
+            String env = sharedPreferences.getString(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, "");
+            if (env.isEmpty()) {
                 SwitchEnvironmentFragment dialog = new SwitchEnvironmentFragment();
                 dialog.show(this.getSupportFragmentManager(), "SwitchEnvironmentFragment");
+            } else {
+                if (env.equalsIgnoreCase(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT)) {
+                    configureUrl(env, BuildConfig.opensrp_url_production);
+                } else {
+                    configureUrl(env, BuildConfig.opensrp_url_staging);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void configureUrl(String env, String baseUrl) {
+        AllSharedPreferences preferences = Utils.getAllSharedPreferences();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        preferences.savePreference(AllConstants.DRISHTI_BASE_URL, baseUrl);
+        sharedPreferences.edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).apply();
+        preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, env);
+        setButtonIndicator(env);
+    }
+
+    private void setButtonIndicator(String env) {
+        Button loginButton = findViewById(R.id.login_login_btn);
+        if (env.equals(Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT)) {
+            loginButton.setBackgroundColor(getResources().getColor(R.color.test_environment_color));
+        } else {
+            loginButton.setBackgroundColor(getResources().getColor(R.color.primary_color));
         }
     }
 }
