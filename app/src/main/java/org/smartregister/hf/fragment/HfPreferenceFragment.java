@@ -11,9 +11,12 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 
 import org.json.JSONObject;
+import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.R;
 import org.smartregister.hf.repository.HfSharedPreference;
 import org.smartregister.hf.util.Constants;
@@ -23,7 +26,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
-public class HfPreferenceFragment extends PreferenceFragmentCompat {
+public class HfPreferenceFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceClickListener {
+    private int countClick = 0;
+    private SwitchPreferenceCompat switchPreferenceCompat;
+    private Preference preference = findPreference("preference");
 
     public static boolean deleteDir(File dir) {
         if (dir != null && dir.isDirectory()) {
@@ -42,6 +48,13 @@ public class HfPreferenceFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         setPreferencesFromResource(R.xml.hf_switch_env_preference, rootKey);
+        switchPreferenceCompat = findPreference("enable_production");
+        setSwitchStatus();
+        preference = findPreference("preference");
+        if (preference != null) {
+            preference.setOnPreferenceClickListener(this);
+        }
+
     }
 
     private void switchToProduction() {
@@ -115,6 +128,30 @@ public class HfPreferenceFragment extends PreferenceFragmentCompat {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        if (preference.getKey().equalsIgnoreCase("preference")) {
+            if (countClick < 7) {
+                countClick++;
+            }
+            if (countClick == 7) {
+                switchPreferenceCompat.setVisible(true);
+                preference.setVisible(false);
+            }
+        }
+        return false;
+    }
+
+    public void setSwitchStatus(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String env = sharedPreferences.getString(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, "");
+        if (env.equalsIgnoreCase(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT)) {
+            switchPreferenceCompat.setChecked(true);
+        } else {
+            switchPreferenceCompat.setChecked(false);
         }
     }
 }
