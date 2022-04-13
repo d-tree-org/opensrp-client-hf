@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
@@ -58,8 +59,15 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.add(getString(R.string.switch_environment));
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getTitle().toString().equalsIgnoreCase("Settings")) {
+        if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.switch_environment))) {
             startActivity(new Intent(this, HfSettingsActivity.class));
             return true;
         }
