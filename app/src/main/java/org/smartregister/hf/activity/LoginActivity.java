@@ -19,6 +19,9 @@ import org.smartregister.util.Utils;
 import org.smartregister.view.activity.BaseLoginActivity;
 import org.smartregister.view.contract.BaseLoginContract;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * Author : Isaya Mollel on 2019-10-18.
  */
@@ -92,9 +95,9 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
                 dialog.show(this.getSupportFragmentManager(), "SwitchEnvironmentFragment");
             } else {
                 if (env.equalsIgnoreCase(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT)) {
-                    configureUrl(env, BuildConfig.opensrp_url_production);
+                    updateEnvironmentUrl(env, BuildConfig.opensrp_url_production);
                 } else {
-                    configureUrl(env, BuildConfig.opensrp_url_staging);
+                    updateEnvironmentUrl(env, BuildConfig.opensrp_url_staging);
                 }
             }
         } catch (Exception e) {
@@ -102,13 +105,20 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
         }
     }
 
-    private void configureUrl(String env, String baseUrl) {
-        AllSharedPreferences preferences = Utils.getAllSharedPreferences();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        preferences.savePreference(AllConstants.DRISHTI_BASE_URL, baseUrl);
-        sharedPreferences.edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).apply();
-        preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, env);
-        setButtonIndicator(env);
+    private void updateEnvironmentUrl(String env, String baseUrl) {
+        try {
+            AllSharedPreferences preferences = Utils.getAllSharedPreferences();
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            URL url = new URL(baseUrl);
+            preferences.saveHost(url.getProtocol() + "://" + url.getHost());
+            preferences.savePort(url.getPort());
+            preferences.savePreference(AllConstants.DRISHTI_BASE_URL, baseUrl);
+            sharedPreferences.edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).apply();
+            preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, env);
+            setButtonIndicator(env);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setButtonIndicator(String env) {

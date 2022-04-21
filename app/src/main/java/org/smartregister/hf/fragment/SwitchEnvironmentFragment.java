@@ -19,6 +19,9 @@ import org.smartregister.hf.util.Constants;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.util.Utils;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class SwitchEnvironmentFragment extends DialogFragment {
     @NonNull
     @Override
@@ -37,7 +40,7 @@ public class SwitchEnvironmentFragment extends DialogFragment {
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                configureUrl(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT, BuildConfig.opensrp_url_production);
+                updateEnvironmentUrl(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT, BuildConfig.opensrp_url_production);
             }
         });
         return builder.create();
@@ -45,19 +48,26 @@ public class SwitchEnvironmentFragment extends DialogFragment {
 
     private void setSelectedEnvironment(String selectedEnvironment) {
         if (selectedEnvironment.equalsIgnoreCase(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT)) {
-            configureUrl(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT, BuildConfig.opensrp_url_production);
+            updateEnvironmentUrl(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT, BuildConfig.opensrp_url_production);
         } else {
-            configureUrl(Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT, BuildConfig.opensrp_url_staging);
+            updateEnvironmentUrl(Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT, BuildConfig.opensrp_url_staging);
         }
     }
 
-    private void configureUrl(String env, String baseUrl) {
-        AllSharedPreferences preferences = Utils.getAllSharedPreferences();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        preferences.savePreference(AllConstants.DRISHTI_BASE_URL, baseUrl);
-        sharedPreferences.edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).apply();
-        preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, env);
-        setButtonIndicator(env);
+    private void updateEnvironmentUrl(String env, String baseUrl) {
+        try {
+            AllSharedPreferences preferences = Utils.getAllSharedPreferences();
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            URL url = new URL(baseUrl);
+            preferences.saveHost(url.getProtocol() + "://" + url.getHost());
+            preferences.savePort(url.getPort());
+            preferences.savePreference(AllConstants.DRISHTI_BASE_URL, baseUrl);
+            sharedPreferences.edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).apply();
+            preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, env);
+            setButtonIndicator(env);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setButtonIndicator(String env) {
