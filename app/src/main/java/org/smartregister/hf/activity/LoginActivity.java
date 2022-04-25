@@ -92,6 +92,7 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
             String env = sharedPreferences.getString(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, "");
             if (env.isEmpty()) {
                 SwitchEnvironmentFragment dialog = new SwitchEnvironmentFragment();
+                dialog.setCancelable(false);
                 dialog.show(this.getSupportFragmentManager(), "SwitchEnvironmentFragment");
             } else {
                 if (env.equalsIgnoreCase(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT)) {
