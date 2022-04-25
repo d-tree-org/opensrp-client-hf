@@ -490,4 +490,6 @@
 
     <string name="has_the_client_arrived_at_the_facility">Has the client arrived at the facility?</string>
 
+    <string name="switch_environment">Switch Environment</string>
+
 </resources>

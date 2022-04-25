@@ -5,141 +5,130 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
-import android.preference.SwitchPreference;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import org.json.JSONObject;
-import org.smartregister.hf.repository.HfSharedPreference;
-import org.smartregister.hf.util.Constants;
-import org.smartregister.simprint.OnDialogButtonClick;
-import org.smartregister.view.activity.SettingsActivity;
-
+import org.smartregister.AllConstants;
+import org.smartregister.hf.BuildConfig;
 import org.smartregister.hf.R;
+import org.smartregister.hf.util.Constants;
+import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.simprint.OnDialogButtonClick;
+import org.smartregister.util.Utils;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 
-public class HfPreferenceFragment extends SettingsActivity.MyPreferenceFragment {
+public class HfPreferenceFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
+    private int countClick = 0;
+    private SwitchPreferenceCompat switchPreferenceCompat;
+    private Preference preference = findPreference("preference");
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+
+        return dir.delete();
+    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+        setPreferencesFromResource(R.xml.hf_switch_env_preference, rootKey);
+        switchPreferenceCompat = findPreference("enable_production");
+        setButtonSwitchStatus();
+        preference = findPreference("preference");
+        if (preference != null)
+            preference.setOnPreferenceClickListener(this);
+        switchPreferenceCompat.setOnPreferenceChangeListener(this);
+    }
 
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference switchReference = database.getReference("config/switch");
+    private void clearApplicationData() {
+        File appDir = new File(Environment.getDataDirectory() + File.separator + "data/org.smartregister.hf");
+        if (appDir.exists()) {
+            String[] children = appDir.list();
+            for (String s : children) {
+                if (!s.equals("lib")) {
+                    deleteDir(new File(appDir, s));
+                    Log.i("TAG", "File /data/data/APP_PACKAGE/" + s + " DELETED");
+                }
+            }
+        } else {
+            // TODO
+        }
 
-        // Read from the database
-        switchReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                boolean value = dataSnapshot.getValue(Boolean.class);
-                if (value){
+        getActivity().finish();
+        System.exit(0);
+    }
 
-                    addPreferencesFromResource(R.xml.hfpreference);
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        if (preference.getKey().equalsIgnoreCase("preference")) {
+            if (countClick < 7) {
+                countClick++;
+            }
+            if (countClick == 7) {
+                switchPreferenceCompat.setVisible(true);
+                preference.setVisible(false);
+            }
+        }
+        return false;
+    }
 
-                    Preference addoEnvironmentPreference = findPreference("enable_production");
+    public void setButtonSwitchStatus() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String env = sharedPreferences.getString(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, "");
+        switchPreferenceCompat.setChecked(env.equalsIgnoreCase(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT));
+    }
 
-                    if (addoEnvironmentPreference != null) {
-
-                        final SwitchPreference addoSwitchPreference = (SwitchPreference) addoEnvironmentPreference;
-
-                        final boolean[] userAgreed = {false};
-
-                        addoSwitchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                            @Override
-                            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                                String environment = preference.getSharedPreferences().getString(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT);
-
-                                if(newValue instanceof Boolean && ((Boolean) newValue != preference.getSharedPreferences().getBoolean("enable_production", false))) {
-                                    if (Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT.equalsIgnoreCase(environment)) {
-                                        confirmSwitchingEnvironment(getActivity(), new OnDialogButtonClick() {
-                                            @Override
-                                            public void onOkButtonClick() {
-                                                switchToProduction();
-                                                preference.getSharedPreferences().edit().putBoolean("enable_production", true).commit();
-                                                addoSwitchPreference.setChecked(true);
-                                                userAgreed[0] = true;
-                                            }
-
-                                            @Override
-                                            public void onCancelButtonClick() {
-                                                addoSwitchPreference.setChecked(false);
-                                                userAgreed[0] = false;
-                                            }
-                                        }, Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT);
-
-                                    } else {
-                                        confirmSwitchingEnvironment(getActivity(), new OnDialogButtonClick() {
-                                            @Override
-                                            public void onOkButtonClick() {
-                                                switchToTest();
-                                                preference.getSharedPreferences().edit().putBoolean("enable_production", false).commit();
-                                                addoSwitchPreference.setChecked(false);
-                                                userAgreed[0] = true;
-                                            }
-
-                                            @Override
-                                            public void onCancelButtonClick() {
-                                                addoSwitchPreference.setChecked(true);
-                                                userAgreed[0] = false;
-                                            }
-                                        }, Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT);
-
-                                    }
-
-                                }
-
-                                return userAgreed[0];
-
-                            }
-                        });
-                    }
-                }else{
-
+    @Override
+    public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+        final boolean[] userAgreed = {false};
+        if ((Boolean) newValue) {
+            confirmSwitchingEnvironment(getActivity(), new OnDialogButtonClick() {
+                @Override
+                public void onOkButtonClick() {
+                    switchEnvironment(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT, BuildConfig.opensrp_url_production);
+                    switchPreferenceCompat.setChecked(true);
+                    userAgreed[0] = true;
                 }
 
-                Log.d("FB", "Value is: " + value);
-            }
+                @Override
+                public void onCancelButtonClick() {
+                    switchPreferenceCompat.setChecked(false);
+                    userAgreed[0] = false;
+                }
+            }, Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT);
+        } else {
+            confirmSwitchingEnvironment(getActivity(), new OnDialogButtonClick() {
+                @Override
+                public void onOkButtonClick() {
+                    switchEnvironment(Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT, BuildConfig.opensrp_url_staging);
+                    switchPreferenceCompat.setChecked(false);
+                    userAgreed[0] = true;
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("FB", "Failed to read value.", error.toException());
-            }
-        });
-
-    }
-
-    private void switchToProduction() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        HfSharedPreference hfSharedPreferences = new HfSharedPreference(sharedPreferences);
-        hfSharedPreferences.updateOpensrpEnviroment(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT);
-        writeEnvironmentConfigurations(Constants.ENVIRONMENT_CONFIG.PRODUCTION_ENVIROMENT);
-        clearApplicationData();
-    }
-
-    private void switchToTest() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        HfSharedPreference hfSharedPreferences = new HfSharedPreference(sharedPreferences);
-        hfSharedPreferences.updateOpensrpEnviroment(Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT);
-        writeEnvironmentConfigurations(Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT);
-        clearApplicationData();
+                @Override
+                public void onCancelButtonClick() {
+                    switchPreferenceCompat.setChecked(true);
+                    userAgreed[0] = false;
+                }
+            }, Constants.ENVIRONMENT_CONFIG.TEST_ENVIROMENT);
+        }
+        return userAgreed[0];
     }
 
     private void confirmSwitchingEnvironment(Context context, final OnDialogButtonClick onDialogButtonClick, String environment) {
@@ -165,52 +154,12 @@ public class HfPreferenceFragment extends SettingsActivity.MyPreferenceFragment 
         alert.show();
     }
 
-    private void clearApplicationData() {
-        File appDir = new File(Environment.getDataDirectory() + File.separator + "data/org.smartregister.hf");
-        if(appDir.exists()){
-            String[] children = appDir.list();
-            for(String s : children){
-                if(!s.equals("lib")){
-                    deleteDir(new File(appDir, s));
-                    Log.i("TAG", "File /data/data/APP_PACKAGE/" + s +" DELETED");
-                }
-            }
-        } else {
-            // TODO
-        }
-
-        getActivity().finish();
-        System.exit(0);
-    }
-
-    public static boolean deleteDir(File dir) {
-        if (dir != null && dir.isDirectory()) {
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-                    return false;
-                }
-            }
-        }
-
-        return dir.delete();
-    }
-
-    private void writeEnvironmentConfigurations(String env) {
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("env", env);
-
-            File file = new File(Environment.getExternalStorageDirectory()+ File.separator + "Kituoni", "env_switch.json");
-
-            FileWriter fileWriter = new FileWriter(file);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(jsonObject.toString());
-            bufferedWriter.close();
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    private void switchEnvironment(String env, String baseUrl) {
+        AllSharedPreferences preferences = Utils.getAllSharedPreferences();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        preferences.savePreference(AllConstants.DRISHTI_BASE_URL, baseUrl);
+        sharedPreferences.edit().putBoolean(Constants.ENVIRONMENT_CONFIG.PREFERENCE_PRODUCTION_ENVIRONMENT_SWITCH, true).apply();
+        preferences.savePreference(Constants.ENVIRONMENT_CONFIG.OPENSRP_HF_ENVIRONMENT, env);
+        clearApplicationData();
     }
 }
