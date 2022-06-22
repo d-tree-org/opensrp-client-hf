@@ -18,11 +18,14 @@
 
     <string name="menu_all_families">All Families</string>
     <string name="menu_hf_referrals">Referrals</string>
-    <string name="menu_hf_report">Reports</string>
+    <string name="menu_hf_report">Ripoti</string>
     <string name="menu_anc_clients">ANC Clients</string>
     <string name="menu_child_clients">Child Clients</string>
     <string name="menu_hiv_clients">HIV Clients</string>
     <string name="menu_referrals">Rufaa</string>
+
+    <string name="log_out_as">Toka kwenye mfumo kama</string>
+    <string name="nav_sync">Oanisha</string>
 
     <string name="select_village">Chagua kijiji cha mteja kutoka kwenye listi</string>
     <string name="total_number_referrals">Rufaa \nZote</string>
@@ -71,9 +74,7 @@
 
     <string name="nav_logout_as">Ondoka kama</string>
 
-    <string name="nav_sync">Oanisha</string>
-
-    <string name="nav_last">"Tangu: </string>
+    <string name="nav_last">"Mwisho: </string>
     <string name="select_the_person_message">Chagua mtu wa kupata huduma</string>
 
     <string name="search_results_return">Rudi kwenye matokeo</string>
